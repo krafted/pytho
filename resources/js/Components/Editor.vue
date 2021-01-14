@@ -27,6 +27,7 @@
             const editorContainer = ref(null)
             const editor = inject('editor')
             const content = inject('content')
+            const isMac = inject('isMac')
             const isMobile = inject('isMobile')
             const showSettings = inject('showSettings')
             const run = inject('run')
@@ -36,10 +37,9 @@
                     autofocus: true,
                     extraKeys: {
                         'Shift-Tab': 'indentLess',
-                        'Cmd-/': 'toggleComment',
-                        'Ctrl-/': 'toggleComment',
-                        'Cmd-,': () => showSettings.value = true,
-                        'Ctrl-,': () => showSettings.value = true,
+                        [isMac.value ? 'Cmd-/' : 'Ctrl-/']: 'toggleComment',
+                        [isMac.value ? 'Cmd-,' : 'Ctrl-,']: () => showSettings.value = true,
+                        [isMac.value ? 'Cmd-Enter' : 'Ctrl-Enter']: run,
                         'Tab': editor => {
                             var spaces = Array(editor.getOption('indentUnit') + 1).join(' ')
                             editor.replaceSelection(spaces)

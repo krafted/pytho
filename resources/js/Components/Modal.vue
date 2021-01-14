@@ -3,7 +3,7 @@
         <transition leave-active-class="duration-200">
             <div
                 v-show="show"
-                class="fixed inset-0 z-10 overflow-y-auto"
+                class="fixed inset-0 z-30 overflow-y-auto"
             >
                 <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
                     <transition
@@ -16,12 +16,10 @@
                     >
                         <div
                             v-show="show"
-                            class="fixed inset-0 transition-opacity"
+                            class="fixed inset-0 transition-all bg-gray-100 bg-opacity-90 backdrop-filter-blur dark:bg-black dark:bg-opacity-90"
                             aria-hidden="true"
                             @click="close"
-                        >
-                            <div class="absolute inset-0 bg-gray-100 opacity-90 dark:bg-black" />
-                        </div>
+                        />
                     </transition>
 
                     <!-- This element is to trick the browser into centering the modal contents. -->

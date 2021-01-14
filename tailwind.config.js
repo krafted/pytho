@@ -50,6 +50,7 @@ module.exports = {
                 'px': '1px',
             },
             spacing: {
+                '10.5': '2.625rem',
                 'safe-top': 'env(safe-area-inset-top)',
                 'safe-bottom': 'env(safe-area-inset-bottom)',
                 'safe-left': 'env(safe-area-inset-left)',
@@ -60,6 +61,7 @@ module.exports = {
     variants: {
         extend: {
             backgroundColor: ['focus-within'],
+            backgroundOpacity: ['dark'],
             display: ['group-hover', 'group-focus'],
             opacity: ['disabled'],
             ringColor: ['focus-within'],

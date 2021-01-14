@@ -1,23 +1,20 @@
 export default String.raw`import turtle
 
-wn = turtle.Screen()
-wn.setup(500, 500)
+screen = turtle.Screen()
+screen.setup(500, 500)
 
-babbage = turtle.Turtle()
-babbage.shape("triangle")
-babbage.penup()
-babbage.goto(45, 90)
-babbage.pendown()
+t = turtle.Turtle()
+t.shape("triangle")
+t.penup()
+t.goto(45, 90)
+t.pendown()
 
-n = 8
-angle = 360/n
+for i in range(8):
+    t.right(45)
+    t.forward(90)
+    t.stamp()
 
-for i in range(n):
-    babbage.right(angle)
-    babbage.forward(90)
-    babbage.stamp()
-
-wn.exitonclick()
+screen.exitonclick()
 `
 // """
 // Welcome to Py!

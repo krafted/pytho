@@ -16,10 +16,12 @@
                     class="flex items-center justify-center p-2.5 text-gray-500 dark:text-gray-700 border border-transparent rounded-md group hover:w-auto hover:bg-gray-200 dark:hover:bg-black focus:bg-gray-200 dark:focus:bg-black focus:border-gray-300 dark:focus:border-gray-800 hover:border-gray-300 dark:hover:border-gray-800 hover:text-gray-900 dark:hover:text-gray-400 focus:text-gray-900 dark:focus:text-gray-400 focus:outline-none focus:w-auto"
                     @click="run"
                 >
+                    <span class="sr-only">Run</span>
+
                     <span
                         v-if="!isMobile"
                         class="flex-shrink-0 hidden mr-2 font-mono text-sm group-hover:inline group-focus:inline"
-                        v-text="'Run'"
+                        v-text="isMac ? '⌘ + ↩︎' : '⌃ + ↩︎'"
                     />
 
                     <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -37,7 +39,7 @@
                     <span
                         v-if="!isMobile"
                         class="flex-shrink-0 hidden mr-2 font-mono text-sm group-hover:inline group-focus:inline"
-                        v-text="isMac ? '⌘,' : '^,'"
+                        v-text="isMac ? '⌘ + ,' : '⌃ + ,'"
                     />
 
                     <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

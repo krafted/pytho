@@ -1,6 +1,5 @@
 <template>
     <div
-        v-if="!showCanvas"
         class="flex-1 mr-safe-right"
         :class="{ 'ml-safe-left': state.settings.layout === 'horizontal' }"
         :style="{
@@ -17,20 +16,46 @@
             @click="dirty = false"
             @focus="dirty = false"
         />
-    </div>
 
-    <div
-        v-if="showCanvas"
-        class="absolute inset-0 flex items-center justify-center flex-1 overflow-auto mr-safe-right"
-        :class="{ 'ml-safe-left': state.settings.layout === 'horizontal' }"
-        @mouseover="dirty = false"
-        @click="dirty = false, closeCanvas"
-        @focus="dirty = false"
-    >
-        <div
-            id="canvas"
-            class="bg-white"
-        />
+        <transition leave-active-class="duration-200">
+            <div
+                v-show="showCanvas"
+                class="absolute inset-0 flex items-center justify-center flex-1 overflow-auto"
+                :class="{ 'ml-safe-left': state.settings.layout === 'horizontal' }"
+                @mouseover="dirty = false"
+                @click="dirty = false, closeCanvas()"
+                @focus="dirty = false"
+            >
+                <transition
+                    enter-active-class="duration-300 ease-out"
+                    enter-from-class="opacity-0"
+                    enter-to-class="opacity-100"
+                    leave-active-class="duration-200 ease-in"
+                    leave-from-class="opacity-100"
+                    leave-to-class="opacity-0"
+                >
+                    <div
+                        v-show="showCanvas"
+                        class="absolute inset-0 flex items-center justify-center flex-1 transition-opacity bg-gray-100 bg-opacity-25 dark:bg-black dark:bg-opacity-25 backdrop-filter-blur mr-safe-right focus:outline-none"
+                    />
+                </transition>
+
+                <transition
+                    enter-active-class="duration-300 ease-out"
+                    enter-from-class="translate-y-4 opacity-0 sm:translate-y-0 sm:scale-95"
+                    enter-to-class="translate-y-0 opacity-100 sm:scale-100"
+                    leave-active-class="duration-200 ease-in"
+                    leave-from-class="translate-y-0 opacity-100 sm:scale-100"
+                    leave-to-class="translate-y-4 opacity-0 sm:translate-y-0 sm:scale-95"
+                >
+                    <div
+                        v-show="showCanvas"
+                        id="canvas"
+                        class="overflow-hidden transition-all transform bg-white rounded-lg shadow-xl focus:outline-none"
+                    />
+                </transition>
+            </div>
+        </transition>
     </div>
 </template>
 

@@ -8,73 +8,79 @@
 @import 'tailwindcss/utilities';
 
 @layer components {
-  * {
-    @apply relative;
-  }
+    * {
+        @apply relative;
+    }
 
-  body {
-    -webkit-tap-highlight-color: transparent;
-  }
+    body {
+        -webkit-tap-highlight-color: transparent;
+    }
 
-  ::selection {
-    @apply bg-gray-500 bg-opacity-25;
-  }
+    ::selection {
+        @apply bg-gray-500 bg-opacity-25;
+    }
 
-  input,
-  textarea,
-  [contenteditable] {
-    caret-color: theme('colors.primary.500');
-  }
+    input,
+    textarea,
+    [contenteditable] {
+        caret-color: theme('colors.primary.500');
+    }
 
-  canvas {
-    @apply focus:outline-none;
-  }
+    canvas {
+        @apply focus:outline-none pointer-events-none;
+    }
 
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
-  input[type=number] {
-    -moz-appearance: textfield;
-  }
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
 
-  .splitpanes {
-    @apply flex w-full h-full;
-  }
+    .splitpanes {
+        @apply flex w-full h-full;
+    }
 
-  .splitpanes--vertical {
-    @apply flex-row;
-  }
+    .splitpanes--vertical {
+        @apply flex-row;
+    }
 
-  .splitpanes--horizontal {
-    @apply flex-col;
-  }
+    .splitpanes--horizontal {
+        @apply flex-col;
+    }
 
-  .splitpanes__splitter {
-    @apply relative bg-gray-100 dark:bg-gray-800;
-    touch-action: none
-  }
+    .splitpanes__splitter {
+        @apply relative bg-gray-100 dark:bg-gray-800;
+        touch-action: none
+    }
 
-  .splitpanes--vertical .splitpanes__splitter {
-    @apply w-px;
-  }
+    .splitpanes--vertical .splitpanes__splitter {
+        @apply w-px;
+    }
 
-  .splitpanes--horizontal .splitpanes__splitter {
-    @apply h-px;
-  }
+    .splitpanes--horizontal .splitpanes__splitter {
+        @apply h-px;
+    }
 
-  .splitpanes__splitter:before {
-    @apply absolute top-0 left-0 z-10;
-    content: '';
-  }
+    .splitpanes__splitter:before {
+        @apply absolute top-0 left-0 z-20;
+        content: '';
+    }
 
-  .splitpanes--vertical > .splitpanes__splitter:before {
-    @apply cursor-col-resize -left-4 -right-4 h-full
-  }
+    .splitpanes--vertical > .splitpanes__splitter:before {
+        @apply cursor-col-resize -left-4 -right-4 h-full
+    }
 
-  .splitpanes--horizontal > .splitpanes__splitter:before {
-    @apply cursor-row-resize -top-4 -bottom-4 w-full
-  }
+    .splitpanes--horizontal > .splitpanes__splitter:before {
+        @apply cursor-row-resize -top-4 -bottom-4 w-full
+    }
+}
+
+@layer utilities {
+    .backdrop-filter-blur {
+        backdrop-filter: blur(5px);
+    }
 }

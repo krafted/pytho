@@ -1,28 +1,28 @@
 <template>
     <app-layout>
-        <div class="flex flex-col flex-1 border-t border-gray-100 dark:border-gray-800 md:flex-row">
+        <div class="flex flex-col flex-1 border-t border-gray-100 dark:border-gray-800">
+            <app-tab-bar  />
+
             <splitpanes :horizontal="state.settings.layout === 'horizontal'">
                 <pane
-                    class="flex flex-col w-full h-full overflow-hidden"
+                    v-if="state.activeTab === 'editor' || isMd"
+                    class="flex flex-col w-full h-full overflow-hidden mt-10.5"
                     min-size="33.333"
                 >
-                    <div class="relative flex flex-col flex-1">
-                        <app-tab-bar />
-
-                        <app-editor v-if="state.activeTab === 'editor'" />
-                        <app-output v-if="state.activeTab === 'output'" />
+                    <div class="flex flex-1">
+                        <app-editor />
                     </div>
                 </pane>
 
                 <pane
-                    v-if="isMd"
+                    v-if="state.activeTab === 'output' || isMd"
                     class="flex flex-col w-full h-full overflow-hidden"
                     min-size="33.333"
                 >
                     <div class="relative flex flex-col flex-1">
-                        <header class="flex items-center w-full px-4 py-3.5 border-b border-gray-100 dark:border-gray-800 pr-safe-right">
+                        <header class="absolute inset-x-0 top-0 items-center hidden px-4 py-3 border-gray-100 dark:border-gray-800 pr-safe-right md:flex">
                             <h3
-                                class="font-mono text-xs font-semibold tracking-wide text-gray-500 uppercase select-none dark:text-gray-700"
+                                class="font-mono text-xs font-semibold tracking-wide text-gray-500 uppercase border-b-2 border-transparent select-none dark:text-gray-700"
                                 :class="{ 'ml-safe-left': state.settings.layout === 'horizontal' }"
                             >
                                 Output
@@ -41,7 +41,7 @@
                             </transition>
                         </header>
 
-                        <div class="flex flex-1">
+                        <div class="flex flex-1 mt-10.5">
                             <app-output />
                         </div>
                     </div>
@@ -92,7 +92,7 @@
     import DEFAULT_SETTINGS from '@/Config/settings'
     import defaultContent from '@/Config/defaultContent'
     import { Splitpanes, Pane } from 'splitpanes'
-    import { nextTick, onMounted, provide, reactive, ref } from 'vue'
+    import { nextTick, onMounted, onUnmounted, provide, reactive, ref, watchEffect } from 'vue'
     import isMobile from 'is-mobile'
     import { loadEngine, runCode, setOptions } from 'client-side-python-runner'
 
@@ -120,7 +120,7 @@
             const isMd = useMedia('(min-width: 768px)')
             const showCanvas = ref(false)
             const showSettings = ref(false)
-            const closeCanvas = () => content.value.includes('exitonclick') && (showCanvas.value = false) 
+            const closeCanvas = () => content.value.includes('exitonclick') && (showCanvas.value = false)
             const run = async () => {
                 output.value = ''
                 error.value = false
@@ -133,14 +133,26 @@
                         ? Sk.TurtleGraphics.target = 'canvas'
                         : Sk.TurtleGraphics = { target: 'canvas' }
                     Sk.misceval.asyncToPromise(() => Sk.importMainWithBody("<stdin>", false, content.value, true))
+                    output.value = 'Re-run to view the output'
+                    dirty.value = true
 
                     return
                 }
 
                 showCanvas.value = false
-
                 await runCode(content.value, { use: 'pyodide' })
+                dirty.value = true
             }
+
+            watchEffect(() => isMd && (showCanvas.value = false))
+
+            onMounted(() => {
+                hotkeys(isMac.value ? 'cmd+enter' : 'ctrl+enter', async (event) => {
+                    await run()
+                    event.preventDefault()
+                })
+            })
+            onUnmounted(() => hotkeys.unbind(isMac.value ? 'cmd+enter' : 'ctrl+enter'))
 
             onMounted(async () => {
                 await loadEngine('pyodide')
@@ -177,6 +189,7 @@
                 dirty,
                 error,
                 isMd,
+                showCanvas,
             }
         },
     }
