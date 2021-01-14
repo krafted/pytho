@@ -1,0 +1,138 @@
+.cm-s-custom.CodeMirror {
+  @apply bg-white dark:bg-gray-900 text-gray-400 text-inherit;
+}
+
+.cm-s-custom .CodeMirror-gutters {
+  @apply bg-white dark:bg-gray-900 border-0 border-none text-gray-300 dark:text-gray-700;
+}
+
+.cm-s-custom .CodeMirror-guttermarker,
+.cm-s-custom .CodeMirror-guttermarker-subtle,
+.cm-s-custom .CodeMirror-linenumber {
+  @apply text-gray-300 dark:text-gray-700;
+}
+
+.cm-s-custom .CodeMirror-cursor {
+  @apply border-l-2 border-primary-500 rounded-sm;
+}
+
+.cm-s-custom.cm-fat-cursor .CodeMirror-cursor,
+.cm-s-custom .cm-animate-fat-cursor {
+  @apply bg-primary-500 bg-opacity-50 rounded-sm;
+}
+
+.cm-s-custom div.CodeMirror-selected {
+  @apply bg-gray-500 bg-opacity-25;
+}
+
+.cm-s-custom.CodeMirror-focused div.CodeMirror-selected {
+  @apply bg-gray-500 bg-opacity-25;
+}
+
+.cm-s-custom .CodeMirror-line::selection,
+.cm-s-custom .CodeMirror-line>span::selection,
+.cm-s-custom .CodeMirror-line>span>span::selection {
+  @apply bg-gray-500 bg-opacity-25;
+}
+
+.cm-s-custom .CodeMirror-line::-moz-selection,
+.cm-s-custom .CodeMirror-line>span::-moz-selection,
+.cm-s-custom .CodeMirror-line>span>span::-moz-selection {
+  @apply bg-gray-500 bg-opacity-25;
+}
+
+.cm-s-custom .CodeMirror-activeline-gutter {
+  @apply bg-gray-300 dark:bg-black opacity-25;
+}
+
+.cm-s-custom .CodeMirror-activeline-gutter .CodeMirror-guttermarker,
+.cm-s-custom .CodeMirror-activeline-gutter .CodeMirror-guttermarker-subtle,
+.cm-s-custom .CodeMirror-activeline-gutter .CodeMirror-linenumber {
+  @apply text-gray-500;
+}
+
+.cm-s-custom .CodeMirror-activeline-background {
+  @apply bg-gray-300 dark:bg-black opacity-25 rounded-r-md;
+}
+
+.cm-s-custom .cm-keyword {
+  @apply text-purple-500 dark:text-purple-400;
+}
+
+.cm-s-custom .cm-operator {
+  @apply text-blue-500 dark:text-blue-300;
+}
+
+.cm-s-custom .cm-variable-2 {
+  @apply text-gray-500 dark:text-gray-200;
+}
+
+.cm-s-custom .cm-variable-3,
+.cm-s-custom .cm-type {
+  @apply text-red-500 dark:text-red-400;
+}
+
+.cm-s-custom .cm-builtin {
+  @apply text-yellow-500;
+}
+
+.cm-s-custom .cm-atom {
+  @apply text-orange-500;
+}
+
+.cm-s-custom .cm-number {
+  @apply text-red-500;
+}
+
+.cm-s-custom .cm-def {
+  @apply text-indigo-500 dark:text-indigo-400;
+}
+
+.cm-s-custom .cm-string {
+  @apply text-green-500 dark:text-green-300;
+}
+
+.cm-s-custom .cm-string-2 {
+  @apply text-red-500 dark:text-red-400;
+}
+
+.cm-s-custom .cm-comment {
+  @apply text-gray-400 italic dark:text-gray-600;
+}
+
+.cm-s-custom .cm-variable {
+  @apply text-red-500 dark:text-red-400;
+}
+
+.cm-s-custom .cm-tag {
+  @apply text-red-500;
+}
+
+.cm-s-custom .cm-meta {
+  @apply text-yellow-500;
+}
+
+.cm-s-custom .cm-attribute {
+  @apply text-purple-500 dark:text-purple-400;
+}
+
+.cm-s-custom .cm-property {
+  @apply text-purple-500 dark:text-purple-400;
+}
+
+.cm-s-custom .cm-qualifier {
+  @apply text-yellow-500 dark:text-yellow-300;
+}
+
+.cm-s-custom .cm-variable-3,
+.cm-s-custom .cm-type {
+  @apply text-yellow-500 dark:text-yellow-300;
+}
+
+.cm-s-custom .cm-error {
+  @apply bg-red-500 text-white;
+}
+
+.cm-s-custom .CodeMirror-matchingbracket {
+  @apply text-white underline;
+}

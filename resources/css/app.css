@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+@import '../../node_modules/codemirror/lib/codemirror.css';
+@import './codemirror/base.css';
+@import './codemirror/themes/custom.css';
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer components {
+  * {
+    @apply relative;
+  }
+
+  body {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  ::selection {
+    @apply bg-gray-500 bg-opacity-25;
+  }
+
+  input,
+  textarea,
+  [contenteditable] {
+    caret-color: theme('colors.primary.500');
+  }
+
+  canvas {
+    @apply focus:outline-none;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  .splitpanes {
+    @apply flex w-full h-full;
+  }
+
+  .splitpanes--vertical {
+    @apply flex-row;
+  }
+
+  .splitpanes--horizontal {
+    @apply flex-col;
+  }
+
+  .splitpanes__splitter {
+    @apply relative bg-gray-100 dark:bg-gray-800;
+    touch-action: none
+  }
+
+  .splitpanes--vertical .splitpanes__splitter {
+    @apply w-px;
+  }
+
+  .splitpanes--horizontal .splitpanes__splitter {
+    @apply h-px;
+  }
+
+  .splitpanes__splitter:before {
+    @apply absolute top-0 left-0 z-10;
+    content: '';
+  }
+
+  .splitpanes--vertical > .splitpanes__splitter:before {
+    @apply cursor-col-resize -left-4 -right-4 h-full
+  }
+
+  .splitpanes--horizontal > .splitpanes__splitter:before {
+    @apply cursor-row-resize -top-4 -bottom-4 w-full
+  }
+}
