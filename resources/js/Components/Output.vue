@@ -20,7 +20,7 @@
         <transition leave-active-class="duration-200">
             <div
                 v-show="showCanvas"
-                class="absolute inset-0 flex items-center justify-center flex-1 overflow-auto"
+                class="absolute inset-0 flex items-center justify-center flex-1 overflow-hidden"
                 :class="{ 'ml-safe-left': state.settings.layout === 'horizontal' }"
                 @mouseover="dirty = false"
                 @click="dirty = false, closeCanvas()"
@@ -51,7 +51,7 @@
                     <div
                         v-show="showCanvas"
                         id="canvas"
-                        class="overflow-hidden transition-all transform bg-white rounded-lg shadow-xl focus:outline-none"
+                        class="overflow-auto transition-all transform bg-white rounded-lg shadow-xl focus:outline-none"
                     />
                 </transition>
             </div>

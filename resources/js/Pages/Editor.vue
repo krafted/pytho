@@ -3,7 +3,10 @@
         <div class="flex flex-col flex-1 border-t border-gray-100 dark:border-gray-800">
             <app-tab-bar  />
 
-            <splitpanes :horizontal="state.settings.layout === 'horizontal'">
+            <splitpanes
+                class="overflow-hidden"
+                :horizontal="state.settings.layout === 'horizontal'"
+            >
                 <pane
                     v-if="state.activeTab === 'editor' || isMd"
                     class="flex flex-col w-full h-full overflow-hidden mt-10.5"
