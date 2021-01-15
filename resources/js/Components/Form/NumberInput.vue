@@ -66,7 +66,7 @@
         setup(props) {
             const focused = inject('focused')
             const handleInput = inject('handleInput')
-            const value = inject('value')
+            const value = inject('modelValue')
             const getValue = (v) => {
                 if (!v || isNaN(v)) return
                 return props.type === 'int' ? parseInt(v) : parseFloat(v)

@@ -1,42 +1,55 @@
 <template>
-    <jet-authentication-card>
+    <app-authentication-card>
         <template #logo>
-            <jet-authentication-card-logo />
+            <app-logo class="w-12 h-12 text-2xl" />
         </template>
 
-        <div class="mb-4 text-sm text-gray-600">
-            Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.
-        </div>
-
-        <div class="mb-4 text-sm font-medium text-green-600" v-if="verificationLinkSent" >
-            A new verification link has been sent to the email address you provided during registration.
-        </div>
-
         <form @submit.prevent="submit">
-            <div class="flex items-center justify-between mt-4">
-                <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Resend Verification Email
-                </jet-button>
+            <div class="grid grid-cols-1 gap-3 p-6">
+                <div class="text-sm text-gray-500">
+                    Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.
+                </div>
 
-                <inertia-link :href="route('logout')" method="post" as="button" class="text-sm text-gray-600 underline hover:text-gray-900">Logout</inertia-link>
+                <div class="text-sm font-medium text-green-600 dark:text-green-400" v-if="verificationLinkSent" >
+                    A new verification link has been sent to the email address you provided during registration.
+                </div>
+            </div>
+
+            <div class="flex items-center justify-end px-6 py-3 bg-gray-100 dark:bg-gray-800">
+                <inertia-link
+                    :href="route('logout')"
+                    method="post"
+                    as="button"
+                    class="text-sm text-gray-500 hover:underline focus:outline-none focus:ring focus:ring-primary-500"
+                >
+                    Logout
+                </inertia-link>
+                
+                <app-button
+                    class="ml-3"
+                    :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing"
+                >
+                    Resend Verification Email
+                </app-button>
             </div>
         </form>
-    </jet-authentication-card>
+    </app-authentication-card>
 </template>
 
 <script>
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
-    import JetButton from '@/Jetstream/Button'
+    import AppAuthenticationCard from '@/Components/AuthenticationCard'
+    import AppButton from '@/Components/Button'
+    import AppLogo from '@/Components/Logo'
     import { computed, inject } from 'vue'
     import { useForm } from '@inertiajs/inertia-vue3'
 
     export default {
         props: { status: String },
         components: {
-            JetAuthenticationCard,
-            JetAuthenticationCardLogo,
-            JetButton,
+            AppAuthenticationCard,
+            AppButton,
+            AppLogo,
         },
         setup(props) {
             const form = useForm()

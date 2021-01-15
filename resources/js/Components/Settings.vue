@@ -1,5 +1,5 @@
 <template>
-    <Modal>
+    <app-modal>
         <template #icon>
             <div class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-gray-100 rounded-full dark:bg-black sm:mx-0 sm:h-10 sm:w-10">
                 <svg class="w-6 h-6 text-gray-600 dark:text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -55,8 +55,8 @@
 
                 <form-input
                     label="Font Size"
-                    :value="state.settings.fontSize.toString()"
-                    @update:value="updateSetting('fontSize', $event)"
+                    :model-value="state.settings.fontSize.toString()"
+                    @update:model-value="updateSetting('fontSize', $event)"
                 >
                     <form-number-input
                         max="26"
@@ -68,8 +68,8 @@
 
                 <form-input
                     label="Indent Size"
-                    :value="state.settings.indentUnit.toString()"
-                    @update:value="updateSetting('indentUnit', $event)"
+                    :model-value="state.settings.indentUnit.toString()"
+                    @update:model-value="updateSetting('indentUnit', $event)"
                 >
                     <form-number-input
                         max="8"
@@ -83,14 +83,14 @@
                     v-if="!isMobile"
                     label="Keymap"
                     :options="keyMapOptions"
-                    :value="state.settings.keyMap"
-                    @update:value="updateSetting('keyMap', $event)"
+                    :model-value="state.settings.keyMap"
+                    @update:model-value="updateSetting('keyMap', $event)"
                 />
 
                 <form-input
                     label="Line Height"
-                    :value="state.settings.lineHeight.toString()"
-                    @update:value="updateSetting('lineHeight', $event)"
+                    :model-value="state.settings.lineHeight.toString()"
+                    @update:model-value="updateSetting('lineHeight', $event)"
                 >
                     <form-number-input
                         max="2.5"
@@ -104,21 +104,22 @@
         </template>
 
         <template #actions>
-            <button
+            <app-button
                 type="button"
-                class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-gray-600 bg-white border border-white rounded-md dark:text-gray-400 dark:border-gray-900 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-black focus:bg-gray-200 dark:focus:bg-black focus:border-gray-300 dark:focus:border-gray-600 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-900 dark:hover:text-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-800 focus:ring-primary-500 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                class="w-full sm:w-auto"
                 @click="show = false"
             >
                 Close
-            </button>
+            </app-button>
         </template>
-    </Modal>
+    </app-modal>
 </template>
 
 <script>
     import { inject, onMounted, onUnmounted, provide, watchEffect } from 'vue'
     import { updateTheme } from '@/Utils/theme'
-    import Modal from '@/Components/Modal.vue'
+    import AppButton from '@/Components/Button'
+    import AppModal from '@/Components/Modal'
     import FormButtonGroup from '@/Components/Form/ButtonGroup.vue'
     import FormInput from '@/Components/Form/Input.vue'
     import FormListbox from '@/Components/Form/Listbox.vue'
@@ -128,7 +129,8 @@
     export default {
         emits: ['update:setting'],
         components: {
-            Modal,
+            AppButton,
+            AppModal,
             FormButtonGroup,
             FormInput,
             FormListbox,

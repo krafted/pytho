@@ -1,79 +1,102 @@
 <template>
-    <jet-authentication-card>
+    <app-authentication-card>
         <template #logo>
-            <jet-authentication-card-logo />
+            <app-logo class="w-12 h-12 text-2xl" />
         </template>
 
-        <jet-validation-errors class="mb-4" />
-
         <form @submit.prevent="submit">
-            <div>
-                <jet-label for="name" value="Name" />
-                <jet-input id="name" type="text" class="block w-full mt-1" v-model="form.name" required autofocus autocomplete="name" />
+            <div class="grid grid-cols-1 gap-3 p-6">
+                <form-validation-errors />
+
+                <form-input
+                    label="Name"
+                    autocomplete="name"
+                    autofocus
+                    required
+                    v-model="form.name"
+                />
+
+                <form-input
+                    label="Email"
+                    required
+                    type="email" 
+                    v-model="form.email"
+                />
+
+                <form-input
+                    label="Password"
+                    autocomplete="new-password"
+                    required
+                    type="password"
+                    v-model="form.password"
+                />
+
+                <form-input
+                    label="Confirm Password"
+                    autocomplete="new-password"
+                    required
+                    type="password"
+                    v-model="form.password_confirmation"
+                />
+
+                <label
+                    class="flex items-center"
+                    v-if="page.props.value.jetstream.hasTermsAndPrivacyPolicyFeature"
+                >
+                    <form-checkbox
+                        id="terms"
+                        name="terms"
+                        class="w-6 h-6"
+                        v-model="form.terms"
+                    />
+
+                    <span class="ml-3 text-sm text-gray-500">
+                        I agree to the <a target="_blank" :href="route('terms.show')" class="text-gray-400 focus:ring focus:outline-none focus:ring-primary-500 hover:underline">Terms</a> and <a target="_blank" :href="route('policy.show')" class="text-gray-400 focus:outline-none focus:ring focus:ring-primary-500 hover:underline">Privacy Policy</a>
+                    </span>
+                </label>
             </div>
 
-            <div class="mt-4">
-                <jet-label for="email" value="Email" />
-                <jet-input id="email" type="email" class="block w-full mt-1" v-model="form.email" required />
-            </div>
-
-            <div class="mt-4">
-                <jet-label for="password" value="Password" />
-                <jet-input id="password" type="password" class="block w-full mt-1" v-model="form.password" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4">
-                <jet-label for="password_confirmation" value="Confirm Password" />
-                <jet-input id="password_confirmation" type="password" class="block w-full mt-1" v-model="form.password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4" v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature">
-                <jet-label for="terms">
-                    <div class="flex items-center">
-                        <jet-checkbox name="terms" id="terms" v-model="form.terms" />
-
-                        <div class="ml-2">
-                            I agree to the <a target="_blank" :href="route('terms.show')" class="text-sm text-gray-600 underline hover:text-gray-900">Terms of Service</a> and <a target="_blank" :href="route('policy.show')" class="text-sm text-gray-600 underline hover:text-gray-900">Privacy Policy</a>
-                        </div>
-                    </div>
-                </jet-label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <inertia-link :href="route('login')" class="text-sm text-gray-600 underline hover:text-gray-900">
+            <div class="flex items-center justify-end px-6 py-3 bg-gray-100 dark:bg-gray-800">
+                <inertia-link
+                    :href="route('login')"
+                    class="text-sm text-gray-500 hover:underline focus:outline-none focus:ring focus:ring-primary-500"
+                >
                     Already registered?
                 </inertia-link>
 
-                <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <app-button
+                    class="ml-3"
+                    :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing"
+                >
                     Register
-                </jet-button>
+                </app-button>
             </div>
         </form>
-    </jet-authentication-card>
+    </app-authentication-card>
 </template>
 
 <script>
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
-    import JetButton from '@/Jetstream/Button'
-    import JetInput from '@/Jetstream/Input'
-    import JetCheckbox from "@/Jetstream/Checkbox";
-    import JetLabel from '@/Jetstream/Label'
-    import JetValidationErrors from '@/Jetstream/ValidationErrors'
+    import AppAuthenticationCard from '@/Components/AuthenticationCard'
+    import AppButton from '@/Components/Button'
+    import AppLogo from '@/Components/Logo'
+    import FormCheckbox from '@/Components/Form/Checkbox'
+    import FormInput from '@/Components/Form/Input'
+    import FormValidationErrors from '@/Components/Form/ValidationErrors'
     import { inject } from 'vue'
-    import { useForm } from '@inertiajs/inertia-vue3'
+    import { useForm, usePage } from '@inertiajs/inertia-vue3'
 
     export default {
         components: {
-            JetAuthenticationCard,
-            JetAuthenticationCardLogo,
-            JetButton,
-            JetInput,
-            JetCheckbox,
-            JetLabel,
-            JetValidationErrors
+            AppAuthenticationCard,
+            AppButton,
+            AppLogo,
+            FormCheckbox,
+            FormInput,
+            FormValidationErrors,
         },
         setup() {
+            const page = usePage()
             const form = useForm({
                 name: '',
                 email: '',
@@ -88,6 +111,7 @@
             }
 
             return {
+                page,
                 form,
                 submit,
             }

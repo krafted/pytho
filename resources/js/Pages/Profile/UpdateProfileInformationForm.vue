@@ -1,5 +1,5 @@
 <template>
-    <jet-form-section @submitted="updateProfileInformation">
+    <form-section @submitted="updateProfileInformation">
         <template #title>
             Profile Information
         </template>
@@ -10,88 +10,123 @@
 
         <template #form>
             <!-- Profile Photo -->
-            <div class="col-span-6 sm:col-span-4" v-if="$page.props.jetstream.managesProfilePhotos">
+            <div
+                v-if="page.props.value.jetstream.managesProfilePhotos"
+                class="col-span-6 p-3 bg-gray-100 rounded-md dark:bg-gray-800 sm:col-span-4"
+            >
                 <!-- Profile Photo File Input -->
-                <input type="file" class="hidden"
-                            ref="photo"
-                            @change="updatePhotoPreview">
+                <input
+                    class="hidden"
+                    type="file"
+                    ref="photo"
+                    @change="updatePhotoPreview"
+                />
 
-                <jet-label for="photo" value="Photo" />
+                <div class="flex items-center">
+                    <!-- Current Profile Photo -->
+                    <button
+                        v-show="!photoPreview"
+                        class="overflow-hidden border-2 border-gray-200 rounded-full dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-900 ring-offset-2 group"
+                        type="button"
+                        @click="selectNewPhoto"
+                    >
+                        <img
+                            class="object-cover w-24 h-24"
+                            :src="`${user.profile_photo_url}`"
+                            :alt="user.name"
+                        />
 
-                <!-- Current Profile Photo -->
-                <div class="mt-2" v-show="! photoPreview">
-                    <img :src="user.profile_photo_url" :alt="user.name" class="object-cover w-20 h-20 rounded-full">
+                        <div class="absolute inset-0 flex items-center justify-center p-6 transition-opacity duration-200 ease-in-out bg-white bg-opacity-75 rounded-full opacity-0 dark:bg-black dark:bg-opacity-75 group-hover:opacity-100 group-focus:opacity-100 backdrop-filter-blur">
+                            <span class="font-semibold tracking-wide text-gray-300 uppercase text-2xs">Update Photo</span>
+                        </div>
+                    </button>
+
+                    <!-- New Profile Photo Preview -->
+                    <button
+                        v-show="photoPreview"
+                        class="overflow-hidden border-2 border-gray-200 rounded-full dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-900 ring-offset-2 group"
+                        type="button"
+                        @click="selectNewPhoto"
+                    >
+                        <span class="block w-24 h-24"
+                            :style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'">
+                        </span>
+
+                        <div class="absolute inset-0 flex items-center justify-center p-6 transition-opacity duration-200 ease-in-out bg-white bg-opacity-75 rounded-full opacity-0 dark:bg-black dark:bg-opacity-75 group-hover:opacity-100 group-focus:opacity-100 backdrop-filter-blur">
+                            <span class="font-semibold tracking-wide text-gray-300 uppercase text-2xs">Update Photo</span>
+                        </div>
+                    </button>
+                    
+                    <div class="flex flex-col ml-3 space-y-3">
+                        <app-button type="button" @click.native.prevent="selectNewPhoto">
+                            Select A New Photo
+                        </app-button>
+
+                        <app-button type="button" @click.native.prevent="deletePhoto" v-if="user.profile_photo_path">
+                            Remove Photo
+                        </app-button>
+                    </div>
                 </div>
 
-                <!-- New Profile Photo Preview -->
-                <div class="mt-2" v-show="photoPreview">
-                    <span class="block w-20 h-20 rounded-full"
-                          :style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'">
-                    </span>
-                </div>
-
-                <jet-secondary-button class="mt-2 mr-2" type="button" @click.native.prevent="selectNewPhoto">
-                    Select A New Photo
-                </jet-secondary-button>
-
-                <jet-secondary-button type="button" class="mt-2" @click.native.prevent="deletePhoto" v-if="user.profile_photo_path">
-                    Remove Photo
-                </jet-secondary-button>
-
-                <jet-input-error :message="form.errors.photo" class="mt-2" />
+                <form-input-error :message="form.errors.photo" class="mt-2" />
             </div>
 
             <!-- Name -->
-            <div class="col-span-6 sm:col-span-4">
-                <jet-label for="name" value="Name" />
-                <jet-input id="name" type="text" class="block w-full mt-1" v-model="form.name" autocomplete="name" />
-                <jet-input-error :message="form.errors.name" class="mt-2" />
+            <div class="col-span-6 space-y-1 sm:col-span-4">
+                <form-input
+                    label="Name"
+                    autocomplete="name"
+                    v-model="form.name"
+                />
+
+                <form-input-error :message="form.errors.name" />
             </div>
 
             <!-- Email -->
-            <div class="col-span-6 sm:col-span-4">
-                <jet-label for="email" value="Email" />
-                <jet-input id="email" type="email" class="block w-full mt-1" v-model="form.email" />
-                <jet-input-error :message="form.errors.email" class="mt-2" />
+            <div class="col-span-6 space-y-1 sm:col-span-4">
+                <form-input
+                    label="Email"
+                    type="email"
+                    v-model="form.email"
+                />
+
+                <form-input-error :message="form.errors.email" />
             </div>
         </template>
 
         <template #actions>
-            <jet-action-message :on="form.recentlySuccessful" class="mr-3">
-                Saved.
-            </jet-action-message>
+            <form-action-message :on="form.recentlySuccessful" class="mr-3">
+                Saved
+            </form-action-message>
 
-            <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <app-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 Save
-            </jet-button>
+            </app-button>
         </template>
-    </jet-form-section>
+    </form-section>
 </template>
 
 <script>
-    import JetButton from '@/Jetstream/Button'
-    import JetFormSection from '@/Jetstream/FormSection'
-    import JetInput from '@/Jetstream/Input'
-    import JetInputError from '@/Jetstream/InputError'
-    import JetLabel from '@/Jetstream/Label'
-    import JetActionMessage from '@/Jetstream/ActionMessage'
-    import JetSecondaryButton from '@/Jetstream/SecondaryButton'
+    import AppButton from '@/Components/Button'
+    import FormActionMessage from '@/Components/Form/ActionMessage'
+    import FormInput from '@/Components/Form/Input'
+    import FormInputError from '@/Components/Form/InputError'
+    import FormSection from '@/Components/Form/Section'
     import { inject, ref } from 'vue'
     import { Inertia } from '@inertiajs/inertia'
-    import { useForm } from '@inertiajs/inertia-vue3'
+    import { useForm, usePage } from '@inertiajs/inertia-vue3'
 
     export default {
         props: ['user'],
         components: {
-            JetActionMessage,
-            JetButton,
-            JetFormSection,
-            JetInput,
-            JetInputError,
-            JetLabel,
-            JetSecondaryButton,
+            AppButton,
+            FormActionMessage,
+            FormInput,
+            FormInputError,
+            FormSection,
         },
         setup(props) {
+            const page = usePage()
             const form = useForm({
                 _method: 'PUT',
                 name: props.user.name,
@@ -123,6 +158,7 @@
             }
 
             return {
+                page,
                 form,
                 photo,
                 photoPreview,

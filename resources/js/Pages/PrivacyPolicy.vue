@@ -3,7 +3,7 @@
         <div class="pt-4 bg-gray-100">
             <div class="flex flex-col items-center min-h-screen pt-6 sm:pt-0">
                 <div>
-                    <jet-authentication-card-logo />
+                    <app-logo />
                 </div>
 
                 <div v-html="policy" class="w-full p-6 mt-6 overflow-hidden prose bg-white shadow-md sm:max-w-2xl sm:rounded-lg">
@@ -14,12 +14,10 @@
 </template>
 
 <script>
-import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
+    import AppLogo from '@/Components/Logo'
 
-export default {
-    props: ['policy'],
-    components: {
-        JetAuthenticationCardLogo,
-    },
-}
+    export default {
+        props: ['policy'],
+        components: { AppLogo },
+    }
 </script>

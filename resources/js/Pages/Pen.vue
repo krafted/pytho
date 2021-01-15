@@ -1,6 +1,26 @@
 <template>
     <app-layout>
-        <div class="flex flex-col flex-1 border-t border-gray-100 dark:border-gray-800">
+        <template #header-actions>
+            <button
+                class="flex items-center justify-center p-2.5 text-gray-500 dark:text-gray-700 border border-transparent rounded-md group hover:w-auto hover:bg-gray-200 dark:hover:bg-black focus:bg-gray-200 dark:focus:bg-black focus:border-gray-300 dark:focus:border-gray-800 hover:border-gray-300 dark:hover:border-gray-800 hover:text-gray-900 dark:hover:text-gray-400 focus:text-gray-900 dark:focus:text-gray-400 focus:outline-none focus:w-auto"
+                @click="run"
+            >
+                <span class="sr-only">Run</span>
+
+                <span
+                    v-if="!isMobile"
+                    class="flex-shrink-0 hidden mr-2 font-mono text-sm group-hover:inline group-focus:inline"
+                    v-text="isMac ? '⌘ + ↩︎' : '⌃ + ↩︎'"
+                />
+
+                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </button>
+        </template>
+
+        <div class="flex flex-col flex-1">
             <app-tab-bar  />
 
             <splitpanes
@@ -8,7 +28,7 @@
                 :horizontal="state.settings.layout === 'horizontal'"
             >
                 <pane
-                    v-if="state.activeTab === 'editor' || isMd"
+                    v-if="activeTab === 'editor' || isMd"
                     class="flex flex-col w-full h-full overflow-hidden mt-10.5"
                     min-size="33.333"
                 >
@@ -18,7 +38,7 @@
                 </pane>
 
                 <pane
-                    v-if="state.activeTab === 'output' || isMd"
+                    v-if="activeTab === 'output' || isMd"
                     class="flex flex-col w-full h-full overflow-hidden"
                     min-size="33.333"
                 >
@@ -92,11 +112,9 @@
     import AppOutput from '@/Components/Output'
     import AppTabBar from '@/Components/TabBar'
     import useMedia from '@/Hooks/useMedia'
-    import DEFAULT_SETTINGS from '@/Config/settings'
-    import defaultContent from '@/Config/defaultContent'
+    import defaultContent from '@/Config/Content'
     import { Splitpanes, Pane } from 'splitpanes'
-    import { nextTick, onMounted, onUnmounted, provide, reactive, ref, watchEffect } from 'vue'
-    import isMobile from 'is-mobile'
+    import { inject, nextTick, onMounted, onUnmounted, provide, reactive, ref, watchEffect } from 'vue'
     import { loadEngine, runCode, setOptions } from 'client-side-python-runner'
 
     export default {
@@ -109,20 +127,18 @@
             Pane,
         },
         setup() {
-            const state = reactive({
-                activeTab: 'editor',
-                settings: DEFAULT_SETTINGS,
-            })
+            const state = inject('state')
+            const activeTab = ref('editor')
             const content = ref(defaultContent)
             const output = ref('')
             const editor = ref(null)
             const loading = ref(true)
             const dirty = ref(false)
             const error = ref(false)
-            const isMac = ref(navigator.userAgent.indexOf('Mac') !== -1)
+            const isMac = inject('isMac')
             const isMd = useMedia('(min-width: 768px)')
+            const isMobile = inject('isMobile')
             const showCanvas = ref(false)
-            const showSettings = ref(false)
             const closeCanvas = () => content.value.includes('exitonclick') && (showCanvas.value = false)
             const run = async () => {
                 output.value = ''
@@ -170,7 +186,7 @@
                 run()
             })
 
-            provide('state', state)
+            provide('activeTab', activeTab)
             provide('editor', editor)
             provide('content', content)
             provide('output', output)
@@ -179,19 +195,21 @@
             provide('error', error)
             provide('isMac', isMac)
             provide('isMd', isMd)
-            provide('isMobile', isMobile())
             provide('run', run)
-            provide('showSettings', showSettings)
             provide('showCanvas', showCanvas)
             provide('closeCanvas', closeCanvas)
 
             return {
-                editor,
                 state,
-                loading,
+                activeTab,
                 dirty,
+                editor,
                 error,
+                isMac,
                 isMd,
+                isMobile,
+                loading,
+                run,
                 showCanvas,
             }
         },

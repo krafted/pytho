@@ -14,11 +14,11 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <link rel="stylesheet" href="{{ mix('css/main.css') }}">
 
         <!-- Scripts -->
         @routes
-        <script src="{{ mix('js/app.js') }}" defer></script>
+        <script src="{{ mix('js/main.js') }}" defer></script>
     </head>
     <body class="min-h-screen bg-white dark:bg-gray-900">
         <div id="app" class="flex flex-col flex-none w-full" data-page="{{ json_encode($page) }}"></div>

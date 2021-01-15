@@ -1,48 +1,56 @@
 <template>
-    <jet-authentication-card>
+    <app-authentication-card>
         <template #logo>
-            <jet-authentication-card-logo />
+            <app-logo class="w-12 h-12 text-2xl" />
         </template>
 
-        <div class="mb-4 text-sm text-gray-600">
-            This is a secure area of the application. Please confirm your password before continuing.
-        </div>
-
-        <jet-validation-errors class="mb-4" />
-
         <form @submit.prevent="submit">
-            <div>
-                <jet-label for="password" value="Password" />
-                <jet-input id="password" type="password" class="block w-full mt-1" v-model="form.password" required autocomplete="current-password" autofocus />
+            <div class="grid grid-cols-1 gap-3 p-6">
+                <div class="text-sm text-gray-500">
+                    This is a secure area of the application. Please confirm your password before continuing.
+                </div>
+
+                <form-validation-errors />
+
+                <form-input
+                    label="Password"
+                    autocomplete="current-password"
+                    autofocus
+                    required
+                    type="password"
+                    v-model="form.password"
+                />
             </div>
 
-            <div class="flex justify-end mt-4">
-                <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <div class="flex items-center justify-end px-6 py-3 bg-gray-100 dark:bg-gray-800">
+                <app-button
+                    class="ml-3"
+                    :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing"
+                >
                     Confirm
-                </jet-button>
+                </app-button>
             </div>
         </form>
-    </jet-authentication-card>
+    </app-authentication-card>
 </template>
 
 <script>
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
-    import JetButton from '@/Jetstream/Button'
-    import JetInput from '@/Jetstream/Input'
-    import JetLabel from '@/Jetstream/Label'
-    import JetValidationErrors from '@/Jetstream/ValidationErrors'
+    import AppAuthenticationCard from '@/Components/AuthenticationCard'
+    import AppButton from '@/Components/Button'
+    import AppLogo from '@/Components/Logo'
+    import FormInput from '@/Components/Form/Input'
+    import FormValidationErrors from '@/Components/Form/ValidationErrors'
     import { inject } from 'vue'
     import { useForm } from '@inertiajs/inertia-vue3'
 
     export default {
         components: {
-            JetAuthenticationCard,
-            JetAuthenticationCardLogo,
-            JetButton,
-            JetInput,
-            JetLabel,
-            JetValidationErrors
+            AppAuthenticationCard,
+            AppButton,
+            AppLogo,
+            FormInput,
+            FormValidationErrors,
         },
         setup() {
             const form = useForm({ password: '' })

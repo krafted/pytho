@@ -1,74 +1,114 @@
 <template>
-    <header class="px-4 pt-safe-top">
+    <header class="px-4 border-b border-gray-100 pt-safe-top dark:border-gray-800">
         <div class="flex items-center justify-between py-1 pl-safe-left pr-safe-right">
-            <h1>
-                <a
-                    class="flex items-center justify-center w-10 h-10 -ml-2 font-mono text-lg font-semibold text-gray-500 border border-transparent rounded-md select-none dark:text-gray-700 hover:bg-gray-200 dark:hover:bg-black focus:bg-gray-200 dark:focus:bg-black focus:border-gray-300 dark:focus:border-gray-800 hover:border-gray-300 dark:hover:border-gray-800 hover:text-gray-900 dark:hover:text-gray-400 focus:text-gray-900 dark:focus:text-gray-400 focus:outline-none"
-                    href="/"
-                >
-                    Py
-                </a>
-            </h1>
+            <app-logo class="w-10 h-10 -ml-2 text-lg" />
 
             <div class="flex items-center justify-end -mr-2 space-x-2">
-                <button
-                    v-if="route().current('editor')"
-                    class="flex items-center justify-center p-2.5 text-gray-500 dark:text-gray-700 border border-transparent rounded-md group hover:w-auto hover:bg-gray-200 dark:hover:bg-black focus:bg-gray-200 dark:focus:bg-black focus:border-gray-300 dark:focus:border-gray-800 hover:border-gray-300 dark:hover:border-gray-800 hover:text-gray-900 dark:hover:text-gray-400 focus:text-gray-900 dark:focus:text-gray-400 focus:outline-none focus:w-auto"
-                    @click="run"
-                >
-                    <span class="sr-only">Run</span>
+                <slot name="header-actions" />
 
-                    <span
-                        v-if="!isMobile"
-                        class="flex-shrink-0 hidden mr-2 font-mono text-sm group-hover:inline group-focus:inline"
-                        v-text="isMac ? '⌘ + ↩︎' : '⌃ + ↩︎'"
-                    />
+                <app-dropdown align="right" width="48">
+                    <template #trigger>
+                        <button class="flex items-center justify-center p-2.5 text-gray-500 dark:text-gray-700 border border-transparent rounded-md group hover:w-auto hover:bg-gray-200 dark:hover:bg-black focus:bg-gray-200 dark:focus:bg-black focus:border-gray-300 dark:focus:border-gray-800 hover:border-gray-300 dark:hover:border-gray-800 hover:text-gray-900 dark:hover:text-gray-400 focus:text-gray-900 dark:focus:text-gray-400 focus:outline-none focus:w-auto">
+                            <span class="sr-only">Menu</span>                            
 
-                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </button>
+                            <span
+                                v-if="!isMobile"
+                                class="flex-shrink-0 hidden mr-2 font-mono text-sm group-hover:inline group-focus:inline"
+                                v-text="'Menu'"
+                            />
 
-                <button
-                    class="flex items-center justify-center p-2.5 text-gray-500 dark:text-gray-700 border border-transparent rounded-md group hover:w-auto hover:bg-gray-200 dark:hover:bg-black focus:bg-gray-200 dark:focus:bg-black focus:border-gray-300 dark:focus:border-gray-800 hover:border-gray-300 dark:hover:border-gray-800 hover:text-gray-900 dark:hover:text-gray-400 focus:text-gray-900 dark:focus:text-gray-400 focus:outline-none focus:w-auto"
-                    @click="showSettings = true"
-                >
-                    <span class="sr-only">Settings</span>
+                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                    </template>
 
-                    <span
-                        v-if="!isMobile"
-                        class="flex-shrink-0 hidden mr-2 font-mono text-sm group-hover:inline group-focus:inline"
-                        v-text="isMac ? '⌘ + ,' : '⌃ + ,'"
-                    />
+                    <template #content>
+                        <app-dropdown-link
+                            as="button"
+                            type="button"
+                            @click="showSettings = true"
+                        >
+                            <span class="inline-flex items-center justify-between w-full space-x-2">
+                                <span>Settings</span>
 
-                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                </button>
+                                <span
+                                    v-if="!isMobile"
+                                    class="px-1.5 border border-gray-200 dark:border-gray-800 rounded text-2xs"
+                                    v-text="isMac ? '⌘ + ,' : '⌃ + ,'"
+                                />
+                            </span>
+                        </app-dropdown-link>
+
+                        <!-- Authentication -->
+                        <template v-if="page.props.value.user">
+                            <app-dropdown-link :href="route('profile.show')">
+                                Profile
+                            </app-dropdown-link>
+
+                            <app-dropdown-link :href="route('api-tokens.index')" v-if="page.props.value.jetstream.hasApiFeatures">
+                                API Tokens
+                            </app-dropdown-link>
+
+                            <div class="border-t border-gray-100 dark:border-gray-800" />
+
+                            <form @submit.prevent="logout">
+                                <app-dropdown-link as="button">
+                                    Logout
+                                </app-dropdown-link>
+                            </form>
+                        </template>
+
+                        <template v-else>
+                            <div class="border-t border-gray-100 dark:border-gray-800" />
+
+                            <app-dropdown-link :href="route('login')">
+                                Login
+                            </app-dropdown-link>
+
+                            <app-dropdown-link v-if="route().has('register')" :href="route('register')">
+                                Register
+                            </app-dropdown-link>
+                        </template>
+                    </template>
+                </app-dropdown>
             </div>
         </div>
     </header>
 </template>
 
 <script>
+    import AppDropdown from '@/Components/Dropdown'
+    import AppDropdownLink from '@/Components/DropdownLink'
+    import AppLogo from '@/Components/Logo'
     import { inject } from 'vue'
+    import { usePage } from '@inertiajs/inertia-vue3'
+    import { Inertia } from '@inertiajs/inertia'
+    import hotkeys from 'hotkeys-js'
 
     export default {
+        components: {
+            AppDropdown,
+            AppDropdownLink,
+            AppLogo,
+        },
         setup() {
+            const page = usePage()
             const isMac = inject('isMac')
             const isMd = inject('isMd')
             const isMobile = inject('isMobile')
-            const run = inject('run')
             const showSettings = inject('showSettings')
+            const logout = () => {
+                Inertia.post(route('logout'))
+            }
 
             return {
+                page,
                 isMac,
                 isMd,
                 isMobile,
-                run,
                 showSettings,
+                logout,
             }
         }
     }

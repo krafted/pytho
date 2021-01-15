@@ -20,7 +20,7 @@
                 :class="[widthClass, alignmentClasses]"
                 style="display: none;"
                 @click="open = false">
-                <div class="rounded-md ring-1 ring-black ring-opacity-5" :class="contentClasses">
+                <div class="border border-gray-100 rounded-md dark:border-gray-800" :class="contentClasses">
                     <slot name="content"></slot>
                 </div>
             </div>
@@ -40,8 +40,8 @@
                 default: '48'
             },
             contentClasses: {
-                default: () => ['py-1', 'bg-white']
-            }
+                default: () => ['py-1', 'bg-white dark:bg-gray-900']
+            },
         },
         setup(props) {
             const open = ref(false)

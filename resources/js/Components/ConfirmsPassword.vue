@@ -4,44 +4,59 @@
             <slot />
         </span>
 
-        <jet-dialog-modal :show="confirmingPassword" @close="closeModal">
+        <app-modal>
+            <template #icon>
+                <div class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-gray-100 rounded-full dark:bg-black sm:mx-0 sm:h-10 sm:w-10">
+                    <svg class="w-6 h-6 text-gray-600 dark:text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </div>
+            </template>
+
             <template #title>
                 {{ title }}
             </template>
 
             <template #content>
-                {{ content }}
+                <div>
+                    <div class="text-sm text-gray-500">
+                        {{ content }}
+                    </div>
 
-                <div class="mt-4">
-                    <jet-input type="password" class="block w-3/4 mt-1" placeholder="Password"
-                                ref="password"
-                                v-model="form.password"
-                                @keyup.enter.native="confirmPassword" />
+                    <div class="mt-3 space-y-1">
+                        <form-input
+                            label="Password"
+                            type="password"
+                            ref="password"
+                            v-model="form.password"
+                            @keyup.enter.native="confirmPassword"
+                        />
 
-                    <jet-input-error :message="form.error" class="mt-2" />
+                        <form-input-error :message="form.error" />
+                    </div>
                 </div>
             </template>
 
-            <template #footer>
-                <jet-secondary-button @click.native="closeModal">
-                    Nevermind
-                </jet-secondary-button>
-
-                <jet-button class="ml-2" @click.native="confirmPassword" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <template #actions>
+                <app-button class="ml-3" @click.native="confirmPassword" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     {{ button }}
-                </jet-button>
+                </app-button>
+
+                <app-secondary-button @click.native="closeModal">
+                    Nevermind
+                </app-secondary-button>
             </template>
-        </jet-dialog-modal>
+        </app-modal>
     </span>
 </template>
 
 <script>
-    import { nextTick, ref } from 'vue'
-    import JetButton from './Button'
-    import JetDialogModal from './DialogModal'
-    import JetInput from './Input'
-    import JetInputError from './InputError'
-    import JetSecondaryButton from './SecondaryButton'
+    import { nextTick, provide, ref } from 'vue'
+    import AppButton from '@/Components/Button'
+    import AppModal from '@/Components/Modal'
+    import AppSecondaryButton from '@/Components/SecondaryButton'
+    import FormInput from '@/Components/Form/Input'
+    import FormInputError from '@/Components/Form/InputError'
 
     export default {
         emits: ['confirmed'],
@@ -57,11 +72,11 @@
             }
         },
         components: {
-            JetButton,
-            JetDialogModal,
-            JetInput,
-            JetInputError,
-            JetSecondaryButton,
+            AppButton,
+            AppModal,
+            AppSecondaryButton,
+            FormInput,
+            FormInputError,
         },
         setup(_, { emit }) {
             const password = ref(null)
@@ -101,6 +116,8 @@
                 form.value.password = ''
                 form.value.error = ''
             }
+
+            provide('show', confirmingPassword)
 
             return {
                 closeModal,

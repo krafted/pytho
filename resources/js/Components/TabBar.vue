@@ -7,10 +7,10 @@
                 <button
                     class="flex py-3 border-b-2 border-transparent focus:outline-none"
                     :class="{
-                        'border-primary-500 text-gray-900 dark:text-gray-200': !isMd && state.activeTab === 'editor',
-                        'border-transparent text-gray-500 dark:text-gray-700 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400': isMd || state.activeTab !== 'editor',
+                        'border-primary-500 text-gray-900 dark:text-gray-200': !isMd && activeTab === 'editor',
+                        'border-transparent text-gray-500 dark:text-gray-700 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400': isMd || activeTab !== 'editor',
                     }"
-                    @click="state.activeTab = 'editor'"
+                    @click="activeTab = 'editor'"
                 >
                     <h3 class="font-mono text-xs font-semibold tracking-wide uppercase select-none">Editor</h3>
                 </button>
@@ -19,10 +19,10 @@
                     v-if="!isMd"
                     class="flex items-center py-3 border-b-2 focus:outline-none"
                     :class="{
-                        'border-primary-500 text-gray-900 dark:text-gray-200': state.activeTab === 'output',
-                        'border-transparent text-gray-500 dark:text-gray-700 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400': state.activeTab !== 'output',
+                        'border-primary-500 text-gray-900 dark:text-gray-200': activeTab === 'output',
+                        'border-transparent text-gray-500 dark:text-gray-700 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400': activeTab !== 'output',
                     }"
-                    @click="state.activeTab = 'output', run(), dirty = false"
+                    @click="activeTab = 'output', run(), dirty = false"
                 >
                     <h3 class="font-mono text-xs font-semibold tracking-wide uppercase select-none">Output</h3>
 
@@ -44,18 +44,22 @@
 </template>
 
 <script>
-    import { inject } from 'vue'
+    import { inject, watchEffect } from 'vue'
 
     export default {
         setup() {
-            const state = inject('state')
+            const activeTab = inject('activeTab')
             const dirty = inject('dirty')
             const error = inject('error')
             const isMd = inject('isMd')
             const run = inject('run')
 
+            watchEffect(() => {
+                if (isMd.value) activeTab.value = 'editor'
+            })
+
             return {
-                state,
+                activeTab,
                 dirty,
                 error,
                 isMd,

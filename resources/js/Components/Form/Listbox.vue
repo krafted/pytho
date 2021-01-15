@@ -2,9 +2,9 @@
     <h-listbox
         as="div"
         class="px-4 pt-2 pb-8 bg-gray-100 border border-gray-100 rounded-md dark:border-gray-800 dark:bg-gray-800 focus-within:bg-white dark:focus-within:bg-gray-900 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 focus-within:ring-primary-500"
-        :modelValue="value"
+        :modelValue="modelValue"
         v-slot="{ open }"
-        @update:modelValue="handleInput"
+        @update:model-value="handleInput"
     >
         <h-listbox-label class="block font-semibold tracking-wide text-gray-500 uppercase transition-all duration-200 ease-in-out transform text-2xs">
             {{ label }}
@@ -12,7 +12,7 @@
 
         <h-listbox-button class="absolute inset-0 z-10 flex items-center justify-between w-full px-4 mt-px text-left text-gray-900 dark:text-white focus:outline-none focus:ring-0">
             <span class="mt-4">
-                {{ options.find(o => o.value === value).label }}
+                {{ options.find(o => o.value === modelValue).label }}
             </span>
 
             <svg class="w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -78,7 +78,7 @@
     } from '@headlessui/vue'
 
     export default {
-        props: ['label', 'options', 'value'],
+        props: ['label', 'options', 'modelValue'],
         components: {
             HListbox,
             HListboxButton,
@@ -87,7 +87,7 @@
             HListboxOptions,
         },
         setup(_, { emit }) {
-            const handleInput = (v) => emit('update:value', v)
+            const handleInput = (v) => emit('update:modelValue', v)
 
             return {
                 handleInput,

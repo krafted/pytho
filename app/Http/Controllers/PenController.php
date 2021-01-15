@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Inertia\Inertia;
 
-class EditorController extends Controller
+class PenController extends Controller
 {
     /**
      * Show the main Editor.
@@ -16,6 +16,6 @@ class EditorController extends Controller
      */
     public function show(Request $request)
     {
-        return Inertia::render('Editor');
+        return Inertia::render('Pen');
     }
 }

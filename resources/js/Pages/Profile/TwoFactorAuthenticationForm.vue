@@ -1,5 +1,5 @@
 <template>
-    <jet-action-section>
+    <form-action-section>
         <template #title>
             Two Factor Authentication
         </template>
@@ -9,15 +9,15 @@
         </template>
 
         <template #content>
-            <h3 class="text-lg font-medium text-gray-900" v-if="twoFactorEnabled">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200" v-if="twoFactorEnabled">
                 You have enabled two factor authentication.
             </h3>
 
-            <h3 class="text-lg font-medium text-gray-900" v-else>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200" v-else>
                 You have not enabled two factor authentication.
             </h3>
 
-            <div class="max-w-xl mt-3 text-sm text-gray-600">
+            <div class="max-w-xl mt-1 text-sm text-gray-600 dark:text-gray-400">
                 <p>
                     When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone's Google Authenticator application.
                 </p>
@@ -25,84 +25,88 @@
 
             <div v-if="twoFactorEnabled">
                 <div v-if="qrCode">
-                    <div class="max-w-xl mt-4 text-sm text-gray-600">
+                    <div class="max-w-xl mt-3 text-sm text-gray-600 dark:text-gray-400">
                         <p class="font-semibold">
                             Two factor authentication is now enabled. Scan the following QR code using your phone's authenticator application.
                         </p>
                     </div>
 
-                    <div class="mt-4 dark:p-4 dark:w-56 dark:bg-white" v-html="qrCode">
+                    <div class="w-56 p-4 mt-3 bg-gray-100 rounded-md dark:bg-gray-800" v-html="qrCode">
                     </div>
                 </div>
 
                 <div v-if="recoveryCodes.length > 0">
-                    <div class="max-w-xl mt-4 text-sm text-gray-600">
+                    <div class="max-w-xl mt-4 text-sm text-gray-600 dark:text-gray-400">
                         <p class="font-semibold">
                             Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost.
                         </p>
                     </div>
 
-                    <div class="grid max-w-xl gap-1 px-4 py-4 mt-4 font-mono text-sm bg-gray-100 rounded-lg">
+                    <div class="grid max-w-xl gap-1 px-4 py-3 mt-3 font-mono text-sm text-gray-900 bg-gray-100 rounded-md dark:bg-gray-800 dark:text-gray-300">
                         <div v-for="code in recoveryCodes" :key="code">
                             {{ code }}
                         </div>
                     </div>
                 </div>
             </div>
+        </template>
 
-            <div class="mt-5">
-                <div v-if="! twoFactorEnabled">
-                    <jet-confirms-password @confirmed="enableTwoFactorAuthentication">
-                        <jet-button type="button" :class="{ 'opacity-25': enabling }" :disabled="enabling">
-                            Enable
-                        </jet-button>
-                    </jet-confirms-password>
-                </div>
+        <template #actions>
+            <div v-if="!twoFactorEnabled">
+                <app-confirms-password @confirmed="enableTwoFactorAuthentication">
+                    <app-button type="button" :class="{ 'opacity-25': enabling }" :disabled="enabling">
+                        Enable
+                    </app-button>
+                </app-confirms-password>
+            </div>
 
-                <div v-else>
-                    <jet-confirms-password @confirmed="regenerateRecoveryCodes">
-                        <jet-secondary-button class="mr-3"
-                                        v-if="recoveryCodes.length > 0">
-                            Regenerate Recovery Codes
-                        </jet-secondary-button>
-                    </jet-confirms-password>
+            <div v-else>
+                <app-confirms-password @confirmed="regenerateRecoveryCodes">
+                    <app-button
+                        v-if="recoveryCodes.length > 0"
+                        class="mr-3"
+                    >
+                        Regenerate Recovery Codes
+                    </app-button>
+                </app-confirms-password>
 
-                    <jet-confirms-password @confirmed="showRecoveryCodes">
-                        <jet-secondary-button class="mr-3" v-if="recoveryCodes.length === 0">
-                            Show Recovery Codes
-                        </jet-secondary-button>
-                    </jet-confirms-password>
+                <app-confirms-password @confirmed="showRecoveryCodes">
+                    <app-button
+                        v-if="recoveryCodes.length === 0"
+                        class="mr-3"
+                    >
+                        Show Recovery Codes
+                    </app-button>
+                </app-confirms-password>
 
-                    <jet-confirms-password @confirmed="disableTwoFactorAuthentication">
-                        <jet-danger-button
-                                        :class="{ 'opacity-25': disabling }"
-                                        :disabled="disabling">
-                            Disable
-                        </jet-danger-button>
-                    </jet-confirms-password>
-                </div>
+                <app-confirms-password @confirmed="disableTwoFactorAuthentication">
+                    <app-danger-button
+                        :class="{ 'opacity-25': disabling }"
+                        :disabled="disabling"
+                    >
+                        Disable
+                    </app-danger-button>
+                </app-confirms-password>
             </div>
         </template>
-    </jet-action-section>
+    </form-action-section>
 </template>
 
 <script>
-    import JetActionSection from '@/Jetstream/ActionSection'
-    import JetButton from '@/Jetstream/Button'
-    import JetConfirmsPassword from '@/Jetstream/ConfirmsPassword'
-    import JetDangerButton from '@/Jetstream/DangerButton'
-    import JetSecondaryButton from '@/Jetstream/SecondaryButton'
+    import AppButton from '@/Components/Button'
+    import AppConfirmsPassword from '@/Components/ConfirmsPassword'
+    import AppDangerButton from '@/Components/DangerButton'
+    import FormActionSection from '@/Components/Form/ActionSection'
     import { Inertia } from '@inertiajs/inertia'
     import { usePage } from '@inertiajs/inertia-vue3'
     import { computed, inject, ref } from 'vue'
 
     export default {
         components: {
-            JetActionSection,
-            JetButton,
-            JetConfirmsPassword,
-            JetDangerButton,
-            JetSecondaryButton,
+            AppButton,
+            AppConfirmsPassword,
+            AppDangerButton,
+            FormActionSection,
         },
         setup() {
             const page = usePage()

@@ -40,7 +40,7 @@
                             aria-modal="true"
                             aria-labelledby="modal-headline"
                         >
-                            <div class="p-4 bg-white dark:bg-gray-900 sm:p-6">
+                            <div class="p-6 bg-white dark:bg-gray-900">
                                 <div class="flex items-start space-x-4 sm:space-x-6">
                                     <div class="hidden sm:block">
                                         <slot name="icon" />
@@ -59,7 +59,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="px-4 py-3 bg-gray-100 dark:bg-gray-800 sm:px-6 sm:flex sm:flex-row-reverse">
+
+                            <div class="px-6 py-3 bg-gray-100 dark:bg-gray-800 sm:flex sm:flex-row-reverse">
                                 <slot name="actions" />
                             </div>
                         </div>
@@ -75,17 +76,21 @@
     import hotkeys from 'hotkeys-js'
 
     export default {
-        setup() {
-            const show = inject('show')
-            const close = () => show.value = false
+        emits: ['close'],
+        props: ['show'],
+        setup(props, { emit }) {
+            const show = inject('show', props.show)
+            const close = () => {
+                show.value = false
+                emit('close')
+            }
 
             onMounted(() => {
                 hotkeys('esc', (event) => {
-                    show.value = false
+                    close()
                     event.preventDefault()
                 })
             })
-
             onUnmounted(() => hotkeys.unbind('esc'))
 
             return {

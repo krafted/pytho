@@ -2,6 +2,13 @@
 
 namespace App\Models;
 
+use BaconQrCode\Renderer\Color\Alpha;
+use BaconQrCode\Renderer\Color\Rgb;
+use BaconQrCode\Renderer\Image\SvgImageBackEnd;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\RendererStyle\Fill;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Writer;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,7 +17,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -58,4 +65,31 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Get the default profile photo URL if no profile photo has been uploaded.
+     *
+     * @return string
+     */
+    protected function defaultProfilePhotoUrl()
+    {
+        return 'https://ui-avatars.com/api/?name='.urlencode($this->name).'&color=FFFFFF&background=000000&size=512';
+    }
+
+    /**
+     * Get the QR code SVG of the user's two factor authentication QR code URL.
+     *
+     * @return string
+     */
+    public function twoFactorQrCodeSvg()
+    {
+        $svg = (new Writer(
+            new ImageRenderer(
+                new RendererStyle(192, 0, null, null, Fill::uniformColor(new Alpha(0, new Rgb(0, 0, 0)), new Rgb(113, 113, 122))),
+                new SvgImageBackEnd
+            )
+        ))->writeString($this->twoFactorQrCodeUrl());
+
+        return trim(substr($svg, strpos($svg, "\n") + 1));
+    }
 }

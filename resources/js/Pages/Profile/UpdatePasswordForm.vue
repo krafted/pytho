@@ -1,5 +1,5 @@
 <template>
-    <jet-form-section @submitted="updatePassword">
+    <form-section @submitted="updatePassword">
         <template #title>
             Update Password
         </template>
@@ -9,55 +9,70 @@
         </template>
 
         <template #form>
-            <div class="col-span-6 sm:col-span-4">
-                <jet-label for="current_password" value="Current Password" />
-                <jet-input id="current_password" type="password" class="block w-full mt-1" v-model="form.current_password" ref="currentPassword" autocomplete="current-password" />
-                <jet-input-error :message="form.errors.current_password" class="mt-2" />
+            <div class="col-span-6 space-y-1 sm:col-span-4">
+                <form-input
+                    label="Current Password"
+                    autocomplete="current-password"
+                    ref="currentPassword"
+                    type="password"
+                    v-model="form.current_password"
+                />
+
+                <form-input-error :message="form.errors.current_password" />
             </div>
 
-            <div class="col-span-6 sm:col-span-4">
-                <jet-label for="password" value="New Password" />
-                <jet-input id="password" type="password" class="block w-full mt-1" v-model="form.password" ref="password" autocomplete="new-password" />
-                <jet-input-error :message="form.errors.password" class="mt-2" />
+            <div class="col-span-6 space-y-1 sm:col-span-4">
+                <form-input
+                    label="New Password"
+                    autocomplete="new-password"
+                    ref="password"
+                    type="password"
+                    v-model="form.password"
+                />
+
+                <form-input-error :message="form.errors.password" />
             </div>
 
-            <div class="col-span-6 sm:col-span-4">
-                <jet-label for="password_confirmation" value="Confirm Password" />
-                <jet-input id="password_confirmation" type="password" class="block w-full mt-1" v-model="form.password_confirmation" autocomplete="new-password" />
-                <jet-input-error :message="form.errors.password_confirmation" class="mt-2" />
+            <div class="col-span-6 space-y-1 sm:col-span-4">
+                <form-input
+                    label="Confirm Password"
+                    autocomplete="new-password"
+                    type="password"
+                    v-model="form.password_confirmation"
+                />
+
+                <form-input-error :message="form.errors.password_confirmation" />
             </div>
         </template>
 
         <template #actions>
-            <jet-action-message :on="form.recentlySuccessful" class="mr-3">
-                Saved.
-            </jet-action-message>
+            <form-action-message :on="form.recentlySuccessful" class="mr-3">
+                Saved
+            </form-action-message>
 
-            <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <app-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 Save
-            </jet-button>
+            </app-button>
         </template>
-    </jet-form-section>
+    </form-section>
 </template>
 
 <script>
-    import JetActionMessage from '@/Jetstream/ActionMessage'
-    import JetButton from '@/Jetstream/Button'
-    import JetFormSection from '@/Jetstream/FormSection'
-    import JetInput from '@/Jetstream/Input'
-    import JetInputError from '@/Jetstream/InputError'
-    import JetLabel from '@/Jetstream/Label'
+    import AppButton from '@/Components/Button'
+    import FormActionMessage from '@/Components/Form/ActionMessage'
+    import FormInput from '@/Components/Form/Input'
+    import FormInputError from '@/Components/Form/InputError'
+    import FormSection from '@/Components/Form/Section'
     import { inject, ref } from 'vue'
     import { useForm } from '@inertiajs/inertia-vue3'
 
     export default {
         components: {
-            JetActionMessage,
-            JetButton,
-            JetFormSection,
-            JetInput,
-            JetInputError,
-            JetLabel,
+            AppButton,
+            FormActionMessage,
+            FormInput,
+            FormInputError,
+            FormSection,
         },
         setup() {
             const form = useForm({

@@ -1,43 +1,58 @@
 <template>
-    <jet-authentication-card>
+    <app-authentication-card>
         <template #logo>
-            <jet-authentication-card-logo />
+            <app-logo class="w-12 h-12 text-2xl" />
         </template>
 
-        <jet-validation-errors class="mb-4" />
-
         <form @submit.prevent="submit">
-            <div>
-                <jet-label for="email" value="Email" />
-                <jet-input id="email" type="email" class="block w-full mt-1" v-model="form.email" required autofocus />
+            <div class="grid grid-cols-1 gap-3 p-6">
+                <form-validation-errors />
+
+                <form-input
+                    label="Email"
+                    readonly
+                    required
+                    type="email"
+                    v-model="form.email"
+                />
+
+                <form-input
+                    label="Password"
+                    autocomplete="new-password"
+                    autofocus
+                    required
+                    type="password"
+                    v-model="form.password"
+                />
+
+                <form-input
+                    label="Confirm Password"
+                    autocomplete="new-password"
+                    required
+                    type="password"
+                    v-model="form.password_confirmation"
+                />
             </div>
 
-            <div class="mt-4">
-                <jet-label for="password" value="Password" />
-                <jet-input id="password" type="password" class="block w-full mt-1" v-model="form.password" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4">
-                <jet-label for="password_confirmation" value="Confirm Password" />
-                <jet-input id="password_confirmation" type="password" class="block w-full mt-1" v-model="form.password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <div class="flex items-center justify-end px-6 py-3 bg-gray-100 dark:bg-gray-800">
+                <app-button
+                    class="ml-3"
+                    :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing"
+                >
                     Reset Password
-                </jet-button>
+                </app-button>
             </div>
         </form>
-    </jet-authentication-card>
+    </app-authentication-card>
 </template>
 
 <script>
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
-    import JetButton from '@/Jetstream/Button'
-    import JetInput from '@/Jetstream/Input'
-    import JetLabel from '@/Jetstream/Label'
-    import JetValidationErrors from '@/Jetstream/ValidationErrors'
+    import AppAuthenticationCard from '@/Components/AuthenticationCard'
+    import AppButton from '@/Components/Button'
+    import AppLogo from '@/Components/Logo'
+    import FormInput from '@/Components/Form/Input'
+    import FormValidationErrors from '@/Components/Form/ValidationErrors'
     import { inject } from 'vue'
     import { useForm } from '@inertiajs/inertia-vue3'
 
@@ -47,12 +62,11 @@
             token: String,
         },
         components: {
-            JetAuthenticationCard,
-            JetAuthenticationCardLogo,
-            JetButton,
-            JetInput,
-            JetLabel,
-            JetValidationErrors
+            AppAuthenticationCard,
+            AppButton,
+            AppLogo,
+            FormInput,
+            FormValidationErrors,
         },
         setup(props) {
             const form = useForm({

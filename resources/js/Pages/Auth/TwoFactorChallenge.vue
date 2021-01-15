@@ -1,81 +1,103 @@
 <template>
-    <jet-authentication-card>
+    <app-authentication-card>
         <template #logo>
-            <jet-authentication-card-logo />
+            <app-logo class="w-12 h-12 text-2xl" />
         </template>
 
-        <div class="mb-4 text-sm text-gray-600">
-            <template v-if="! recovery">
-                Please confirm access to your account by entering the authentication code provided by your authenticator application.
-            </template>
-
-            <template v-else>
-                Please confirm access to your account by entering one of your emergency recovery codes.
-            </template>
-        </div>
-
-        <jet-validation-errors class="mb-4" />
-
         <form @submit.prevent="submit">
-            <div v-if="! recovery">
-                <jet-label for="code" value="Code" />
-                <jet-input ref="code" id="code" type="text" inputmode="numeric" class="block w-full mt-1" v-model="form.code" autofocus autocomplete="one-time-code" />
-            </div>
-
-            <div v-else>
-                <jet-label for="recovery_code" value="Recovery Code" />
-                <jet-input ref="recovery_code" id="recovery_code" type="text" class="block w-full mt-1" v-model="form.recovery_code" autocomplete="one-time-code" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <button type="button" class="text-sm text-gray-600 underline cursor-pointer hover:text-gray-900" @click.prevent="toggleRecovery">
-                    <template v-if="! recovery">
-                        Use a recovery code
+            <div class="grid grid-cols-1 gap-3 p-6">
+                <div class="text-sm text-gray-500">
+                    <template v-if="!recovery">
+                        Please confirm access to your account by entering the authentication code provided by your authenticator application.
                     </template>
 
                     <template v-else>
-                        Use an authentication code
+                        Please confirm access to your account by entering one of your emergency recovery codes.
                     </template>
-                </button>
+                </div>
 
-                <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <div class="border-t border-gray-100 dark:border-gray-800" />
+
+                <form-validation-errors />
+
+                <form-input
+                    v-if="!recovery"
+                    label="Code"
+                    autocomplete="one-time-code"
+                    autofocus
+                    inputmode="numeric"
+                    ref="code"
+                    type="text"
+                    v-model="form.code"
+                />
+
+                <form-input
+                    v-else
+                    label="Recovery Code"
+                    autocomplete="one-time-code"
+                    autofocus
+                    ref="recoveryCode"
+                    type="text"
+                    v-model="form.recovery_code"
+                />
+            </div>
+
+            <div class="flex items-center justify-end px-6 py-3 bg-gray-100 dark:bg-gray-800">
+                <app-secondary-button
+                    type="button"
+                    @click.prevent="toggleRecovery"
+                >
+                    <template v-if="!recovery">
+                        Use recovery code
+                    </template>
+
+                    <template v-else>
+                        Use authentication code
+                    </template>
+                </app-secondary-button>
+
+                <app-button
+                    class="ml-3"
+                    :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing"
+                >
                     Login
-                </jet-button>
+                </app-button>
             </div>
         </form>
-    </jet-authentication-card>
+    </app-authentication-card>
 </template>
 
 <script>
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
-    import JetButton from '@/Jetstream/Button'
-    import JetInput from '@/Jetstream/Input'
-    import JetLabel from '@/Jetstream/Label'
-    import JetValidationErrors from '@/Jetstream/ValidationErrors'
-    import { inject, nextTick, ref } from 'vue'
+    import AppAuthenticationCard from '@/Components/AuthenticationCard'
+    import AppButton from '@/Components/Button'
+    import AppSecondaryButton from '@/Components/SecondaryButton'
+    import AppLogo from '@/Components/Logo'
+    import FormInput from '@/Components/Form/Input'
+    import FormValidationErrors from '@/Components/Form/ValidationErrors'
+    import { inject, nextTick, onMounted, ref } from 'vue'
     import { useForm } from '@inertiajs/inertia-vue3'
 
     export default {
         components: {
-            JetAuthenticationCard,
-            JetAuthenticationCardLogo,
-            JetButton,
-            JetInput,
-            JetLabel,
-            JetValidationErrors,
+            AppAuthenticationCard,
+            AppButton,
+            AppSecondaryButton,
+            AppLogo,
+            FormInput,
+            FormValidationErrors,
         },
         setup() {
             const form = useForm({ code: '', recovery_code: '' })
             const recovery = ref(false)
             const code = ref(null)
-            const recovery_code = ref(null)
+            const recoveryCode = ref(null)
             const submit = () => form.value.post(route('two-factor.login'))
             const toggleRecovery = async () => {
-                recovery.value = true
+                recovery.value ^= true
                 await nextTick()
                 if (recovery.value) {
-                    recovery_code.value.focus()
+                    recoveryCode.value.focus()
                     form.value.code = ''
                 } else {
                     code.value.focus()
@@ -87,7 +109,7 @@
                 form,
                 recovery,
                 code,
-                recovery_code,
+                recoveryCode,
                 submit,
                 toggleRecovery,
             }

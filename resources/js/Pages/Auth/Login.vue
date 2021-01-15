@@ -1,54 +1,71 @@
 <template>
-    <jet-authentication-card>
+    <app-authentication-card>
         <template #logo>
-            <jet-authentication-card-logo />
+            <app-logo class="w-12 h-12 text-2xl" />
         </template>
 
-        <jet-validation-errors class="mb-4" />
-
-        <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
-            {{ status }}
-        </div>
-
         <form @submit.prevent="submit">
-            <div>
-                <jet-label for="email" value="Email" />
-                <jet-input id="email" type="email" class="block w-full mt-1" v-model="form.email" required autofocus />
-            </div>
+            <div class="grid grid-cols-1 gap-3 p-6">
+                <div v-if="status" class="text-sm font-medium text-green-600 dark:text-green-400">
+                    {{ status }}
+                </div>
 
-            <div class="mt-4">
-                <jet-label for="password" value="Password" />
-                <jet-input id="password" type="password" class="block w-full mt-1" v-model="form.password" required autocomplete="current-password" />
-            </div>
+                <form-validation-errors />
 
-            <div class="block mt-4">
+                <form-input
+                    label="Email"
+                    autofocus
+                    required
+                    type="email"
+                    v-model="form.email"
+                />
+
+                <form-input
+                    label="Password"
+                    autocomplete="current-password"
+                    required
+                    type="password"
+                    v-model="form.password"
+                />
+
                 <label class="flex items-center">
-                    <jet-checkbox name="remember" v-model="form.remember" />
-                    <span class="ml-2 text-sm text-gray-600">Remember me</span>
+                    <form-checkbox
+                        class="w-6 h-6"
+                        name="remember"
+                        v-model="form.remember"
+                    />
+                    <span class="ml-4 text-xs font-semibold tracking-wide text-gray-500 uppercase">Remember me</span>
                 </label>
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <inertia-link v-if="canResetPassword" :href="route('password.request')" class="text-sm text-gray-600 underline hover:text-gray-900">
+            <div class="flex items-center justify-end px-6 py-3 bg-gray-100 dark:bg-gray-800">
+                <inertia-link
+                    v-if="canResetPassword"
+                    :href="route('password.request')"
+                    class="text-sm text-gray-500 hover:underline focus:outline-none focus:ring focus:ring-primary-500"
+                >
                     Forgot your password?
                 </inertia-link>
 
-                <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <app-button
+                    class="ml-3"
+                    :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing"
+                >
                     Login
-                </jet-button>
+                </app-button>
             </div>
         </form>
-    </jet-authentication-card>
+    </app-authentication-card>
 </template>
 
 <script>
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
-    import JetButton from '@/Jetstream/Button'
-    import JetInput from '@/Jetstream/Input'
-    import JetCheckbox from '@/Jetstream/Checkbox'
-    import JetLabel from '@/Jetstream/Label'
-    import JetValidationErrors from '@/Jetstream/ValidationErrors'
+    import AppAuthenticationCard from '@/Components/AuthenticationCard'
+    import AppButton from '@/Components/Button'
+    import AppLogo from '@/Components/Logo'
+    import FormCheckbox from '@/Components/Form/Checkbox'
+    import FormInput from '@/Components/Form/Input'
+    import FormValidationErrors from '@/Components/Form/ValidationErrors'
     import { inject } from 'vue'
     import { useForm } from '@inertiajs/inertia-vue3'
 
@@ -58,13 +75,12 @@
             status: String
         },
         components: {
-            JetAuthenticationCard,
-            JetAuthenticationCardLogo,
-            JetButton,
-            JetInput,
-            JetCheckbox,
-            JetLabel,
-            JetValidationErrors
+            AppAuthenticationCard,
+            AppButton,
+            AppLogo,
+            FormCheckbox,
+            FormInput,
+            FormValidationErrors,
         },
         setup() {
             const form = useForm({
