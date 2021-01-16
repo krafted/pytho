@@ -35,12 +35,12 @@
                     >
                         <div
                             v-show="show"
-                            class="inline-block w-full overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl dark:bg-gray-900 sm:my-8 sm:align-middle sm:max-w-lg"
+                            class="inline-block w-full text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl dark:bg-gray-900 sm:my-8 sm:align-middle sm:max-w-lg"
                             role="dialog"
                             aria-modal="true"
                             aria-labelledby="modal-headline"
                         >
-                            <div class="p-6 bg-white dark:bg-gray-900">
+                            <div class="p-6">
                                 <div class="flex items-start space-x-4 sm:space-x-6">
                                     <div class="hidden sm:block">
                                         <slot name="icon" />
@@ -60,7 +60,7 @@
                                 </div>
                             </div>
 
-                            <div class="px-6 py-3 bg-gray-100 dark:bg-gray-800 sm:flex sm:flex-row-reverse">
+                            <div class="px-6 py-3 bg-gray-100 rounded-b-lg dark:bg-gray-800 sm:flex sm:flex-row-reverse">
                                 <slot name="actions" />
                             </div>
                         </div>
@@ -79,11 +79,7 @@
         emits: ['close'],
         props: ['show'],
         setup(props, { emit }) {
-            const show = inject('show', props.show)
-            const close = () => {
-                show.value = false
-                emit('close')
-            }
+            const close = () => emit('close')
 
             onMounted(() => {
                 hotkeys('esc', (event) => {
@@ -93,10 +89,7 @@
             })
             onUnmounted(() => hotkeys.unbind('esc'))
 
-            return {
-                close,
-                show,
-            }
+            return { close }
         },
     }
 </script>

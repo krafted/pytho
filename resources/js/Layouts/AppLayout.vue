@@ -16,7 +16,6 @@
     import AppBanner from '@/Components/Banner'
     import AppHeader from '@/Components/Header'
     import AppSettings from '@/Components/Settings'
-    import JetApplicationMark from '@/Jetstream/ApplicationMark'
     import JetNavLink from '@/Jetstream/NavLink'
     import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink'
     import { Inertia } from '@inertiajs/inertia'
@@ -30,7 +29,6 @@
             AppBanner,
             AppHeader,
             AppSettings,
-            JetApplicationMark,
             JetNavLink,
             JetResponsiveNavLink,
         },

@@ -44,7 +44,10 @@
             </div>
 
             <!-- Logout Other Devices Confirmation Modal -->
-            <app-modal @close="closeModal">
+            <app-modal
+                :show="confirmingLogout"
+                @close="closeModal"
+            >
                 <template #icon>
                     <div class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-gray-100 rounded-full dark:bg-black sm:mx-0 sm:h-10 sm:w-10">
                         <svg class="w-6 h-6 text-gray-600 dark:text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -143,8 +146,6 @@
                 confirmingLogout.value = false
                 form.value.reset()
             }
-
-            provide('show', confirmingLogout)
 
             return {
                 closeModal,

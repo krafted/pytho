@@ -33,7 +33,7 @@
             <template v-if="page.props.value.jetstream.hasAccountDeletionFeatures">
                 <form-section-border />
 
-                <delete-user-form class="mt-10 sm:mt-0" />
+                <delete-user-form class="mt-6 sm:mt-0" />
             </template>
         </div>
     </app-layout>
@@ -41,12 +41,12 @@
 
 <script>
     import AppLayout from '@/Layouts/AppLayout'
-    import DeleteUserForm from './DeleteUserForm'
+    import DeleteUserForm from '@/Pages/Profile/DeleteUserForm'
     import FormSectionBorder from '@/Components/Form/SectionBorder'
-    import LogoutOtherBrowserSessionsForm from './LogoutOtherBrowserSessionsForm'
-    import TwoFactorAuthenticationForm from './TwoFactorAuthenticationForm'
-    import UpdatePasswordForm from './UpdatePasswordForm'
-    import UpdateProfileInformationForm from './UpdateProfileInformationForm'
+    import LogoutOtherBrowserSessionsForm from '@/Pages/Profile/LogoutOtherBrowserSessionsForm'
+    import TwoFactorAuthenticationForm from '@/Pages/Profile/TwoFactorAuthenticationForm'
+    import UpdatePasswordForm from '@/Pages/Profile/UpdatePasswordForm'
+    import UpdateProfileInformationForm from '@/Pages/Profile/UpdateProfileInformationForm'
     import { usePage } from '@inertiajs/inertia-vue3'
 
     export default {

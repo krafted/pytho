@@ -20,7 +20,7 @@
                     :href="route('logout')"
                     method="post"
                     as="button"
-                    class="text-sm text-gray-500 hover:underline focus:outline-none focus:ring focus:ring-primary-500"
+                    class="text-sm font-semibold tracking-wide text-gray-500 uppercase hover:underline focus:outline-none focus:ring focus:ring-primary-500"
                 >
                     Logout
                 </inertia-link>

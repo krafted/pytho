@@ -12,15 +12,19 @@
 
             <template #form>
                 <!-- Token Name -->
-                <div class="col-span-6 sm:col-span-4">
-                    <jet-label for="name" value="Name" />
-                    <jet-input id="name" type="text" class="block w-full mt-1" v-model="createApiTokenForm.name" autofocus />
-                    <form-input-error :message="createApiTokenForm.errors.name" class="mt-2" />
+                <div class="col-span-6 space-y-1 sm:col-span-4">
+                    <form-input
+                        label="Name"
+                        autofocus
+                        v-model="createApiTokenForm.name"
+                    />
+
+                    <form-input-error :message="createApiTokenForm.errors.name" />
                 </div>
 
                 <!-- Token Permissions -->
                 <div class="col-span-6" v-if="availablePermissions.length > 0">
-                    <jet-label for="permissions" value="Permissions" />
+                    <span v-text="'Permissions'" />
 
                     <div class="grid grid-cols-1 gap-4 mt-2 md:grid-cols-2">
                         <div v-for="permission in availablePermissions" :key="permission">
@@ -90,7 +94,10 @@
         </div>
 
         <!-- Token Value Modal -->
-        <jet-dialog-modal :show="displayingToken" @close="displayingToken = false">
+        <app-modal
+            :show="displayingToken"
+            @close="displayingToken = false"
+        >
             <template #title>
                 API Token
             </template>
@@ -106,14 +113,17 @@
             </template>
 
             <template #footer>
-                <jet-secondary-button @click.native="displayingToken = false">
+                <app-secondary-button @click.native="displayingToken = false">
                     Close
-                </jet-secondary-button>
+                </app-secondary-button>
             </template>
-        </jet-dialog-modal>
+        </app-modal>
 
         <!-- API Token Permissions Modal -->
-        <app-modal :show="managingPermissionsFor" @close="managingPermissionsFor = null">
+        <app-modal
+            :show="managingPermissionsFor"
+            @close="managingPermissionsFor = null"
+        >
             <template #title>
                 API Token Permissions
             </template>
@@ -133,9 +143,9 @@
             </template>
 
             <template #actions>
-                <jet-secondary-button @click.native="managingPermissionsFor = null">
+                <app-secondary-button @click.native="managingPermissionsFor = null">
                     Nevermind
-                </jet-secondary-button>
+                </app-secondary-button>
 
                 <app-button class="ml-2" @click.native="updateApiToken" :class="{ 'opacity-25': updateApiTokenForm.processing }" :disabled="updateApiTokenForm.processing">
                     Save
@@ -144,7 +154,10 @@
         </app-modal>
 
         <!-- Delete Token Confirmation Modal -->
-        <app-modal :show="apiTokenBeingDeleted" @close="apiTokenBeingDeleted = null">
+        <app-modal
+            :show="apiTokenBeingDeleted"
+            @close="apiTokenBeingDeleted = null"
+        >
             <template #title>
                 Delete API Token
             </template>
@@ -173,10 +186,10 @@
     import AppModal from '@/Components/Modal'
     import FormCheckbox from '@/Components/Form/Checkbox'
     import FormActionMessage from '@/Components/Form/ActionMessage'
+    import FormInput from '@/Components/Form/Input'
     import FormInputError from '@/Components/Form/InputError'
     import FormSection from '@/Components/Form/Section'
     import FormSectionBorder from '@/Components/Form/SectionBorder'
-    import JetInput from '@/Jetstream/Input'
     import { inject, ref } from 'vue'
     import { useForm, usePage } from '@inertiajs/inertia-vue3'
 
@@ -188,10 +201,10 @@
             AppModal,
             FormActionMessage,
             FormCheckbox,
+            FormInput,
+            FormInputError,
             FormSection,
             FormSectionBorder,
-            JetInput,
-            JetInputError,
         },
         props: [
             'tokens',

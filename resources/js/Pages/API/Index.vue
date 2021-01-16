@@ -17,7 +17,7 @@
 </template>
 
 <script>
-    import ApiTokenManager from './ApiTokenManager'
+    import ApiTokenManager from '@/Pages/API/ApiTokenManager'
     import AppLayout from '@/Layouts/AppLayout'
 
     export default {

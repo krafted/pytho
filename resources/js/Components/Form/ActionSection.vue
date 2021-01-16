@@ -11,7 +11,10 @@
                     <slot name="content"></slot>
                 </div>
 
-                <div class="flex items-center justify-end px-6 py-3 bg-gray-100 dark:bg-gray-800">
+                <div
+                    v-if="hasActions"
+                    class="flex items-center justify-end px-6 py-3 bg-gray-100 dark:bg-gray-800"
+                >
                     <slot name="actions"></slot>
                 </div>
             </div>
@@ -21,8 +24,14 @@
 
 <script>
     import FormSectionTitle from '@/Components/Form/SectionTitle'
+    import { computed } from 'vue'
 
     export default {
-        components: { FormSectionTitle }
+        components: { FormSectionTitle },
+        setup(_, { slots }) {
+            const hasActions = computed(() => !!slots.actions)
+
+            return { hasActions }
+        },
     }
 </script>

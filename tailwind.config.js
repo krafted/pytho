@@ -42,6 +42,7 @@ module.exports = {
             },
             height: {
                 'px': '1px',
+                '14.5': '3.625rem',
             },
             lineHeight: {
                 'inherit': 'inherit',
