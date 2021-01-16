@@ -48,9 +48,22 @@
                                 <template v-for="team in page.props.value.user.all_teams" :key="team.id">
                                     <form @submit.prevent="switchToTeam(team)">
                                         <app-dropdown-link as="button">
-                                            <div class="flex items-center">
-                                                <svg v-if="team.id == page.props.value.user.current_team_id" class="w-5 h-5 mr-2 text-green-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                            <div class="flex items-center justify-between">
                                                 <div>{{ team.name }}</div>
+
+                                                <svg
+                                                    v-if="team.id == page.props.value.user.current_team_id"
+                                                    class="w-4 h-4 ml-3"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 20 20"
+                                                    fill="currentColor"
+                                                >
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                        clip-rule="evenodd"
+                                                    />
+                                                </svg>
                                             </div>
                                         </app-dropdown-link>
                                     </form>
