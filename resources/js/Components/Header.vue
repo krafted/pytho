@@ -7,7 +7,7 @@
                 <slot name="header-actions" />
 
                 <!-- Teams Dropdown -->
-                <app-dropdown align="right" width="60" v-if="page.props.value.user && page.props.value.jetstream.hasTeamFeatures>
+                <app-dropdown align="right" width="60" v-if="page.props.value.user && page.props.value.jetstream.hasTeamFeatures">
                     <template #trigger>
                         <button class="flex items-center justify-center p-2.5 text-gray-500 dark:text-gray-700 border border-transparent rounded-md group hover:w-auto hover:bg-gray-200 dark:hover:bg-black focus:bg-gray-200 dark:focus:bg-black focus:border-gray-300 dark:focus:border-gray-800 hover:border-gray-300 dark:hover:border-gray-800 hover:text-gray-900 dark:hover:text-gray-400 focus:text-gray-900 dark:focus:text-gray-400 focus:outline-none focus:w-auto">
                             <span class="sr-only">Team</span>                            
