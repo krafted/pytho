@@ -10,7 +10,7 @@
 
         <template #form>
             <!-- Team Owner Information -->
-            <div class="col-span-6 p-3 bg-gray-100 rounded-md dark:bg-gray-800 sm:col-span-4">
+            <div class="col-span-6 px-4 py-3 bg-gray-100 rounded-md dark:bg-gray-800 sm:col-span-4">
                 <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
                     Team Owner
                 </h3>

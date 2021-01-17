@@ -1,7 +1,7 @@
 <template>
     <h-listbox
         as="div"
-        class="h-14.5 px-3 pt-2 pb-8 bg-gray-100 border border-gray-100 rounded-md dark:border-gray-800 dark:bg-gray-800 focus-within:bg-white dark:focus-within:bg-gray-900 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 focus-within:outline-none focus-within:ring-primary-500"
+        class="h-14.5 px-4 pt-2 pb-8 bg-gray-100 border border-gray-100 rounded-md dark:border-gray-800 dark:bg-gray-800 focus-within:bg-white dark:focus-within:bg-gray-900 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 focus-within:outline-none focus-within:ring-primary-500"
         :model-value="modelValue"
         v-slot="{ open }"
         @update:model-value="handleInput"
@@ -16,8 +16,8 @@
             {{ label }}
         </h-listbox-label>
 
-        <h-listbox-button class="absolute inset-0 z-10 flex items-center justify-between w-full px-3 mt-px text-left text-gray-900 dark:text-white focus:outline-none focus:ring-0">
-            <span class="mt-3">
+        <h-listbox-button class="absolute inset-0 z-10 flex items-center justify-between w-full px-4 mt-px text-left text-gray-900 dark:text-white focus:outline-none focus:ring-0">
+            <span class="mt-3.5">
                 <span v-if="modelValue">
                     {{ options.find(o => o.value === modelValue).label }}
                 </span>
@@ -51,7 +51,7 @@
                         v-slot="{ selected, active }"
                     >
                         <button
-                            class="flex items-center justify-between w-full px-3 py-2 focus:outline-none focus:ring-0"
+                            class="flex items-center justify-between w-full px-4 py-2 focus:outline-none focus:ring-0"
                             :class="{
                                 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white': active,
                                 'font-semibold text-gray-900 dark:text-white': selected,

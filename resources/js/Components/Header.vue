@@ -14,7 +14,7 @@
 
                             <span
                                 v-if="!isMobile"
-                                class="flex-shrink-0 hidden mr-2 font-mono text-sm group-hover:inline group-focus:inline"
+                                class="flex-shrink-0 hidden mr-2 text-sm group-hover:inline group-focus:inline"
                                 v-text="'Team'"
                             />
 
@@ -80,7 +80,7 @@
 
                             <span
                                 v-if="!isMobile"
-                                class="flex-shrink-0 hidden mr-2 font-mono text-sm group-hover:inline group-focus:inline"
+                                class="flex-shrink-0 hidden mr-2 text-sm group-hover:inline group-focus:inline"
                                 v-text="'Menu'"
                             />
 
