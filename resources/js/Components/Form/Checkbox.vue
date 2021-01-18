@@ -1,7 +1,7 @@
 <template>
     <input
         v-model="proxyChecked"
-        :class="['rounded focus:ring focus:ring-primary-500', classes]"
+        :class="['rounded focus:ring focus:ring-primary-500 cursor-pointer', classes]"
         :value="value"
         type="checkbox"
     />
