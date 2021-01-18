@@ -33,7 +33,8 @@ module.exports = {
                 'row-resize': 'row-resize',
             },
             fontFamily: {
-                mono: ['Fira Code', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
+                mono: ['Fira Code', ...defaultTheme.fontFamily.mono],
+                sans: ['Inter var', ...defaultTheme.fontFamily.sans],
             },
             fontSize: {
                 'inherit': 'inherit',
@@ -47,15 +48,15 @@ module.exports = {
             lineHeight: {
                 'inherit': 'inherit',
             },
-            width: {
-                'px': '1px',
-            },
             spacing: {
                 '10.5': '2.625rem',
                 'safe-top': 'env(safe-area-inset-top)',
                 'safe-bottom': 'env(safe-area-inset-bottom)',
                 'safe-left': 'env(safe-area-inset-left)',
                 'safe-right': 'env(safe-area-inset-right)',
+            },
+            width: {
+                'px': '1px',
             },
         },
     },
