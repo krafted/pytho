@@ -54,8 +54,8 @@
     }
 
     .splitpanes__splitter {
-        @apply relative bg-gray-100 dark:bg-gray-800;
-        touch-action: none
+        @apply relative bg-gray-100 dark:bg-gray-800 z-20;
+        touch-action: none;
     }
 
     .splitpanes--vertical .splitpanes__splitter {
@@ -67,7 +67,7 @@
     }
 
     .splitpanes__splitter:before {
-        @apply absolute top-0 left-0 z-20;
+        @apply absolute top-0 left-0;
         content: '';
     }
 
