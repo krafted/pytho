@@ -3,15 +3,17 @@
         <template #header-actions>
             <button
                 class="flex items-center justify-center p-2.5 text-gray-500 dark:text-gray-700 border border-transparent rounded-md group hover:w-auto hover:bg-gray-200 dark:hover:bg-black focus:bg-gray-200 dark:focus:bg-black focus:border-gray-300 dark:focus:border-gray-800 hover:border-gray-300 dark:hover:border-gray-800 hover:text-gray-900 dark:hover:text-gray-400 focus:text-gray-900 dark:focus:text-gray-400 focus:outline-none focus:w-auto"
+                :title="isMac ? '⌘ + ↩︎' : '⌃ + ↩︎'"
                 @click="run"
             >
                 <span class="sr-only">Run</span>
 
                 <span
                     v-if="!isMobile"
-                    class="flex-shrink-0 hidden mr-2 font-mono text-sm group-hover:inline group-focus:inline"
-                    v-text="isMac ? '⌘ + ↩︎' : '⌃ + ↩︎'"
-                />
+                    class="flex-shrink-0 hidden mr-2 text-sm group-hover:inline group-focus:inline"
+                >
+                    Run
+                </span>
 
                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
@@ -114,7 +116,7 @@
     import useMedia from '@/Hooks/useMedia'
     import defaultContent from '@/Config/Content'
     import { Splitpanes, Pane } from 'splitpanes'
-    import { inject, nextTick, onMounted, onUnmounted, provide, reactive, ref, watchEffect } from 'vue'
+    import { inject, nextTick, onMounted, onUnmounted, provide, reactive, ref, watch } from 'vue'
     import { loadEngine, runCode, setOptions } from 'client-side-python-runner'
 
     export default {
@@ -163,7 +165,7 @@
                 dirty.value = true
             }
 
-            watchEffect(() => isMd && (showCanvas.value = false))
+            watch(isMd, (value, oldValue) => value !== oldValue && run())
 
             onMounted(() => {
                 hotkeys(isMac.value ? 'cmd+enter' : 'ctrl+enter', async (event) => {
@@ -175,6 +177,7 @@
 
             onMounted(async () => {
                 await loadEngine('pyodide')
+                await pyodide.loadPackage('numpy')
 
                 setOptions({
                     output: (result) => output.value += result,
