@@ -3,15 +3,15 @@
         ref="editorContainer"
         class="flex-1 ml-safe-left"
         :style="{
-            fontSize: `${state.settings.fontSize}px`,
-            lineHeight: `${state.settings.lineHeight}rem`,
+            fontSize: `${settings.fontSize}px`,
+            lineHeight: `${settings.lineHeight}rem`,
         }"
     >
     </div>
 </template>
 
 <script>
-    import { inject, onMounted, ref } from 'vue'
+    import { inject, onMounted, readonly, ref } from 'vue'
     import debounce from 'debounce'
     import CodeMirror from 'codemirror'
 
@@ -23,7 +23,7 @@
 
     export default {
         setup() {
-            const state = inject('state')
+            const settings = inject('settings')
             const editorContainer = ref(null)
             const editor = inject('editor')
             const content = inject('content')
@@ -46,8 +46,8 @@
                         }
                     },
                     gutters: ["CodeMirror-linenumbers"],
-                    indentUnit: parseInt(state.settings.indentUnit),
-                    keyMap: isMobile.value ? 'default' : state.settings.keyMap,
+                    indentUnit: parseInt(settings.value.indentUnit),
+                    keyMap: isMobile.value ? 'default' : settings.value.keyMap,
                     lineNumbers: true,
                     lineWrapping: true,
                     mode: 'text/x-python',
@@ -63,8 +63,8 @@
             })
 
             return {
+                settings,
                 editor,
-                state,
                 editorContainer,
             }
         }

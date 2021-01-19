@@ -108,6 +108,8 @@
                                     v-text="isMac ? '⌘ + ,' : '⌃ + ,'"
                                 />
                             </span>
+
+                            <app-settings />
                         </app-dropdown-link>
 
                         <!-- Authentication -->
@@ -151,6 +153,7 @@
     import AppDropdown from '@/Components/Dropdown'
     import AppDropdownLink from '@/Components/DropdownLink'
     import AppLogo from '@/Components/Logo'
+    import AppSettings from '@/Components/Settings'
     import { inject } from 'vue'
     import { usePage } from '@inertiajs/inertia-vue3'
     import { Inertia } from '@inertiajs/inertia'
@@ -161,6 +164,7 @@
             AppDropdown,
             AppDropdownLink,
             AppLogo,
+            AppSettings,
         },
         setup() {
             const page = usePage()

@@ -20,6 +20,8 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </button>
+
+            <app-share />
         </template>
 
         <div class="flex flex-col flex-1">
@@ -27,7 +29,7 @@
 
             <splitpanes
                 class="overflow-hidden"
-                :horizontal="state.settings.layout === 'horizontal'"
+                :horizontal="settings.layout === 'horizontal'"
             >
                 <pane
                     v-if="activeTab === 'editor' || isMd"
@@ -48,7 +50,7 @@
                         <header class="absolute inset-x-0 top-0 items-center hidden px-4 py-3 border-gray-100 dark:border-gray-800 pr-safe-right md:flex">
                             <h3
                                 class="font-mono text-xs font-semibold tracking-wide text-gray-500 uppercase border-b-2 border-transparent select-none dark:text-gray-700"
-                                :class="{ 'ml-safe-left': state.settings.layout === 'horizontal' }"
+                                :class="{ 'ml-safe-left': settings.layout === 'horizontal' }"
                             >
                                 Output
                             </h3>
@@ -109,9 +111,10 @@
 </template>
 
 <script>
-    import AppLayout from '@/Layouts/AppLayout'
     import AppEditor from '@/Components/Editor'
+    import AppLayout from '@/Layouts/AppLayout'
     import AppOutput from '@/Components/Output'
+    import AppShare from '@/Components/Share'
     import AppTabBar from '@/Components/TabBar'
     import useMedia from '@/Hooks/useMedia'
     import defaultContent from '@/Config/Content'
@@ -121,19 +124,20 @@
 
     export default {
         components: {
-            AppLayout,
             AppEditor,
+            AppLayout,
             AppOutput,
+            AppShare,
             AppTabBar,
-            Splitpanes,
             Pane,
+            Splitpanes,
         },
         setup() {
-            const state = inject('state')
+            const settings = inject('settings')
             const activeTab = ref('editor')
             const content = ref(defaultContent)
+            const editor = inject('editor')
             const output = ref('')
-            const editor = ref(null)
             const loading = ref(true)
             const dirty = ref(false)
             const error = ref(false)
@@ -190,7 +194,6 @@
             })
 
             provide('activeTab', activeTab)
-            provide('editor', editor)
             provide('content', content)
             provide('output', output)
             provide('loading', loading)
@@ -203,7 +206,7 @@
             provide('closeCanvas', closeCanvas)
 
             return {
-                state,
+                settings,
                 activeTab,
                 dirty,
                 editor,

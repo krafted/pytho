@@ -39,26 +39,61 @@
                     </transition>
                 </button>
             </div>
+
+            <div>
+                <SwitchGroup
+                    as="div"
+                    class="flex items-center justify-center p-1.5 -mt-px -mr-1 text-gray-500 border border-transparent rounded-md dark:text-gray-700 group hover:w-auto hover:bg-gray-200 dark:hover:bg-black focus:bg-gray-200 dark:focus:bg-black focus:border-gray-300 dark:focus:border-gray-800 hover:border-gray-300 dark:hover:border-gray-800 hover:text-gray-900 dark:hover:text-gray-400 focus:text-gray-900 dark:focus:text-gray-400 focus:outline-none focus:w-auto"
+                    title="Auto-Run"
+                >
+                    <span class="sr-only">
+                        Auto-Run
+                    </span>
+
+                    <Switch
+                        as="button"
+                        v-model="settings.autoRun"
+                        class="relative inline-flex flex-shrink-0 cursor-pointer focus:outline-none focus:shadow-outline"
+                        v-slot="{ checked }"
+                    >
+                        <svg
+                            class="w-5 h-5 text-gray-600 transition-all duration-200 ease-in-out"
+                            :class="settings.autoRun ? 'text-primary-500' : 'text-gray-600'"
+                            xmlns="http://www.w3.org/2000/svg"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </Switch>
+                </SwitchGroup>
+            </div>
         </div>
     </header>
 </template>
 
 <script>
     import { inject, watchEffect } from 'vue'
+    import { SwitchGroup, Switch, SwitchLabel } from '@headlessui/vue'
 
     export default {
+        components: {
+            SwitchGroup,
+            Switch,
+            SwitchLabel,
+        },
         setup() {
+            const settings = inject('settings')
             const activeTab = inject('activeTab')
             const dirty = inject('dirty')
             const error = inject('error')
             const isMd = inject('isMd')
             const run = inject('run')
 
-            watchEffect(() => {
-                if (isMd.value) activeTab.value = 'editor'
-            })
+            watchEffect(() => isMd.value && (activeTab.value = 'editor'))
 
             return {
+                settings,
                 activeTab,
                 dirty,
                 error,

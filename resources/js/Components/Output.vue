@@ -1,10 +1,10 @@
 <template>
     <div
         class="flex-1 mr-safe-right"
-        :class="{ 'ml-safe-left': state.settings.layout === 'horizontal' }"
+        :class="{ 'ml-safe-left': settings.layout === 'horizontal' }"
         :style="{
-            fontSize: `${state.settings.fontSize}px`,
-            lineHeight: `${state.settings.lineHeight}rem`,
+            fontSize: `${settings.fontSize}px`,
+            lineHeight: `${settings.lineHeight}rem`,
         }"
     >
         <textarea
@@ -21,7 +21,7 @@
             <div
                 v-show="showCanvas"
                 class="absolute inset-0 flex items-center justify-center flex-1 overflow-hidden"
-                :class="{ 'ml-safe-left': state.settings.layout === 'horizontal' }"
+                :class="{ 'ml-safe-left': settings.layout === 'horizontal' }"
                 @mouseover="dirty = false"
                 @click="dirty = false, closeCanvas()"
                 @focus="dirty = false"
@@ -64,14 +64,14 @@
 
     export default {
         setup() {
-            const state = inject('state')
+            const settings = inject('settings')
             const output = inject('output')
             const dirty = inject('dirty')
             const showCanvas = inject('showCanvas')
             const closeCanvas = inject('closeCanvas')
 
             return {
-                state,
+                settings,
                 dirty,
                 output,
                 showCanvas,

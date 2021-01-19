@@ -11,16 +11,3 @@
         </div>
     </div>
 </template>
-
-<script>
-    import { onMounted } from 'vue'
-    import { updateTheme } from '@/Utils/theme'
-
-    export default {
-        setup() {
-            onMounted(() => {
-                if (localStorage.settings) updateTheme(JSON.parse(localStorage.settings)?.theme)
-            })
-        }
-    }
-</script>

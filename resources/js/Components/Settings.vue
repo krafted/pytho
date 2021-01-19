@@ -21,7 +21,7 @@
                 <div class="grid grid-cols-2 gap-3">
                     <form-button-group
                         label="Layout"
-                        :value="state.settings.layout"
+                        :value="settings.layout"
                         :options="[
                             {
                                 label: 'Vertical',
@@ -34,12 +34,12 @@
                                 value: 'horizontal',
                             }
                         ]"
-                        @update:value="updateSetting('layout', $event, false)"
+                        @update:value="updateSetting('layout', $event)"
                     />
 
                     <form-button-group
                         label="Theme"
-                        :value="state.settings.theme"
+                        :value="settings.theme"
                         :options="[
                             {
                                 label: 'Light',
@@ -52,13 +52,13 @@
                                 value: 'dark',
                             }
                         ]"
-                        @update:value="updateSetting('theme', $event, false), updateTheme($event)"
+                        @update:value="updateSetting('theme', $event), updateTheme($event)"
                     />
                 </div>
 
                 <form-input
                     label="Font Size"
-                    :model-value="state.settings.fontSize.toString()"
+                    :model-value="settings.fontSize.toString()"
                     @update:model-value="updateSetting('fontSize', $event)"
                 >
                     <form-number-input
@@ -71,7 +71,7 @@
 
                 <form-input
                     label="Indent Size"
-                    :model-value="state.settings.indentUnit.toString()"
+                    :model-value="settings.indentUnit.toString()"
                     @update:model-value="updateSetting('indentUnit', $event)"
                 >
                     <form-number-input
@@ -85,7 +85,7 @@
                 <form-listbox
                     v-if="!isMobile"
                     label="Keymap"
-                    :model-value="state.settings.keyMap"
+                    :model-value="settings.keyMap"
                     :options="keyMapOptions"
                     position="top"
                     @update:model-value="updateSetting('keyMap', $event)"
@@ -93,7 +93,7 @@
 
                 <form-input
                     label="Line Height"
-                    :model-value="state.settings.lineHeight.toString()"
+                    :model-value="settings.lineHeight.toString()"
                     @update:model-value="updateSetting('lineHeight', $event)"
                 >
                     <form-number-input
@@ -141,7 +141,7 @@
             FormNumberInput,
         },
         setup(_, { emit }) {
-            const state = inject('state')
+            const settings = inject('settings')
             const isMac = inject('isMac')
             const isMobile = inject('isMobile')
             const keyMapOptions = [
@@ -151,7 +151,7 @@
                 { value: 'vim', label: 'Vim' },
             ]
             const show = inject('showSettings')
-            const updateSetting = (key, value, editor = true) => emit('update:setting', { key, value, editor })
+            const updateSetting = inject('updateSetting')
 
             watchEffect(() => show.value && document.activeElement.blur())
 
@@ -164,7 +164,7 @@
             onUnmounted(() => hotkeys.unbind(isMac.value ? 'cmd+,' : 'ctrl+,'))
 
             return {
-                state,
+                settings,
                 isMobile,
                 keyMapOptions,
                 show,

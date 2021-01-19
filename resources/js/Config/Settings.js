@@ -1,6 +1,7 @@
-export const nonEditorSettings = ['layout', 'theme']
+export const nonEditorSettings = ['autoRun', 'layout', 'theme']
 
 export default {
+  autoRun: true,
   fontSize: 16,
   indentUnit: 2,
   keyMap: 'default',
