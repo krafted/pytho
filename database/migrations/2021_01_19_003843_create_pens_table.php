@@ -15,7 +15,7 @@ class CreatePensTable extends Migration
     {
         Schema::create('pens', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->string('slug')->unique();
             $table->string('title')->nullable();
             $table->text('content');
