@@ -51,7 +51,7 @@
                     />
 
                     <span class="ml-3 text-sm text-gray-500">
-                        I agree to the <a target="_blank" :href="route('terms.show')" class="text-gray-400 focus:ring focus:outline-none focus:ring-primary-500 hover:underline">Terms</a> and <a target="_blank" :href="route('policy.show')" class="text-gray-400 focus:outline-none focus:ring focus:ring-primary-500 hover:underline">Privacy Policy</a>
+                        I agree to the <a target="_blank" :href="route('terms.show')" class="font-medium text-gray-600 dark:text-gray-400 focus:ring focus:outline-none focus:ring-primary-500 hover:underline">Terms</a> and <a target="_blank" :href="route('privacy.show')" class="font-medium text-gray-600 dark:text-gray-400 focus:outline-none focus:ring focus:ring-primary-500 hover:underline">Privacy Policy</a>
                     </span>
                 </label>
             </div>

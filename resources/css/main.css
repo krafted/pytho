@@ -78,6 +78,15 @@
     .splitpanes--horizontal > .splitpanes__splitter:before {
         @apply cursor-row-resize -top-4 -bottom-4 w-full
     }
+
+    h1 .heading-permalink,
+    h2 .heading-permalink,
+    h3 .heading-permalink,
+    h4 .heading-permalink,
+    h5 .heading-permalink,
+    h6 .heading-permalink {
+        @apply absolute right-0 md:-left-6 text-gray-200 dark:text-gray-700 hover:no-underline hover:text-gray-300 dark:hover:text-gray-600;
+    }
 }
 
 @layer utilities {

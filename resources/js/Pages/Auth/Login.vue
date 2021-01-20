@@ -28,23 +28,33 @@
                     v-model="form.password"
                 />
 
-                <label class="flex items-center">
-                    <form-checkbox
-                        class="w-6 h-6"
-                        name="remember"
-                        v-model="form.remember"
-                    />
-                    <span class="ml-4 text-xs font-semibold tracking-wide text-gray-500 uppercase">Remember me</span>
-                </label>
+                <div class="flex items-center justify-between">
+                    <label class="flex items-center cursor-pointer">
+                        <form-checkbox
+                            class="w-6 h-6"
+                            name="remember"
+                            v-model="form.remember"
+                        />
+                        <span class="ml-4 text-xs font-semibold tracking-wide text-gray-500 uppercase">Remember me</span>
+                    </label>
+
+                    <inertia-link
+                        v-if="canResetPassword"
+                        :href="route('password.request')"
+                        class="text-sm text-gray-500 hover:underline focus:outline-none focus:ring focus:ring-primary-500"
+                    >
+                        Forgot your password?
+                    </inertia-link>
+                </div>
             </div>
 
             <div class="flex items-center justify-end px-6 py-3 bg-gray-100 dark:bg-gray-800">
                 <inertia-link
-                    v-if="canResetPassword"
-                    :href="route('password.request')"
+                    v-if="route().has('register')"
+                    :href="route('register')"
                     class="text-sm text-gray-500 hover:underline focus:outline-none focus:ring focus:ring-primary-500"
                 >
-                    Forgot your password?
+                    Need an account?
                 </inertia-link>
 
                 <app-button

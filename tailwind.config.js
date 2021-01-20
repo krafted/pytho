@@ -50,11 +50,160 @@ module.exports = {
             },
             spacing: {
                 '10.5': '2.625rem',
+                '12.5': '3.125rem',
                 'safe-top': 'env(safe-area-inset-top)',
                 'safe-bottom': 'env(safe-area-inset-bottom)',
                 'safe-left': 'env(safe-area-inset-left)',
                 'safe-right': 'env(safe-area-inset-right)',
             },
+            typography: (theme) => ({
+                DEFAULT: {
+                    css: {
+                        color: theme('colors.gray.800'),
+                        a: {
+                            color: theme('colors.gray.900'),
+                            textDecoration: 'none',
+                            '&:hover': {
+                                textDecoration: 'underline',
+                            },
+                            '&:focus': {
+                                boxShadow: `0px 0px 0px 3px ${theme('colors.primary.500')}`,
+                                outline: 'none',
+                            },
+                        },
+                        strong: {
+                            color: theme('colors.gray.800'),
+                        },
+                        'ol[type="A"]': {
+                            '--list-counter-style': 'upper-alpha',
+                        },
+                        'ol[type="a"]': {
+                            '--list-counter-style': 'lower-alpha',
+                        },
+                        'ol[type="A s"]': {
+                            '--list-counter-style': 'upper-alpha',
+                        },
+                        'ol[type="a s"]': {
+                            '--list-counter-style': 'lower-alpha',
+                        },
+                        'ol[type="I"]': {
+                            '--list-counter-style': 'upper-roman',
+                        },
+                        'ol[type="i"]': {
+                            '--list-counter-style': 'lower-roman',
+                        },
+                        'ol[type="I s"]': {
+                            '--list-counter-style': 'upper-roman',
+                        },
+                        'ol[type="i s"]': {
+                            '--list-counter-style': 'lower-roman',
+                        },
+                        'ol[type="1"]': {
+                            '--list-counter-style': 'decimal',
+                        },
+                        'ol > li::before': {
+                            content: 'counter(list-item, var(--list-counter-style, decimal)) "."',
+                            color: theme('colors.gray.500'),
+                        },
+                        'ul > li::before': {
+                            backgroundColor: theme('colors.gray.500'),
+                        },
+                        hr: {
+                            borderColor: theme('colors.gray.100'),
+                        },
+                        blockquote: {
+                            color: theme('colors.gray.800'),
+                            borderLeftColor: theme('colors.gray.100'),
+                        },
+                        h1: {
+                            color: theme('colors.gray.900'),
+                            fontWeight: '600',
+                        },
+                        h2: {
+                            color: theme('colors.gray.900'),
+                            fontWeight: '600',
+                        },
+                        h3: {
+                            color: theme('colors.gray.900'),
+                            fontWeight: '600',
+                        },
+                        h4: {
+                            color: theme('colors.gray.900'),
+                            fontWeight: '600',
+                        },
+                        'figure figcaption': {
+                            color: theme('colors.gray.500'),
+                        },
+                        code: {
+                            color: theme('colors.gray.800'),
+                            fontWeight: '600',
+                        },
+                        'a code': {
+                            color: theme('colors.gray.800'),
+                        },
+                        pre: {
+                            color: theme('colors.gray.800'),
+                            backgroundColor: theme('colors.gray.100'),
+                        },
+                        thead: {
+                            color: theme('colors.gray.800'),
+                            borderBottomColor: theme('colors.gray.100'),
+                            borderBottomWidth: 2,
+                        },
+                        'tbody tr': {
+                            borderBottomColor: theme('colors.gray.100'),
+                        },
+                    },
+                },
+                dark: {
+                    css: {
+                        color: theme('colors.gray.300'),
+                        a: {
+                            color: theme('colors.gray.200'),
+                        },
+                        strong: {
+                            color: theme('colors.gray.300'),
+                        },
+                        hr: {
+                            borderColor: theme('colors.gray.800'),
+                        },
+                        blockquote: {
+                            color: theme('colors.gray.300'),
+                            borderLeftColor: theme('colors.gray.800'),
+                        },
+                        h1: {
+                            color: theme('colors.gray.200'),
+                        },
+                        h2: {
+                            color: theme('colors.gray.200'),
+                        },
+                        h3: {
+                            color: theme('colors.gray.200'),
+                        },
+                        h4: {
+                            color: theme('colors.gray.200'),
+                        },
+                        code: {
+                            color: theme('colors.gray.300'),
+                        },
+                        'a code': {
+                            color: theme('colors.gray.300'),
+                        },
+                        pre: {
+                            color: theme('colors.gray.300'),
+                            backgroundColor: theme('colors.gray.800'),
+                        },
+                        thead: {
+                            color: theme('colors.gray.300'),
+                            borderBottomColor: theme('colors.gray.800'),
+                            borderBottomWidth: 2,
+                        },
+                        'tbody tr': {
+                            borderBottomColor: theme('colors.gray.800'),
+                        },
+                    },
+                },
+            }),
             width: {
                 'px': '1px',
             },
@@ -71,6 +220,7 @@ module.exports = {
             ringOffsetWidth: ['focus-within'],
             ringWidth: ['focus-within'],
             scale: ['focus-within'],
+            typography: ['dark'],
             width: ['hover', 'focus'],
         },
     },

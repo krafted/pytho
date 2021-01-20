@@ -1,5 +1,8 @@
 <template>
-    <header class="px-4 border-b border-gray-100 pt-safe-top dark:border-gray-800">
+    <header
+        class="fixed inset-x-0 top-0 z-30 px-4 bg-white bg-opacity-75 border-b border-gray-100 pt-safe-top dark:border-gray-800 backdrop-filter-blur dark:bg-opacity-75 dark:bg-gray-900"
+        :class="{ 'shadow-sm': !route().current('pen.show') }"
+    >
         <div class="flex items-center justify-between py-1 pl-safe-left pr-safe-right">
             <app-logo class="w-10 h-10 -ml-2 text-lg" />
 
@@ -115,7 +118,7 @@
                         <!-- Authentication -->
                         <template v-if="page.props.value.user">
                             <app-dropdown-link :href="route('profile.show')">
-                                Profile
+                                Account
                             </app-dropdown-link>
 
                             <app-dropdown-link :href="route('api-tokens.index')" v-if="page.props.value.jetstream.hasApiFeatures">
@@ -142,6 +145,16 @@
                                 Register
                             </app-dropdown-link>
                         </template>
+
+                        <div class="px-3 py-2 -mb-1 space-x-1 text-xs text-center bg-gray-100 rounded-b dark:bg-gray-800">
+                            <a target="_blank" :href="route('terms.show')" class="text-gray-400 focus:ring focus:outline-none focus:ring-primary-500 hover:underline">
+                                Terms
+                            </a>
+
+                            <a target="_blank" :href="route('privacy.show')" class="text-gray-400 focus:outline-none focus:ring focus:ring-primary-500 hover:underline">
+                                Privacy
+                            </a>
+                        </div>
                     </template>
                 </app-dropdown>
             </div>
