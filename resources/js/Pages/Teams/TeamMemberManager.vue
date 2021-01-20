@@ -43,7 +43,7 @@
                             v-model="addTeamMemberForm.role"
                         >
                             <template #option="{ option }">
-                                <div>
+                                <div class="text-left">
                                     <!-- Role Name -->
                                     <div class="flex items-center">
                                         <div class="text-sm font-semibold">

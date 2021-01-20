@@ -80,10 +80,11 @@
                     <form-listbox
                         label="Visibility"
                         :options="visibilityOptions"
+                        position="top"
                         v-model="form.visibility"
                     >
                         <template #option="{ option }">
-                            <div>
+                            <div class="text-left">
                                 <div class="flex items-center">
                                     <div class="text-sm font-semibold">
                                         {{ option.label }}
