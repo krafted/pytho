@@ -37,10 +37,10 @@
             >
                 <pane
                     v-if="activeTab === 'editor' || isMd"
-                    class="flex flex-col w-full h-full overflow-hidden mt-10.5"
+                    class="flex flex-col w-full h-full overflow-hidden"
                     min-size="33.333"
                 >
-                    <div class="flex flex-1">
+                    <div class="flex flex-1 mt-10.5">
                         <app-editor @saved="save" />
                     </div>
                 </pane>
