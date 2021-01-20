@@ -48,6 +48,9 @@ module.exports = {
             lineHeight: {
                 'inherit': 'inherit',
             },
+            minHeight: {
+                6: '1.5rem',
+            },
             spacing: {
                 '10.5': '2.625rem',
                 '12.5': '3.125rem',

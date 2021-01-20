@@ -3,7 +3,8 @@
         <app-banner />
 
         <app-header>
-            <template #header-actions><slot name="header-actions" /></template>
+            <template #header-left-actions><slot name="header-left-actions" /></template>
+            <template #header-right-actions><slot name="header-right-actions" /></template>
         </app-header>
 
         <slot />
@@ -16,6 +17,7 @@
     import { provide, ref } from 'vue'
 
     export default {
+        props: ['appUrl', 'errorBags', 'errors', 'jetstream'],
         components: {
             AppBanner,
             AppHeader,

@@ -1,7 +1,7 @@
 <template>
     <app-authentication-card>
         <template #logo>
-            <app-logo class="w-10 h-10 text-lg sm:w-12 sm:h-12 sm:text-2xl" />
+            <app-logo class="10.5 h-10.5 text-lg sm:w-12 sm:h-12 sm:text-2xl" />
         </template>
 
         <form @submit.prevent="submit">

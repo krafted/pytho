@@ -27,6 +27,8 @@ class PenRequest extends FormRequest
     {
         return [
             'content' => ['required'],
+            'title' => ['max:255'],
+            'description' => [],
             'slug' => [
                 'required',
                 'alpha_num',
@@ -35,6 +37,7 @@ class PenRequest extends FormRequest
                     : 'unique:pens',
                 'max:25'
             ],
+            'visibility' => ['required', 'in:private,public,team'],
         ];
     }
 }

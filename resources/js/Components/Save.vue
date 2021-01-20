@@ -50,14 +50,54 @@
 
         <template #content>
             <div class="grid grid-cols-1 gap-3">
-                <form-url-input
-                    ref="url"
-                    label="URL"
-                    :prepend="page.props.value.appUrl"
-                    v-model="form.slug"
-                />
+                <div class="space-y-1">
+                    <form-url-input
+                        ref="url"
+                        label="URL"
+                        :prepend="page.props.value.appUrl"
+                        v-model="form.slug"
+                    />
+                    <form-input-error :message="form.errors.slug" />
+                </div>
 
-                <form-input-error :message="form.errors.slug" />
+                <div class="space-y-1">
+                    <form-input
+                        label="Title"
+                        v-model="form.title"
+                    />
+                    <form-input-error :message="form.errors.title" />
+                </div>
+
+                <div class="space-y-1">
+                    <form-textarea
+                        label="Description"
+                        v-model="form.description"
+                    />
+                    <form-input-error :message="form.errors.description" />
+                </div>
+
+                <div class="space-y-1">
+                    <form-listbox
+                        label="Visibility"
+                        :options="visibilityOptions"
+                        v-model="form.visibility"
+                    >
+                        <template #option="{ option }">
+                            <div>
+                                <div class="flex items-center">
+                                    <div class="text-sm font-semibold">
+                                        {{ option.label }}
+                                    </div>
+                                </div>
+
+                                <div class="mt-1 text-xs">
+                                    {{ option.description }}
+                                </div>
+                            </div>
+                        </template>
+                    </form-listbox>
+                    <form-input-error :message="form.errors.visibility" />
+                </div>
             </div>
         </template>
 
@@ -85,6 +125,8 @@
     import AppSecondaryButton from '@/Components/SecondaryButton'
     import FormInput from '@/Components/Form/Input'
     import FormInputError from '@/Components/Form/InputError'
+    import FormListbox from '@/Components/Form/Listbox'
+    import FormTextarea from '@/Components/Form/Textarea'
     import FormUrlInput from '@/Components/Form/UrlInput'
     import { inject, onMounted, onUnmounted, ref, watchEffect } from 'vue'
     import hotkeys from 'hotkeys-js'
@@ -92,13 +134,15 @@
     import { usePage } from '@inertiajs/inertia-vue3'
 
     export default {
-        props: ['pen', 'slug'],
+        props: ['isOwner', 'pen', 'slug'],
         components: {
             AppButton,
             AppModal,
             AppSecondaryButton,
             FormInput,
             FormInputError,
+            FormListbox,
+            FormTextarea,
             FormUrlInput,
         },
         setup(props) {
@@ -111,12 +155,16 @@
             const show = ref(false)
             const url = ref(null)
             const run = inject('run')
+            const visibilityOptions = [
+                { value: 'public', label: 'Public', description: 'Anyone you send this link to will be able to view it.' },
+                { value: 'private', label: 'Private', description: 'You will be the only user that is able to view it.' },
+            ]
             const save = async () => {
-                const method = props.pen ? 'put' : 'post'
-                const url = props.pen
+                const method = props.isOwner && props.pen ? 'put' : 'post'
+                const url = props.isOwner && props.pen
                     ? route('pen.update', props.pen)
                     : route('pen.store')
-
+                
                 form.value[method](url, { onSuccess: () => (show.value = false, dirty.value = false) })
 
                 await run()
@@ -145,6 +193,7 @@
                 save,
                 show,
                 url,
+                visibilityOptions,
             }
         }
     }

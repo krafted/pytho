@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\PenRequest;
 use App\Models\Pen;
 use App\Slug;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Inertia\Inertia;
 
 class PenController extends Controller
@@ -17,14 +17,21 @@ class PenController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Pen           $pen
      * @return \Inertia\Response
+     *
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show(Request $request, ?Pen $pen = null)
     {
+        if ($pen) {
+            $this->authorize('view', $pen);
+        }
+
         $isOwner = $pen && $pen->owner->id === optional($request->user())->id;
 
         return inertia('Pen', [
-            'is_owner' => $isOwner,
-            'pen' => optional($pen)->only('content', 'slug'),
+            'isOwner' => $isOwner,
+            'pen' => optional($pen)
+                ->only('title', 'description', 'content', 'slug', 'visibility'),
             'slug' => $isOwner
                 ? $pen->slug ?? Slug::generate()
                 : Slug::generate(),
@@ -36,10 +43,12 @@ class PenController extends Controller
      *
      * @param  \App\Http\Requests\PenRequest  $request
      * @return \App\Models\Pen
+     * 
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(PenRequest $request)
     {
-        $pen = $request->user()->pens()->create($request->validated());
+        $pen = optional($request->user())->pens()->create($request->validated());
 
         return redirect($pen->path());
     }
@@ -50,9 +59,13 @@ class PenController extends Controller
      * @param  \App\Http\Requests\PenRequest  $request
      * @param  \App\Models\Pen                $pen
      * @return \App\Models\Pen
+     * 
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(PenRequest $request, Pen $pen)
     {
+        $this->authorize('update', $pen);
+
         $pen->update($request->validated());
 
         return redirect($pen->path());

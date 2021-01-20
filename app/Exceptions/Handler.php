@@ -2,6 +2,8 @@
 
 namespace App\Exceptions;
 
+use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -47,6 +49,10 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $e)
     {
         $response = parent::render($request, $e);
+
+        if ($e instanceof AuthorizationException) {
+            abort(404);
+        }
 
         if (!app()->environment('local') && in_array($response->status(), [503, 500, 429, 419, 404, 403, 401])) {
             return inertia('Error', ['status' => $response->status()])

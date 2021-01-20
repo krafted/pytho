@@ -11,14 +11,15 @@ class PenPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can create a pen.
+     * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @return bool
+     * @param  \App\Models\Pen   $pen
+     * @return mixed
      */
-    public function create(User $user)
+    public function view(?User $user, Pen $pen)
     {
-        return true;
+        return optional($user)->id === $pen->user_id || $pen->visibility === 'public';
     }
 
     /**
@@ -30,6 +31,6 @@ class PenPolicy
      */
     public function update(User $user, Pen $pen)
     {
-        return $user->id === $pen->user_id;
+        return optional($user)->id === $pen->user_id;
     }
 }

@@ -4,10 +4,14 @@
         :class="{ 'shadow-sm': !route().current('pen.show') }"
     >
         <div class="flex items-center justify-between py-1 pl-safe-left pr-safe-right">
-            <app-logo class="w-10 h-10 -ml-2 text-lg" />
+            <div class="flex items-center -ml-2 space-x-2">
+                <app-logo class="text-lg w-10.5 h-10.5" />
+
+                <slot name="header-left-actions" />
+            </div>
 
             <div class="flex items-center justify-end -mr-2 space-x-2">
-                <slot name="header-actions" />
+                <slot name="header-right-actions" />
 
                 <!-- Teams Dropdown -->
                 <app-dropdown

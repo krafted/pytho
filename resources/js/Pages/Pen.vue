@@ -1,6 +1,6 @@
 <template>
     <app-layout>
-        <template #header-actions>
+        <template #header-right-actions>
             <button
                 class="flex items-center justify-center p-2.5 text-gray-500 dark:text-gray-700 border border-transparent rounded-md group hover:w-auto hover:bg-gray-200 dark:hover:bg-black focus:bg-gray-200 dark:focus:bg-black focus:border-gray-300 dark:focus:border-gray-800 hover:border-gray-300 dark:hover:border-gray-800 hover:text-gray-900 dark:hover:text-gray-400 focus:text-gray-900 dark:focus:text-gray-400 focus:outline-none focus:w-auto"
                 :title="isMac ? '⌘ + ↩︎' : '⌃ + ↩︎'"
@@ -23,8 +23,14 @@
 
             <app-save
                 ref="saveRef"
+                :is-owner="isOwner"
                 :pen="pen"
                 :slug="slug"
+            />
+
+            <app-details
+                v-if="!isOwner && pen"
+                :pen="pen"
             />
         </template>
 
@@ -32,7 +38,7 @@
             <app-tab-bar  />
 
             <splitpanes
-                class="overflow-hidden"
+                class="mt-px overflow-hidden"
                 :horizontal="settings.layout === 'horizontal'"
             >
                 <pane
@@ -40,7 +46,7 @@
                     class="flex flex-col w-full h-full overflow-hidden"
                     min-size="33.333"
                 >
-                    <div class="flex flex-1 mt-10.5">
+                    <div class="flex flex-1 mt-12.5">
                         <app-editor @saved="save" />
                     </div>
                 </pane>
@@ -51,16 +57,19 @@
                     min-size="33.333"
                 >
                     <div class="relative flex flex-col flex-1">
-                        <header class="absolute inset-x-0 top-0 items-center hidden px-4 py-3 border-gray-100 dark:border-gray-800 pr-safe-right md:flex">
+                        <header
+                            class="absolute inset-x-0 top-0 items-center hidden p-4 border-gray-100 dark:border-gray-800 pr-safe-right md:flex"
+                            :class="{ 'border-b border-gray-100 dark:border-gray-800': settings.layout === 'horizontal' }"
+                        >
                             <h3
-                                class="font-mono text-xs font-semibold tracking-wide text-gray-500 uppercase border-b-2 border-transparent select-none dark:text-gray-700"
+                                class="mt-px font-mono text-xs font-semibold tracking-wide text-gray-500 uppercase border-b-2 border-transparent select-none dark:text-gray-700"
                                 :class="{ 'ml-safe-left': settings.layout === 'horizontal' }"
                             >
                                 Output
                             </h3>
                         </header>
 
-                        <div class="flex flex-1 mt-10.5">
+                        <div class="flex flex-1 mt-12.5">
                             <app-output />
                         </div>
                     </div>
@@ -103,6 +112,7 @@
 </template>
 
 <script>
+    import AppDetails from '@/Components/Details'
     import AppEditor from '@/Components/Editor'
     import AppLayout from '@/Layouts/AppLayout'
     import AppOutput from '@/Components/Output'
@@ -116,8 +126,19 @@
     import { useForm } from '@inertiajs/inertia-vue3'
 
     export default {
-        props: ['pen', 'slug'],
+        props: {
+            isOwner: {
+                type: Boolean,
+            },
+            pen: {
+                type: Object,
+            },
+            slug: {
+                type: String,
+            },
+        },
         components: {
+            AppDetails,
             AppEditor,
             AppLayout,
             AppOutput,
@@ -129,8 +150,11 @@
         setup(props) {
             const settings = inject('settings')
             const form = useForm({
-                'content': props.pen?.content || defaultContent,
                 'slug': props.slug,
+                'title': props.pen?.title || 'Untitled',
+                'content': props.pen?.content || defaultContent,
+                'description': props.pen?.description,
+                'visibility': props.pen?.visibility || 'public',
             })
             const activeTab = ref('editor')
             const editor = inject('editor')
