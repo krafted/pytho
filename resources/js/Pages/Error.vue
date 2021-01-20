@@ -1,7 +1,7 @@
 <template>
-    <div class="relative flex justify-center min-h-screen bg-gray-100 items-top dark:bg-gray-900 sm:items-center sm:pt-0">
+    <div class="relative flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:pt-0">
         <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex items-center pt-8 divide-x divide-gray-500 sm:justify-start sm:pt-0">
+            <div class="flex items-center pt-8 divide-x divide-gray-500">
                 <div class="px-3 text-lg tracking-wider text-gray-500">
                     {{ title }}
                 </div>
