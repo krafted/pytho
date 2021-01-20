@@ -33,37 +33,74 @@
                         leave-from-class="translate-y-0 opacity-100 sm:scale-100"
                         leave-to-class="translate-y-4 opacity-0 sm:translate-y-0 sm:scale-95"
                     >
-                        <div
-                            v-show="show"
-                            class="inline-block w-full text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl dark:bg-gray-900 sm:my-8 sm:align-middle sm:max-w-lg"
-                            role="dialog"
-                            aria-modal="true"
-                            aria-labelledby="modal-headline"
-                        >
-                            <div class="p-6">
-                                <div class="flex items-start space-x-4 sm:space-x-6">
-                                    <div class="hidden sm:block">
-                                        <slot name="icon" />
-                                    </div>
+                        <template v-if="type === 'form'">
+                            <form
+                                v-show="show"
+                                class="inline-block w-full text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl dark:bg-gray-900 sm:my-8 sm:align-middle sm:max-w-lg"
+                                role="dialog"
+                                aria-modal="true"
+                                aria-labelledby="modal-headline"
+                                @submit.prevent="submit"
+                            >
+                                <div class="p-6">
+                                    <div class="flex items-start space-x-4 sm:space-x-6">
+                                        <div class="hidden sm:block">
+                                            <slot name="icon" />
+                                        </div>
 
-                                    <div class="flex-1">
-                                        <header class="flex items-center">
-                                            <h3 class="flex items-center h-12 text-lg font-semibold leading-6 text-gray-600 dark:text-gray-200 sm:h-10" id="modal-headline">
-                                            <slot name="title" />
-                                            </h3>
-                                        </header>
+                                        <div class="flex-1">
+                                            <header class="flex items-center">
+                                                <h3 class="flex items-center h-12 text-lg font-semibold leading-6 text-gray-600 dark:text-gray-200 sm:h-10" id="modal-headline">
+                                                    <slot name="title" />
+                                                </h3>
+                                            </header>
 
-                                        <div class="mt-3">
-                                            <slot name="content" />
+                                            <div class="mt-3">
+                                                <slot name="content" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="px-6 py-3 bg-gray-100 rounded-b-lg dark:bg-gray-800 sm:flex sm:flex-row-reverse">
-                                <slot name="actions" />
+                                <div class="px-6 py-3 bg-gray-100 rounded-b-lg dark:bg-gray-800 sm:flex sm:flex-row-reverse">
+                                    <slot name="actions" />
+                                </div>
+                            </form>
+                        </template>
+
+                        <template v-else>
+                            <div
+                                v-show="show"
+                                class="inline-block w-full text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl dark:bg-gray-900 sm:my-8 sm:align-middle sm:max-w-lg"
+                                role="dialog"
+                                aria-modal="true"
+                                aria-labelledby="modal-headline"
+                            >
+                                <div class="p-6">
+                                    <div class="flex items-start space-x-4 sm:space-x-6">
+                                        <div class="hidden sm:block">
+                                            <slot name="icon" />
+                                        </div>
+
+                                        <div class="flex-1">
+                                            <header class="flex items-center">
+                                                <h3 class="flex items-center h-12 text-lg font-semibold leading-6 text-gray-600 dark:text-gray-200 sm:h-10" id="modal-headline">
+                                                    <slot name="title" />
+                                                </h3>
+                                            </header>
+
+                                            <div class="mt-3">
+                                                <slot name="content" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="px-6 py-3 bg-gray-100 rounded-b-lg dark:bg-gray-800 sm:flex sm:flex-row-reverse">
+                                    <slot name="actions" />
+                                </div>
                             </div>
-                        </div>
+                        </template>
                     </transition>
                 </div>
             </div>
@@ -76,10 +113,20 @@
     import hotkeys from 'hotkeys-js'
 
     export default {
-        emits: ['close'],
-        props: ['show'],
+        emits: ['close', 'submitted'],
+        props: {
+            show: {
+                type: Boolean,
+                default: false,
+            },
+            type: {
+                type: String,
+                default: 'div',
+            }
+        },
         setup(props, { emit }) {
             const close = () => emit('close')
+            const submit = () => emit('submitted')
 
             onMounted(() => {
                 hotkeys('esc', (event) => {
@@ -89,7 +136,10 @@
             })
             onUnmounted(() => hotkeys.unbind('esc'))
 
-            return { close }
+            return {
+                close,
+                submit,
+            }
         },
     }
 </script>

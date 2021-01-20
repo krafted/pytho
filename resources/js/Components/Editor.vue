@@ -22,11 +22,13 @@
     import 'codemirror/keymap/vim'
 
     export default {
-        setup() {
+        emits: ['saved'],
+        setup(_, { emit }) {
             const settings = inject('settings')
+            const form = inject('form')
             const editorContainer = ref(null)
             const editor = inject('editor')
-            const content = inject('content')
+            const dirty = inject('dirty')
             const isMac = inject('isMac')
             const isMobile = inject('isMobile')
             const showSettings = inject('showSettings')
@@ -39,6 +41,7 @@
                         'Shift-Tab': 'indentLess',
                         [isMac.value ? 'Cmd-/' : 'Ctrl-/']: 'toggleComment',
                         [isMac.value ? 'Cmd-,' : 'Ctrl-,']: () => showSettings.value = true,
+                        [isMac.value ? 'Cmd-S' : 'Ctrl-S']: () => emit('saved'),
                         [isMac.value ? 'Cmd-Enter' : 'Ctrl-Enter']: run,
                         'Tab': editor => {
                             var spaces = Array(editor.getOption('indentUnit') + 1).join(' ')
@@ -53,13 +56,15 @@
                     mode: 'text/x-python',
                     styleActiveLine: true,
                     theme: 'custom',
-                    value: content.value,
+                    value: form.value.content,
                 })
 
-                editor.value.on('change', debounce(e => {
-                    content.value = e.getValue()
-                    run()
-                }))
+                editor.value.on('change', debounce(async (e) => {
+                    form.value.content = e.getValue()
+                    dirty.value = true
+
+                    if (settings.value.autoRun) await run()
+                }), 250)
             })
 
             return {

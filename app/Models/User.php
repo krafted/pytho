@@ -92,4 +92,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return trim(substr($svg, strpos($svg, "\n") + 1));
     }
+
+    /**
+     * Get the pens that this user owns.
+     */
+    public function pens()
+    {
+        return $this->hasMany(Pen::class);
+    }
 }

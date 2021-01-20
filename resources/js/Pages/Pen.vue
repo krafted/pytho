@@ -21,7 +21,11 @@
                 </svg>
             </button>
 
-            <app-share />
+            <app-save
+                ref="saveRef"
+                :pen="pen"
+                :slug="slug"
+            />
         </template>
 
         <div class="flex flex-col flex-1">
@@ -37,7 +41,7 @@
                     min-size="33.333"
                 >
                     <div class="flex flex-1">
-                        <app-editor />
+                        <app-editor @saved="save" />
                     </div>
                 </pane>
 
@@ -54,18 +58,6 @@
                             >
                                 Output
                             </h3>
-
-                            <transition
-                                enter-active-class="duration-300 ease-out"
-                                enter-from-class="opacity-0"
-                                enter-to-class="opacity-100"
-                            >
-                                <span
-                                    v-if="dirty || error"
-                                    class="w-1 h-1 ml-2 transition-opacity rounded-full"
-                                    :class="error ? 'bg-red-500' : 'bg-primary-500'"
-                                />
-                            </transition>
                         </header>
 
                         <div class="flex flex-1 mt-10.5">
@@ -114,28 +106,33 @@
     import AppEditor from '@/Components/Editor'
     import AppLayout from '@/Layouts/AppLayout'
     import AppOutput from '@/Components/Output'
-    import AppShare from '@/Components/Share'
+    import AppSave from '@/Components/Save'
     import AppTabBar from '@/Components/TabBar'
     import useMedia from '@/Hooks/useMedia'
     import defaultContent from '@/Config/Content'
     import { Splitpanes, Pane } from 'splitpanes'
-    import { inject, nextTick, onMounted, onUnmounted, provide, reactive, ref, watch } from 'vue'
+    import { inject, nextTick, onMounted, onUnmounted, provide, ref, watch } from 'vue'
     import { loadEngine, runCode, setOptions } from 'client-side-python-runner'
+    import { useForm } from '@inertiajs/inertia-vue3'
 
     export default {
+        props: ['pen', 'slug'],
         components: {
             AppEditor,
             AppLayout,
             AppOutput,
-            AppShare,
+            AppSave,
             AppTabBar,
             Pane,
             Splitpanes,
         },
-        setup() {
+        setup(props) {
             const settings = inject('settings')
+            const form = useForm({
+                'content': props.pen?.content || defaultContent,
+                'slug': props.slug,
+            })
             const activeTab = ref('editor')
-            const content = ref(defaultContent)
             const editor = inject('editor')
             const output = ref('')
             const loading = ref(true)
@@ -145,31 +142,34 @@
             const isMd = useMedia('(min-width: 768px)')
             const isMobile = inject('isMobile')
             const showCanvas = ref(false)
-            const closeCanvas = () => content.value.includes('exitonclick') && (showCanvas.value = false)
+            const saveRef = ref(null)
+            const paneWidth = ref(null)
+            const closeCanvas = () => form.value.content.includes('exitonclick') && (showCanvas.value = false)
             const run = async () => {
                 output.value = ''
                 error.value = false
 
-                if (content.value.includes('import turtle')) {
+                if (form.value.content.includes('import turtle')) {
                     await loadEngine('skulpt')
                     showCanvas.value = true
                     await nextTick()
                     Sk.TurtleGraphics
                         ? Sk.TurtleGraphics.target = 'canvas'
                         : Sk.TurtleGraphics = { target: 'canvas' }
-                    Sk.misceval.asyncToPromise(() => Sk.importMainWithBody("<stdin>", false, content.value, true))
+                    Sk.misceval.asyncToPromise(() => Sk.importMainWithBody("<stdin>", false, form.value.content, true))
                     output.value = 'Re-run to view the output'
-                    dirty.value = true
 
                     return
                 }
 
                 showCanvas.value = false
-                await runCode(content.value, { use: 'pyodide' })
-                dirty.value = true
+                await runCode(form.value.content, { use: 'pyodide' })
             }
+            const save = () => saveRef.value.save()
 
-            watch(isMd, (value, oldValue) => value !== oldValue && run())
+            watch(isMd, async (value, oldValue) => {
+                if (value !== oldValue && !loading.value) await run()
+            })
 
             onMounted(() => {
                 hotkeys(isMac.value ? 'cmd+enter' : 'ctrl+enter', async (event) => {
@@ -181,20 +181,20 @@
 
             onMounted(async () => {
                 await loadEngine('pyodide')
-                await pyodide.loadPackage('numpy')
 
                 setOptions({
-                    output: (result) => output.value += result,
-                    error: (error) => output.value += error.error.message
+                    storeStateBetweenRuns: false,
+                    output: res => output.value += res,
+                    error: err => (error.value = true, output.value += err.error.message),
                 })
 
                 loading.value = false
 
-                run()
+                await run()
             })
 
             provide('activeTab', activeTab)
-            provide('content', content)
+            provide('form', form)
             provide('output', output)
             provide('loading', loading)
             provide('dirty', dirty)
@@ -215,7 +215,10 @@
                 isMd,
                 isMobile,
                 loading,
+                paneWidth,
                 run,
+                saveRef,
+                save,
                 showCanvas,
             }
         },

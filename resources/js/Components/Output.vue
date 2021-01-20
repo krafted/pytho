@@ -12,19 +12,14 @@
             class="absolute inset-0 flex-shrink-0 w-full h-full px-4 py-1 pb-4 font-mono text-gray-600 bg-transparent border-0 border-none resize-none dark:text-gray-400 leading-inherit text-inherit focus:ring-0 focus:outline-none"
             readonly
             :value="output"
-            @mouseover="dirty = false"
-            @click="dirty = false"
-            @focus="dirty = false"
         />
 
         <transition leave-active-class="duration-200">
             <div
                 v-show="showCanvas"
-                class="absolute inset-0 flex items-center justify-center flex-1 overflow-hidden"
+                class="absolute inset-0 z-20 flex items-center justify-center flex-1 overflow-hidden"
                 :class="{ 'ml-safe-left': settings.layout === 'horizontal' }"
-                @mouseover="dirty = false"
-                @click="dirty = false, closeCanvas()"
-                @focus="dirty = false"
+                @click="closeCanvas"
             >
                 <transition
                     enter-active-class="duration-300 ease-out"
@@ -66,13 +61,11 @@
         setup() {
             const settings = inject('settings')
             const output = inject('output')
-            const dirty = inject('dirty')
             const showCanvas = inject('showCanvas')
             const closeCanvas = inject('closeCanvas')
 
             return {
                 settings,
-                dirty,
                 output,
                 showCanvas,
                 closeCanvas,
