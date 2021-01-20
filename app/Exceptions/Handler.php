@@ -37,4 +37,23 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    /**
+     * Prepare exception for rendering.
+     *
+     * @param  \Throwable  $e
+     * @return \Throwable
+     */
+    public function render($request, Throwable $e)
+    {
+        $response = parent::render($request, $e);
+
+        if (!app()->environment('local') && in_array($response->status(), [503, 500, 429, 419, 404, 403, 401])) {
+            return inertia('Error', ['status' => $response->status()])
+                ->toResponse($request)
+                ->setStatusCode($response->status());
+        }
+
+        return $response;
+    }
 }
