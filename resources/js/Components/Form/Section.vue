@@ -7,7 +7,7 @@
 
         <div class="mt-6 md:mt-0 md:col-span-2">
             <form @submit.prevent="$emit('submitted')">
-                <div class="overflow-hidden bg-white border-t border-b border-gray-100 sm:border-r sm:border-l dark:border-gray-800 dark:bg-gray-900 sm:rounded-lg">
+                <div class="bg-white border-t border-b border-gray-100 sm:border-r sm:border-l dark:border-gray-800 dark:bg-gray-900 sm:rounded-lg">
                     <div class="grid grid-cols-6 gap-3 p-4 sm:p-6">
                         <slot name="form"></slot>
                     </div>

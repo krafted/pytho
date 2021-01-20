@@ -3,7 +3,7 @@
         <transition leave-active-class="duration-200">
             <div
                 v-show="show"
-                class="fixed inset-0 z-30 overflow-y-auto pb-safe-bottom"
+                class="fixed inset-0 z-30 overflow-x-hidden overflow-y-auto pb-safe-bottom"
             >
                 <div class="flex items-end justify-center min-h-screen p-4 text-center sm:block sm:p-0">
                     <transition

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="fixed inset-x-0 bottom-0 z-30">
         <div
             v-if="show && message"
             :class="{

@@ -144,7 +144,7 @@
 
             <template #actions>
                 <app-secondary-button @click.native="managingPermissionsFor = null">
-                    Nevermind
+                    Close
                 </app-secondary-button>
 
                 <app-button class="ml-2" @click.native="updateApiToken" :class="{ 'opacity-25': updateApiTokenForm.processing }" :disabled="updateApiTokenForm.processing">
@@ -168,7 +168,7 @@
 
             <template #actions>
                 <app-secondary-button @click.native="apiTokenBeingDeleted = null">
-                    Nevermind
+                    Close
                 </app-secondary-button>
 
                 <app-danger-button class="ml-2" @click.native="deleteApiToken" :class="{ 'opacity-25': deleteApiTokenForm.processing }" :disabled="deleteApiTokenForm.processing">

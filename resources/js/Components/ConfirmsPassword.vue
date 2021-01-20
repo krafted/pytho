@@ -42,7 +42,7 @@
 
             <template #actions>
                 <app-secondary-button @click.native="closeModal">
-                    Nevermind
+                    Close
                 </app-secondary-button>
 
                 <app-button @click.native="confirmPassword" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">

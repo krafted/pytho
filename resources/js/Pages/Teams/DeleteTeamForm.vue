@@ -38,7 +38,7 @@
 
                 <template #actions>
                     <app-secondary-button @click.native="confirmingTeamDeletion = false">
-                        Nevermind
+                        Close
                     </app-secondary-button>
 
                     <app-danger-button @click.native="deleteTeam" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">

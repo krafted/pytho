@@ -50,7 +50,7 @@
 
                 <template #actions>
                     <app-secondary-button @click.native="closeModal">
-                        Nevermind
+                        Close
                     </app-secondary-button>
 
                     <app-danger-button @click.native="deleteUser" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">

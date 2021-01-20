@@ -1,13 +1,13 @@
 <template>
     <div class="flex flex-col h-screen pt-12.5 mt-safe-top">
-        <app-banner />
-
         <app-header>
             <template #header-left-actions><slot name="header-left-actions" /></template>
             <template #header-right-actions><slot name="header-right-actions" /></template>
         </app-header>
 
         <slot />
+
+        <app-banner />
     </div>
 </template>
 
