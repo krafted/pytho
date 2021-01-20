@@ -19,13 +19,16 @@ class Pen extends Model
     ];
 
     /**
-     * Get the user that owns the pen.
+     * Get the user that owns the Pen.
      */
     public function owner()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
+    /**
+     * Get the path to the Pen.
+     */
     public function path()
     {
         return route('pen.show', $this->slug);

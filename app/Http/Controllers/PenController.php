@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PenRequest;
 use App\Models\Pen;
 use App\Slug;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Inertia\Inertia;
 
@@ -13,14 +14,20 @@ class PenController extends Controller
     /**
      * Show the main Editor.
      *
-     * @param  \App\Models\Pen  $pen
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Pen           $pen
      * @return \Inertia\Response
      */
-    public function show(?Pen $pen = null)
+    public function show(Request $request, ?Pen $pen = null)
     {
+        $isOwner = $pen && $pen->owner->id === optional($request->user())->id;
+
         return inertia('Pen', [
+            'is_owner' => $isOwner,
             'pen' => optional($pen)->only('content', 'slug'),
-            'slug' => $pen->slug ?? Slug::generate(),
+            'slug' => $isOwner
+                ? $pen->slug ?? Slug::generate()
+                : Slug::generate(),
         ]);
     }
 
