@@ -41,13 +41,13 @@
             </template>
 
             <template #actions>
-                <app-button class="ml-3" @click.native="confirmPassword" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    {{ button }}
-                </app-button>
-
                 <app-secondary-button @click.native="closeModal">
                     Nevermind
                 </app-secondary-button>
+
+                <app-button @click.native="confirmPassword" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    {{ button }}
+                </app-button>
             </template>
         </app-modal>
     </span>

@@ -110,7 +110,6 @@
         <template #actions>
             <app-button
                 type="button"
-                class="w-full sm:w-auto"
                 @click="show = false"
             >
                 Close

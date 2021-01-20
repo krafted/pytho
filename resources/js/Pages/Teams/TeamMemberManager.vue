@@ -236,13 +236,13 @@
             </template>
 
             <template #actions>
-                <app-button class="ml-3" @click.native="updateRole" :class="{ 'opacity-25': updateRoleForm.processing }" :disabled="updateRoleForm.processing">
-                    Save
-                </app-button>
-
                 <app-secondary-button @click.native="currentlyManagingRole = false">
                     Nevermind
                 </app-secondary-button>
+
+                <app-button @click.native="updateRole" :class="{ 'opacity-25': updateRoleForm.processing }" :disabled="updateRoleForm.processing">
+                    Save
+                </app-button>
             </template>
         </app-modal>
 
@@ -270,13 +270,13 @@
             </template>
 
             <template #actions>
-                <app-danger-button class="ml-3" @click.native="leaveTeam" :class="{ 'opacity-25': leaveTeamForm.processing }" :disabled="leaveTeamForm.processing">
-                    Leave
-                </app-danger-button>
-
                 <app-secondary-button @click.native="confirmingLeavingTeam = false">
                     Nevermind
                 </app-secondary-button>
+
+                <app-danger-button @click.native="leaveTeam" :class="{ 'opacity-25': leaveTeamForm.processing }" :disabled="leaveTeamForm.processing">
+                    Leave
+                </app-danger-button>
             </template>
         </app-modal>
 
@@ -304,13 +304,13 @@
             </template>
 
             <template #actions>
-                <app-danger-button class="ml-3" @click.native="removeTeamMember" :class="{ 'opacity-25': removeTeamMemberForm.processing }" :disabled="removeTeamMemberForm.processing">
-                    Remove
-                </app-danger-button>
-
                 <app-secondary-button @click.native="teamMemberBeingRemoved = null">
                     Nevermind
                 </app-secondary-button>
+
+                <app-danger-button @click.native="removeTeamMember" :class="{ 'opacity-25': removeTeamMemberForm.processing }" :disabled="removeTeamMemberForm.processing">
+                    Remove
+                </app-danger-button>
             </template>
         </app-modal>
     </div>

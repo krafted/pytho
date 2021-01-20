@@ -5,7 +5,7 @@
         </template>
 
         <form @submit.prevent="submit">
-            <div class="grid grid-cols-1 gap-3 p-6">
+            <div class="grid grid-cols-1 gap-3 p-4 sm:p-6">
                 <div v-if="status" class="text-sm font-medium text-green-600 dark:text-green-400">
                     {{ status }}
                 </div>
@@ -48,17 +48,16 @@
                 </div>
             </div>
 
-            <div class="flex items-center justify-end px-6 py-3 bg-gray-100 dark:bg-gray-800">
+            <div class="flex items-center justify-end p-4 space-x-3 bg-gray-100 rounded-b-lg sm:px-6 sm:py-3 dark:bg-gray-800">
                 <inertia-link
                     v-if="route().has('register')"
                     :href="route('register')"
-                    class="text-sm text-gray-500 hover:underline focus:outline-none focus:ring focus:ring-primary-500"
+                    class="text-sm text-center text-gray-500 hover:underline focus:outline-none focus:ring focus:ring-primary-500"
                 >
                     Need an account?
                 </inertia-link>
 
                 <app-button
-                    class="ml-3"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >

@@ -81,13 +81,13 @@
                 </template>
 
                 <template #actions>
-                    <app-button class="ml-3" @click.native="logoutOtherBrowserSessions" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Logout Other Browser Sessions
-                    </app-button>
-
                     <app-secondary-button @click.native="closeModal">
                         Nevermind
                     </app-secondary-button>
+
+                    <app-button @click.native="logoutOtherBrowserSessions" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Logout Other Browser Sessions
+                    </app-button>
                 </template>
             </app-modal>
         </template>
@@ -97,7 +97,7 @@
                 Done
             </form-action-message>
 
-            <app-button @click.native="confirmLogout" class="ml-3">
+            <app-button @click.native="confirmLogout">
                 Logout Other Browser Sessions
             </app-button>
         </template>

@@ -95,7 +95,7 @@
         </template>
 
         <template #actions>
-            <form-action-message :on="form.recentlySuccessful" class="mr-3">
+            <form-action-message :on="form.recentlySuccessful">
                 Saved
             </form-action-message>
 

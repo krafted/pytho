@@ -5,7 +5,7 @@
         </template>
 
         <form @submit.prevent="submit">
-            <div class="grid grid-cols-1 gap-3 p-6">
+            <div class="grid grid-cols-1 gap-3 p-4 sm:p-6">
                 <div class="text-sm text-gray-500">
                     This is a secure area of the application. Please confirm your password before continuing.
                 </div>
@@ -22,9 +22,8 @@
                 />
             </div>
 
-            <div class="flex items-center justify-end px-6 py-3 bg-gray-100 dark:bg-gray-800">
+            <div class="flex flex-col p-4 space-y-1 bg-gray-100 rounded-b-lg sm:space-x-3 sm:px-6 sm:py-3 dark:bg-gray-800 sm:flex-row-reverse">
                 <app-button
-                    class="ml-3"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >

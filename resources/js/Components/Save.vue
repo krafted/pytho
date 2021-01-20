@@ -62,20 +62,19 @@
         </template>
 
         <template #actions>
-            <app-button
-                class="ml-3"
-                :class="{ 'opacity-25': form.processing }"
-                :disabled="form.processing"
-            >
-                Save
-            </app-button>
-
             <app-secondary-button
                 type="button"
                 @click="show = false"
             >
                 Close
             </app-secondary-button>
+
+            <app-button
+                :class="{ 'opacity-25': form.processing }"
+                :disabled="form.processing"
+            >
+                Save
+            </app-button>
         </template>
     </app-modal>
 </template>

@@ -3,9 +3,9 @@
         <transition leave-active-class="duration-200">
             <div
                 v-show="show"
-                class="fixed inset-0 z-30 overflow-y-auto"
+                class="fixed inset-0 z-30 overflow-y-auto pb-safe-bottom"
             >
-                <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+                <div class="flex items-end justify-center min-h-screen p-4 text-center sm:block sm:p-0">
                     <transition
                         enter-active-class="duration-300 ease-out"
                         enter-from-class="opacity-0"
@@ -42,15 +42,15 @@
                                 aria-labelledby="modal-headline"
                                 @submit.prevent="submit"
                             >
-                                <div class="p-6">
-                                    <div class="flex items-start space-x-4 sm:space-x-6">
+                                <div class="p-4 sm:p-6">
+                                    <div class="flex items-start sm:space-x-6">
                                         <div class="hidden sm:block">
                                             <slot name="icon" />
                                         </div>
 
                                         <div class="flex-1">
                                             <header class="flex items-center">
-                                                <h3 class="flex items-center h-12 text-lg font-semibold leading-6 text-gray-600 dark:text-gray-200 sm:h-10" id="modal-headline">
+                                                <h3 class="flex items-center text-lg font-semibold leading-6 text-gray-600 dark:text-gray-200 sm:h-10" id="modal-headline">
                                                     <slot name="title" />
                                                 </h3>
                                             </header>
@@ -62,7 +62,7 @@
                                     </div>
                                 </div>
 
-                                <div class="px-6 py-3 bg-gray-100 rounded-b-lg dark:bg-gray-800 sm:flex sm:flex-row-reverse">
+                                <div class="flex items-center justify-end p-4 space-x-3 bg-gray-100 rounded-b-lg sm:px-6 sm:py-3 dark:bg-gray-800">
                                     <slot name="actions" />
                                 </div>
                             </form>
@@ -76,15 +76,15 @@
                                 aria-modal="true"
                                 aria-labelledby="modal-headline"
                             >
-                                <div class="p-6">
-                                    <div class="flex items-start space-x-4 sm:space-x-6">
+                                <div class="p-4 sm:p-6">
+                                    <div class="flex items-start sm:space-x-6">
                                         <div class="hidden sm:block">
                                             <slot name="icon" />
                                         </div>
 
                                         <div class="flex-1">
                                             <header class="flex items-center">
-                                                <h3 class="flex items-center h-12 text-lg font-semibold leading-6 text-gray-600 dark:text-gray-200 sm:h-10" id="modal-headline">
+                                                <h3 class="flex items-center text-lg font-semibold leading-6 text-gray-600 dark:text-gray-200 sm:h-10" id="modal-headline">
                                                     <slot name="title" />
                                                 </h3>
                                             </header>
@@ -96,7 +96,7 @@
                                     </div>
                                 </div>
 
-                                <div class="px-6 py-3 bg-gray-100 rounded-b-lg dark:bg-gray-800 sm:flex sm:flex-row-reverse">
+                                <div class="flex items-center justify-end p-4 space-x-3 bg-gray-100 rounded-b-lg sm:px-6 sm:py-3 dark:bg-gray-800">
                                     <slot name="actions" />
                                 </div>
                             </div>

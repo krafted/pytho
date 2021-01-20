@@ -37,13 +37,13 @@
                 </template>
 
                 <template #actions>
-                    <app-danger-button class="ml-3" @click.native="deleteTeam" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Delete Team
-                    </app-danger-button>
-
                     <app-secondary-button @click.native="confirmingTeamDeletion = false">
                         Nevermind
                     </app-secondary-button>
+
+                    <app-danger-button @click.native="deleteTeam" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Delete Team
+                    </app-danger-button>
                 </template>
             </app-modal>
         </template>

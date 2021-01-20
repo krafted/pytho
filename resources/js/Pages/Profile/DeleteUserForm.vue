@@ -49,13 +49,13 @@
                 </template>
 
                 <template #actions>
-                    <app-danger-button class="ml-3" @click.native="deleteUser" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Delete Account
-                    </app-danger-button>
-
                     <app-secondary-button @click.native="closeModal">
                         Nevermind
                     </app-secondary-button>
+
+                    <app-danger-button @click.native="deleteUser" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Delete Account
+                    </app-danger-button>
                 </template>
             </app-modal>
         </template>
