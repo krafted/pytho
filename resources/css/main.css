@@ -79,12 +79,12 @@
         @apply cursor-row-resize -top-4 -bottom-4 w-full
     }
 
-    h1 .heading-permalink,
-    h2 .heading-permalink,
-    h3 .heading-permalink,
-    h4 .heading-permalink,
-    h5 .heading-permalink,
-    h6 .heading-permalink {
+    h1 .py-heading-permalink,
+    h2 .py-heading-permalink,
+    h3 .py-heading-permalink,
+    h4 .py-heading-permalink,
+    h5 .py-heading-permalink,
+    h6 .py-heading-permalink {
         @apply absolute right-0 md:-left-6 text-gray-200 dark:text-gray-700 hover:no-underline hover:text-gray-300 dark:hover:text-gray-600;
     }
 }

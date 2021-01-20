@@ -16,7 +16,7 @@ module.exports = {
         ],
         options: {
             safelist: {
-                standard: [/cm|CodeMirror|splitpanes/],
+                standard: [/py|cm|CodeMirror|splitpanes/],
             },
         },
     },
