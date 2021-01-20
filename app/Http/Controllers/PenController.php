@@ -32,7 +32,7 @@ class PenController extends Controller
      */
     public function store(PenRequest $request)
     {
-        $pen = Pen::create($request->validated());
+        $pen = $request->user()->pens()->create($request->validated());
 
         return redirect($pen->path());
     }
