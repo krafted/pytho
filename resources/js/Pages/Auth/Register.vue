@@ -56,7 +56,7 @@
                 </label>
             </div>
 
-            <div class="flex items-center justify-end p-4 space-x-3 bg-gray-100 rounded-b-lg sm:px-6 sm:py-3 dark:bg-gray-800">
+            <div class="flex items-center justify-end p-4 space-x-3 bg-gray-100 sm:rounded-b-lg sm:px-6 sm:py-3 dark:bg-gray-800">
                 <inertia-link
                     :href="route('login')"
                     class="text-sm text-gray-500 hover:underline focus:outline-none focus:ring focus:ring-primary-500"

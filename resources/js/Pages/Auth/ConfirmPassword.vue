@@ -22,7 +22,7 @@
                 />
             </div>
 
-            <div class="flex flex-col p-4 space-y-1 bg-gray-100 rounded-b-lg sm:space-x-3 sm:px-6 sm:py-3 dark:bg-gray-800 sm:flex-row-reverse">
+            <div class="flex flex-col p-4 space-y-1 bg-gray-100 sm:rounded-b-lg sm:space-x-3 sm:px-6 sm:py-3 dark:bg-gray-800 sm:flex-row-reverse">
                 <app-button
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
