@@ -53,9 +53,10 @@ export default String.raw`"""
 Welcome to Py!
 ---
 In this environment, you can create and share
-your Python code with the world. Try reloading
-to get another example, or dig right in and
-write your own code!
+your Python code with the world.
+
+Try reloading to get another example, or dig
+right in and write your own code!
 """
 
 ${options[Math.floor(Math.random() * options.length)]}
