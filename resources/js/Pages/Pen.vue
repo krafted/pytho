@@ -69,7 +69,7 @@
                     <div class="relative flex flex-col flex-1">
                         <header
                             class="absolute inset-x-0 top-0 items-center hidden p-4 border-gray-100 dark:border-gray-800 pr-safe-right md:flex"
-                            :class="{ 'border-b border-gray-100 dark:border-gray-800': settings.layout === 'horizontal' }"
+                            :class="{ 'border-b border-gray-100 dark:border-gray-800 z-30': settings.layout === 'horizontal' }"
                         >
                             <h3
                                 class="mt-px font-mono text-xs font-semibold tracking-wide text-gray-500 uppercase border-b-2 border-transparent select-none dark:text-gray-700"
