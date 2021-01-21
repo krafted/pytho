@@ -98,7 +98,6 @@
             AppDangerButton,
             AppModal,
             AppSecondaryButton,
-            ConnectedAccount,
             FormActionSection,
         },
         setup() {
