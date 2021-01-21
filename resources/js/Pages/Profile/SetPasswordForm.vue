@@ -1,7 +1,7 @@
 <template>
-    <form-section @submitted="updatePassword">
+    <form-section @submitted="setPassword">
         <template #title>
-            Update Password
+            Set Password
         </template>
 
         <template #description>
@@ -9,18 +9,6 @@
         </template>
 
         <template #form>
-            <div class="col-span-6 space-y-1 sm:col-span-4">
-                <form-input
-                    label="Current Password"
-                    autocomplete="current-password"
-                    ref="currentPassword"
-                    type="password"
-                    v-model="form.current_password"
-                />
-
-                <form-input-error :message="form.errors.current_password" />
-            </div>
-
             <div class="col-span-6 space-y-1 sm:col-span-4">
                 <form-input
                     label="New Password"
@@ -76,25 +64,19 @@
         },
         setup() {
             const form = useForm({
-                current_password: '',
                 password: '',
                 password_confirmation: '',
             })
             const password = ref(null)
-            const currentPassword = ref(null)
-            const updatePassword = () => {
-                form.value.put(route('user-password.update'), {
-                    errorBag: 'updatePassword',
+            const setPassword = () => {
+                form.value.put(route('user-password.set'), {
+                    errorBag: 'setPassword',
                     preserveScroll: true,
                     onSuccess: () => form.value.reset(),
                     onError: () => {
                         if (form.value.errors.password) {
                             form.value.reset('password', 'password_confirmation')
                             password.value.focus()
-                        }
-                        if (form.value.errors.current_password) {
-                            form.value.reset('current_password')
-                            currentPassword.value.focus()
                         }
                     }
                 })
@@ -103,8 +85,7 @@
             return {
                 form,
                 password,
-                updatePassword,
-                currentPassword,
+                setPassword,
             }
         },
     }

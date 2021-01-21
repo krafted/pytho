@@ -37,18 +37,34 @@
                         />
                         <span class="ml-4 text-xs font-semibold tracking-wide text-gray-500 uppercase">Remember me</span>
                     </label>
-
-                    <inertia-link
-                        v-if="canResetPassword"
-                        :href="route('password.request')"
-                        class="text-sm text-gray-500 hover:underline focus:outline-none focus:ring focus:ring-primary-500"
-                    >
-                        Forgot your password?
-                    </inertia-link>
                 </div>
             </div>
 
-            <div class="flex items-center justify-end p-4 space-x-3 bg-gray-100 sm:rounded-b-lg sm:px-6 sm:py-3 dark:bg-gray-800">
+            <div class="p-4 bg-gray-100 sm:rounded-b-lg sm:px-6 sm:py-3 dark:bg-gray-800">
+                <app-button
+                    class="w-full"
+                    :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing"
+                >
+                    Login
+                </app-button>
+
+                <app-providers v-if="page.props.value.socialstream.show" method="Login" />
+            </div>
+        </form>
+
+        <template #additional-links>
+            <div class="flex items-center justify-center w-full mt-3 space-x-3 text-gray-800">
+                <inertia-link
+                    v-if="canResetPassword"
+                    :href="route('password.request')"
+                    class="text-sm text-gray-500 hover:underline focus:outline-none focus:ring focus:ring-primary-500"
+                >
+                    Forgot your password?
+                </inertia-link>
+
+                <span>&mdash;</span>
+
                 <inertia-link
                     v-if="route().has('register')"
                     :href="route('register')"
@@ -56,15 +72,8 @@
                 >
                     Need an account?
                 </inertia-link>
-
-                <app-button
-                    :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing"
-                >
-                    Login
-                </app-button>
             </div>
-        </form>
+        </template>
     </app-authentication-card>
 </template>
 
@@ -72,11 +81,11 @@
     import AppAuthenticationCard from '@/Components/AuthenticationCard'
     import AppButton from '@/Components/Button'
     import AppLogo from '@/Components/Logo'
+    import AppProviders from '@/Components/Providers'
     import FormCheckbox from '@/Components/Form/Checkbox'
     import FormInput from '@/Components/Form/Input'
     import FormValidationErrors from '@/Components/Form/ValidationErrors'
-    import { inject } from 'vue'
-    import { useForm } from '@inertiajs/inertia-vue3'
+    import { useForm, usePage } from '@inertiajs/inertia-vue3'
 
     export default {
         props: {
@@ -87,11 +96,13 @@
             AppAuthenticationCard,
             AppButton,
             AppLogo,
+            AppProviders,
             FormCheckbox,
             FormInput,
             FormValidationErrors,
         },
         setup() {
+            const page = usePage()
             const form = useForm({
                 email: '',
                 password: '',
@@ -109,6 +120,7 @@
             }
 
             return {
+                page,
                 form,
                 submit,
             }

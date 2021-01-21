@@ -56,22 +56,29 @@
                 </label>
             </div>
 
-            <div class="flex items-center justify-end p-4 space-x-3 bg-gray-100 sm:rounded-b-lg sm:px-6 sm:py-3 dark:bg-gray-800">
-                <inertia-link
-                    :href="route('login')"
-                    class="text-sm text-gray-500 hover:underline focus:outline-none focus:ring focus:ring-primary-500"
-                >
-                    Already registered?
-                </inertia-link>
-
+            <div class="p-4 bg-gray-100 sm:rounded-b-lg sm:px-6 sm:py-3 dark:bg-gray-800">
                 <app-button
+                    class="w-full"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     Register
                 </app-button>
+
+                <app-providers v-if="page.props.value.socialstream.show" method="Register" />
             </div>
         </form>
+
+        <template #additional-links>
+            <div class="flex items-center justify-center w-full mt-3 space-x-3 text-gray-800">
+                <inertia-link
+                    :href="route('login')"
+                    class="text-sm text-gray-500 hover:underline focus:outline-none focus:ring focus:ring-primary-500"
+                >
+                    Already have an account?
+                </inertia-link>
+            </div>
+        </template>
     </app-authentication-card>
 </template>
 
@@ -79,10 +86,10 @@
     import AppAuthenticationCard from '@/Components/AuthenticationCard'
     import AppButton from '@/Components/Button'
     import AppLogo from '@/Components/Logo'
+    import AppProviders from '@/Components/Providers'
     import FormCheckbox from '@/Components/Form/Checkbox'
     import FormInput from '@/Components/Form/Input'
     import FormValidationErrors from '@/Components/Form/ValidationErrors'
-    import { inject } from 'vue'
     import { useForm, usePage } from '@inertiajs/inertia-vue3'
 
     export default {
@@ -90,6 +97,7 @@
             AppAuthenticationCard,
             AppButton,
             AppLogo,
+            AppProviders,
             FormCheckbox,
             FormInput,
             FormValidationErrors,

@@ -44,8 +44,12 @@
                             >
                                 <div class="p-4 sm:p-6">
                                     <div class="flex items-start sm:space-x-6">
-                                        <div class="hidden sm:block">
-                                            <slot name="icon" />
+                                        <div v-if="hasIcon" class="hidden sm:block">
+                                            <div class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-gray-100 rounded-full dark:bg-black sm:mx-0 sm:h-10 sm:w-10">
+                                                <svg class="w-6 h-6 text-gray-600 dark:text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <slot name="icon" />
+                                                </svg>
+                                            </div>
                                         </div>
 
                                         <div class="flex-1">
@@ -78,8 +82,12 @@
                             >
                                 <div class="p-4 sm:p-6">
                                     <div class="flex items-start sm:space-x-6">
-                                        <div class="hidden sm:block">
-                                            <slot name="icon" />
+                                        <div v-if="hasIcon" class="hidden sm:block">
+                                            <div class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-gray-100 rounded-full dark:bg-black sm:mx-0 sm:h-10 sm:w-10">
+                                                <svg class="w-6 h-6 text-gray-600 dark:text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <slot name="icon" />
+                                                </svg>
+                                            </div>
                                         </div>
 
                                         <div class="flex-1">
@@ -109,7 +117,7 @@
 </template>
 
 <script>
-    import { inject, onMounted, onUnmounted, watchEffect } from 'vue'
+    import { computed, inject, onMounted, onUnmounted, watchEffect } from 'vue'
     import hotkeys from 'hotkeys-js'
 
     export default {
@@ -124,7 +132,8 @@
                 default: 'div',
             }
         },
-        setup(props, { emit }) {
+        setup(props, { emit, slots }) {
+            const hasIcon = computed(() => !!slots.icon)
             const close = () => emit('close')
             const submit = () => emit('submitted')
 
@@ -139,6 +148,7 @@
             watchEffect(() => props.show && document.activeElement.blur())
 
             return {
+                hasIcon,
                 close,
                 submit,
             }
