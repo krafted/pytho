@@ -186,7 +186,7 @@
                 output.value = ''
                 error.value = false
 
-                if (form.value.content.includes('import turtle')) {
+                if (['import turtle', 'from turtle import'].some(s => form.value.content.includes(s))) {
                     await loadEngine('skulpt')
                     showCanvas.value = true
                     await nextTick()
@@ -202,7 +202,12 @@
                 showCanvas.value = false
                 await runCode(form.value.content, { use: 'pyodide' })
             }
-            const save = () => saveRef.value.save()
+            const save = () => {
+                const canSave = props.isOwner && props.pen
+
+                if (canSave) saveRef.value.save()
+                else saveRef.value.show = true
+            }
 
             watch(isMd, async (value, oldValue) => {
                 if (value !== oldValue && !loading.value) await run()

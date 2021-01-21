@@ -192,7 +192,7 @@
             })
             onUnmounted(() => hotkeys.unbind(isMac.value ? 'cmd+s' : 'ctrl+s'))
 
-            watchEffect(async () => (show.value && (await nextTick(), url.value.focus())))
+            watchEffect(async () => show.value && (await nextTick(), url.value.focus()))
 
             return {
                 page,
