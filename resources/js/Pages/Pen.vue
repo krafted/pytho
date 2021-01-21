@@ -1,6 +1,14 @@
 <template>
     <app-layout>
         <template #header-right-actions>
+            <form-action-message
+                :on="form.recentlySuccessful"
+                class="mr-2 font-semibold"
+                type="success"
+            >
+                {{ message }}
+            </form-action-message>
+
             <button
                 class="flex items-center justify-center p-2.5 text-gray-500 dark:text-gray-700 border border-transparent rounded-md group hover:w-auto hover:bg-gray-200 dark:hover:bg-black focus:bg-gray-200 dark:focus:bg-black focus:border-gray-300 dark:focus:border-gray-800 hover:border-gray-300 dark:hover:border-gray-800 hover:text-gray-900 dark:hover:text-gray-400 focus:text-gray-900 dark:focus:text-gray-400 focus:outline-none focus:w-auto"
                 :title="isMac ? '⌘ + ↩︎' : '⌃ + ↩︎'"
@@ -26,6 +34,8 @@
                 :is-owner="isOwner"
                 :pen="pen"
                 :slug="slug"
+                @created="typeof navigator.clipboard !== 'undefined' ? message = 'Copied' : message = 'Created'"
+                @saved="message = 'Saved'"
             />
 
             <app-details
@@ -118,6 +128,7 @@
     import AppOutput from '@/Components/Output'
     import AppSave from '@/Components/Save'
     import AppTabBar from '@/Components/TabBar'
+    import FormActionMessage from '@/Components/Form/ActionMessage'
     import useMedia from '@/Hooks/useMedia'
     import defaultContent from '@/Config/Content'
     import { Splitpanes, Pane } from 'splitpanes'
@@ -144,6 +155,7 @@
             AppOutput,
             AppSave,
             AppTabBar,
+            FormActionMessage,
             Pane,
             Splitpanes,
         },
@@ -168,6 +180,7 @@
             const showCanvas = ref(false)
             const saveRef = ref(null)
             const paneWidth = ref(null)
+            const message = ref('')
             const closeCanvas = () => form.value.content.includes('exitonclick') && (showCanvas.value = false)
             const run = async () => {
                 output.value = ''
@@ -231,6 +244,7 @@
 
             return {
                 settings,
+                form,
                 activeTab,
                 dirty,
                 editor,
@@ -239,11 +253,13 @@
                 isMd,
                 isMobile,
                 loading,
+                message,
                 paneWidth,
                 run,
                 saveRef,
                 save,
                 showCanvas,
+                navigator,
             }
         },
     }

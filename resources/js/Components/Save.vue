@@ -135,6 +135,7 @@
     import { usePage } from '@inertiajs/inertia-vue3'
 
     export default {
+        emits: ['created', 'saved'],
         props: ['isOwner', 'pen', 'slug'],
         components: {
             AppButton,
@@ -146,7 +147,7 @@
             FormTextarea,
             FormUrlInput,
         },
-        setup(props) {
+        setup(props, { emit }) {
             const page = usePage()
             const form = inject('form')
             const dirty = inject('dirty')
@@ -161,20 +162,32 @@
                 { value: 'private', label: 'Private', description: 'You will be the only user that is able to view it.' },
             ]
             const save = async () => {
-                const method = props.isOwner && props.pen ? 'put' : 'post'
-                const url = props.isOwner && props.pen
-                    ? route('pen.update', props.pen)
-                    : route('pen.store')
+                const canSave = props.isOwner && !!props.pen
+                const method = canSave ? 'put' : 'post'
+                const url = canSave ? route('pen.update', props.pen) : route('pen.store')
                 
-                form.value[method](url, { onSuccess: () => (show.value = false, dirty.value = false) })
+                form.value[method](url, {
+                    onSuccess: async () => {
+                        console.log(navigator)
+                        if (!canSave && typeof navigator.clipboard !== 'undefined') navigator.clipboard.writeText(`${page.props.value.appUrl}/${form.value.slug}`)
 
-                await run()
+                        show.value = false
+                        dirty.value = false
+
+                        await run()
+
+                        emit(canSave ? 'saved' : 'created')
+                    }
+                })
             }
 
             onMounted(() => {
                 hotkeys(isMac.value ? 'cmd+s' : 'ctrl+s', async (event) => {
-                    if (props.pen) save()
+                    const canSave = props.isOwner && props.pen
+
+                    if (canSave) save()
                     else show.value = true
+
                     event.preventDefault()
                 })
             })
