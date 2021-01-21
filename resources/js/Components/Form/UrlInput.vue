@@ -72,7 +72,7 @@
             const focused = ref(false)
             const input = ref(null)
             const handleInput = (v) => emit('update:modelValue', v)
-            const focus = () => input.value.focus()
+            const focus = () => input.value.select()
 
             provide('handleInput', handleInput)
             provide('focused', focused)

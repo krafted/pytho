@@ -129,7 +129,7 @@
     import FormListbox from '@/Components/Form/Listbox'
     import FormTextarea from '@/Components/Form/Textarea'
     import FormUrlInput from '@/Components/Form/UrlInput'
-    import { inject, onMounted, onUnmounted, ref, watchEffect } from 'vue'
+    import { inject, nextTick, onMounted, onUnmounted, ref, watchEffect } from 'vue'
     import hotkeys from 'hotkeys-js'
     import { Inertia } from '@inertiajs/inertia'
     import { usePage } from '@inertiajs/inertia-vue3'
@@ -168,7 +168,6 @@
                 
                 form.value[method](url, {
                     onSuccess: async () => {
-                        console.log(navigator)
                         if (!canSave && typeof navigator.clipboard !== 'undefined') navigator.clipboard.writeText(`${page.props.value.appUrl}/${form.value.slug}`)
 
                         show.value = false
@@ -193,9 +192,7 @@
             })
             onUnmounted(() => hotkeys.unbind(isMac.value ? 'cmd+s' : 'ctrl+s'))
 
-            watchEffect(() => {
-                if (show.value) url.value.focus()
-            })
+            watchEffect(async () => (show.value && (await nextTick(), url.value.focus())))
 
             return {
                 page,

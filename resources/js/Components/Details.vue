@@ -37,32 +37,13 @@
             <div class="grid grid-cols-1 gap-3">
                 <form-field
                     label="Title"
-                    :value="pen.title"
+                    :value="pen.title || 'Untitled'"
                 />
 
                 <form-field
                     label="Description"
-                    :value="pen.description"
+                    :value="pen.description || 'No description'"
                 />
-                <!-- <form-url-input
-                    ref="url"
-                    label="URL"
-                    :prepend="page.props.value.appUrl"
-                    v-model="form.slug"
-                />
-                <form-input-error :message="form.errors.slug" />
-
-                <form-input
-                    label="Title"
-                    v-model="form.title"
-                />
-                <form-input-error :message="form.errors.title" />
-
-                <form-textarea
-                    label="Description"
-                    v-model="form.description"
-                />
-                <form-input-error :message="form.errors.description" /> -->
             </div>
         </template>
 

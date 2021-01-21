@@ -109,7 +109,7 @@
 </template>
 
 <script>
-    import { inject, onMounted, onUnmounted } from 'vue'
+    import { inject, onMounted, onUnmounted, watchEffect } from 'vue'
     import hotkeys from 'hotkeys-js'
 
     export default {
@@ -135,6 +135,8 @@
                 })
             })
             onUnmounted(() => hotkeys.unbind('esc'))
+
+            watchEffect(() => props.show && document.activeElement.blur())
 
             return {
                 close,

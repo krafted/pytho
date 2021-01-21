@@ -152,8 +152,6 @@
             const show = inject('showSettings')
             const updateSetting = inject('updateSetting')
 
-            watchEffect(() => show.value && document.activeElement.blur())
-
             onMounted(() => {
                 hotkeys(isMac.value ? 'cmd+,' : 'ctrl+,', (event) => {
                     show.value = true
