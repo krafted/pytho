@@ -32,9 +32,7 @@ class PenController extends Controller
             'isOwner' => $isOwner,
             'pen' => optional($pen)
                 ->only('title', 'description', 'content', 'slug', 'visibility'),
-            'slug' => $isOwner
-                ? $pen->slug ?? Slug::generate()
-                : Slug::generate(),
+            'slug' => Slug::generate(),
         ]);
     }
 

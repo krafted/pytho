@@ -11,6 +11,24 @@
 
             <button
                 class="flex items-center justify-center p-2.5 text-gray-500 dark:text-gray-700 border border-transparent rounded-md group hover:w-auto hover:bg-gray-200 dark:hover:bg-black focus:bg-gray-200 dark:focus:bg-black focus:border-gray-300 dark:focus:border-gray-800 hover:border-gray-300 dark:hover:border-gray-800 hover:text-gray-900 dark:hover:text-gray-400 focus:text-gray-900 dark:focus:text-gray-400 focus:outline-none focus:w-auto"
+                @click="create"
+            >
+                <span class="sr-only">Create</span>
+
+                <span
+                    v-if="!isMobile"
+                    class="flex-shrink-0 hidden mr-2 text-sm group-hover:inline group-focus:inline"
+                >
+                    Create
+                </span>
+
+                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </button>
+
+            <button
+                class="flex items-center justify-center p-2.5 text-gray-500 dark:text-gray-700 border border-transparent rounded-md group hover:w-auto hover:bg-gray-200 dark:hover:bg-black focus:bg-gray-200 dark:focus:bg-black focus:border-gray-300 dark:focus:border-gray-800 hover:border-gray-300 dark:hover:border-gray-800 hover:text-gray-900 dark:hover:text-gray-400 focus:text-gray-900 dark:focus:text-gray-400 focus:outline-none focus:w-auto"
                 :title="isMac ? '⌘ + ↩︎' : '⌃ + ↩︎'"
                 @click="run"
             >
@@ -134,7 +152,8 @@
     import { Splitpanes, Pane } from 'splitpanes'
     import { inject, nextTick, onMounted, onUnmounted, provide, ref, watch } from 'vue'
     import { loadEngine, runCode, setOptions } from 'client-side-python-runner'
-    import { useForm } from '@inertiajs/inertia-vue3'
+    import { useForm, usePage } from '@inertiajs/inertia-vue3'
+    import dedent from 'dedent'
 
     export default {
         props: {
@@ -161,8 +180,9 @@
         },
         setup(props) {
             const settings = inject('settings')
+            const page = usePage()
             const form = useForm({
-                'slug': props.slug,
+                'slug': props.isOwner ? props.pen?.slug || props.slug : props.slug,
                 'title': props.pen?.title || 'Untitled',
                 'content': props.pen?.content || defaultContent,
                 'description': props.pen?.description,
@@ -208,6 +228,25 @@
                 if (canSave) saveRef.value.save()
                 else saveRef.value.show = true
             }
+            const create = () => {
+                form.value.slug = props.slug
+                form.value.title = 'Untitled'
+                form.value.description = null
+                form.value.content = "# Let's write some code"
+                form.value.visibility = 'public'
+
+                form.value.post(route('pen.store'), {
+                    preserveState: false,
+                    onSuccess: async () => {
+                        const canCopy = typeof navigator.clipboard !== 'undefined'
+
+                        if (canCopy) navigator.clipboard.writeText(`${page.props.value.appUrl}/${form.value.slug}`)
+
+                        dirty.value = false
+                        editor.value.execCommand('selectAll')
+                    }
+                })
+            }
 
             watch(isMd, async (value, oldValue) => {
                 if (value !== oldValue && !loading.value) await run()
@@ -249,8 +288,10 @@
 
             return {
                 settings,
+                page,
                 form,
                 activeTab,
+                create,
                 dirty,
                 editor,
                 error,

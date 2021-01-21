@@ -166,10 +166,10 @@
                     onSuccess: async () => {
                         if (!canSave && typeof navigator.clipboard !== 'undefined') navigator.clipboard.writeText(`${page.props.value.appUrl}/${form.value.slug}`)
 
+                        await run()
+
                         show.value = false
                         dirty.value = false
-
-                        await run()
 
                         emit(canSave ? 'saved' : 'created')
                     }
