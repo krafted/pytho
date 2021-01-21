@@ -15,7 +15,19 @@
                 </div>
             </div>
 
-            <div class="flex items-center justify-end p-4 space-x-3 bg-gray-100 sm:rounded-b-lg sm:px-6 sm:py-3 dark:bg-gray-800">
+            <div class="flex p-4 space-x-3 bg-gray-100 sm:rounded-b-lg sm:px-6 sm:py-3 dark:bg-gray-800">
+                <app-button
+                    class="w-full"
+                    :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing"
+                >
+                    Resend Verification Email
+                </app-button>
+            </div>
+        </form>
+
+        <template #additional-links>
+            <div class="flex items-center justify-center w-full mt-3 space-x-3 text-gray-800">
                 <inertia-link
                     :href="route('logout')"
                     method="post"
@@ -24,15 +36,8 @@
                 >
                     Logout?
                 </inertia-link>
-                
-                <app-button
-                    :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing"
-                >
-                    Resend Verification Email
-                </app-button>
             </div>
-        </form>
+        </template>
     </app-authentication-card>
 </template>
 
