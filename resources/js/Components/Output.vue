@@ -44,14 +44,14 @@
                 >
                     <div
                         v-show="show"
-                        class="overflow-hidden bg-black shadow-xl"
+                        class="overflow-hidden bg-gray-100 shadow-xl dark:bg-black"
                         :class="{
                             'rounded-lg': isMac,
                             'rounded-none': !isMac,
                         }"
                     >
                         <header
-                            class="flex items-center bg-black"
+                            class="flex items-center"
                             :class="{
                                 'justify-start p-4': isMac,
                                 'justify-end': !isMac,
@@ -79,7 +79,7 @@
                             </button>
                         </header>
 
-                        <div class="overflow-auto transition-all transform bg-white focus:outline-none">
+                        <div class="overflow-auto transition-all transform bg-white rounded-b-lg focus:outline-none">
                             <div id="canvas" />
 
                             <div
