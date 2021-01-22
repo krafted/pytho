@@ -213,7 +213,7 @@
                     Sk.TurtleGraphics
                         ? Sk.TurtleGraphics.target = 'canvas'
                         : Sk.TurtleGraphics = { target: 'canvas' }
-                    Sk.misceval.asyncToPromise(() => Sk.importMainWithBody("<stdin>", false, form.value.content, true))
+                    await runCode(form.value.content, { use: 'skulpt' })
                     output.value = 'Re-run to view the output'
 
                     return
@@ -266,8 +266,16 @@
                 setOptions({
                     storeStateBetweenRuns: false,
                     output: res => output.value += res,
-                    error: err => (error.value = true, output.value += err.error.message),
+                    error: err => (error.value = true, output.value += err.error?.message ?? err.error),
                 })
+
+                window.js_input = text => prompt(text)
+
+                await runCode(`
+                    from js import js_input
+                    input = js_input
+                    __builtins__.input = js_input
+                `, { use: 'pyodide' })
 
                 loading.value = false
 
