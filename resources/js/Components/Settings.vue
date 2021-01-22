@@ -115,7 +115,7 @@
 </template>
 
 <script>
-    import { inject, onMounted, onUnmounted, provide, watchEffect } from 'vue'
+    import { inject, onMounted, onUnmounted } from 'vue'
     import { updateTheme } from '@/Utils/theme'
     import AppButton from '@/Components/Button'
     import AppModal from '@/Components/Modal'
@@ -135,7 +135,7 @@
             FormListbox,
             FormNumberInput,
         },
-        setup(_, { emit }) {
+        setup() {
             const settings = inject('settings')
             const isMac = inject('isMac')
             const isMobile = inject('isMobile')
