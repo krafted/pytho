@@ -44,7 +44,7 @@
                 >
                     <div
                         v-show="show"
-                        class="overflow-hidden bg-gray-100 shadow-xl dark:bg-black"
+                        class="overflow-hidden bg-gray-100 shadow-xl dark:bg-gray-900"
                         :class="{
                             'rounded-lg': isMac,
                             'rounded-none': !isMac,
@@ -79,7 +79,10 @@
                             </button>
                         </header>
 
-                        <div class="overflow-auto transition-all transform bg-white rounded-b-lg focus:outline-none">
+                        <div
+                            class="overflow-auto transition-all transform bg-white focus:outline-none"
+                            :class="{ 'rounded-b-lg': isMac }"
+                        >
                             <div id="canvas" />
 
                             <div
