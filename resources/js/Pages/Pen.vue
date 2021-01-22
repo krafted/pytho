@@ -213,7 +213,7 @@
                     Sk.TurtleGraphics
                         ? Sk.TurtleGraphics.target = 'canvas'
                         : Sk.TurtleGraphics = { target: 'canvas' }
-                    await runCode(form.value.content, { use: 'skulpt' })
+                    Sk.misceval.asyncToPromise(() => Sk.importMainWithBody("<stdin>", false, form.value.content, true))
                     output.value = 'Re-run to view the output'
 
                     return
