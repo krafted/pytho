@@ -21,6 +21,7 @@
         "@interactjs/modifiers": "^1.10.2",
         "@tailwindcss/typography": "^0.3.0",
         "@vue/compiler-sfc": "^3.0.5",
+        "@vueuse/head": "^0.2.3",
         "autoprefixer": "^10.0.2",
         "axios": "^0.21",
         "codemirror": "^5.59.1",

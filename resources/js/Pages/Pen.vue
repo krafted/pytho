@@ -151,8 +151,9 @@
     import defaultContent from '@/Config/Content'
     import { loadEngine, runCode, setOptions } from '@/Utils/interpreter'
     import { Splitpanes, Pane } from 'splitpanes'
-    import { inject, nextTick, onMounted, onUnmounted, provide, ref, watch } from 'vue'
+    import { computed, inject, nextTick, onMounted, onUnmounted, provide, ref, watch } from 'vue'
     import { useForm, usePage } from '@inertiajs/inertia-vue3'
+    import { useHead } from '@vueuse/head'
 
     export default {
         props: {
@@ -243,6 +244,8 @@
                     }
                 })
             }
+
+            useHead({ title: computed(() => `${props.pen?.title} — Py` ?? 'Py') })
 
             watch(isMd, async (value, oldValue) => {
                 if (value !== oldValue && !loading.value) await run()
