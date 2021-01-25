@@ -268,7 +268,7 @@
                     error: err => (error.value = true, output.value += err.error?.message ?? err.error),
                 })
 
-                window.js_input = text => prompt(text)
+                window.js_input = text => prompt(text || 'Input:')
 
                 await runCode(`
                     from js import js_input
