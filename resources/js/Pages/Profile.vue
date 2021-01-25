@@ -34,7 +34,7 @@
                     </inertia-link>
 
                     <inertia-link
-                        v-if="profile.id === page.props.value.user.id"
+                        v-if="profile.id === page.props.value.user?.id"
                         class="flex py-4 border-b-2 focus:outline-none"
                         :class="[
                             route().current('profile.private.show')
@@ -106,8 +106,6 @@
         },
         setup(props) {
             const page = usePage()
-
-            console.log(route().current(''))
 
             useHead({ title: computed(() => props.user ? `${props.user?.name} — Py` : 'Py') })
 
