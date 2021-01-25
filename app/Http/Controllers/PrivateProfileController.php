@@ -17,6 +17,8 @@ class PrivateProfileController extends Controller
      */
     public function show(Request $request, User $user)
     {
+        abort_if(optional($request->user())->id !== $user->id, 403);
+
         return inertia('Profile', [
             'profile' => $user,
             'pens'    =>
