@@ -245,7 +245,7 @@
                 })
             }
 
-            useHead({ title: computed(() => `${props.pen?.title} — Py` ?? 'Py') })
+            useHead({ title: computed(() => `${props.pen?.title} — Py` || 'Py') })
 
             watch(isMd, async (value, oldValue) => {
                 if (value !== oldValue && !loading.value) await run()
