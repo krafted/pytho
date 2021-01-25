@@ -149,11 +149,10 @@
     import FormActionMessage from '@/Components/Form/ActionMessage'
     import useMedia from '@/Hooks/useMedia'
     import defaultContent from '@/Config/Content'
+    import { loadEngine, runCode, setOptions } from '@/Utils/interpreter'
     import { Splitpanes, Pane } from 'splitpanes'
     import { inject, nextTick, onMounted, onUnmounted, provide, ref, watch } from 'vue'
-    import { loadEngine, runCode, setOptions } from 'client-side-python-runner'
     import { useForm, usePage } from '@inertiajs/inertia-vue3'
-    import dedent from 'dedent'
 
     export default {
         props: {
@@ -210,11 +209,8 @@
                     await loadEngine('skulpt')
                     showCanvas.value = true
                     await nextTick()
-                    Sk.TurtleGraphics
-                        ? Sk.TurtleGraphics.target = 'canvas'
-                        : Sk.TurtleGraphics = { target: 'canvas' }
-                    Sk.misceval.asyncToPromise(() => Sk.importMainWithBody("<stdin>", false, form.value.content, true))
                     output.value = 'Re-run to view the output'
+                    await runCode(form.value.content, { use: 'skulpt', canvas: 'canvas' })
 
                     return
                 }
