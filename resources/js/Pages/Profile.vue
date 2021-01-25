@@ -54,7 +54,7 @@
             >
                 <inertia-link
                     v-for="pen in pens"
-                    class="flex flex-col overflow-hidden transition ease-in-out transform bg-white border-t border-b border-gray-100 duration-250 sm:border-r sm:border-l dark:border-gray-800 dark:bg-gray-900 sm:rounded-lg sm:hover:-translate-y-2 sm:focus:-translate-y-2 sm:hover:shadow sm:focus:shadow focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-900"
+                    class="flex flex-col overflow-hidden transition ease-in-out transform bg-white border-t border-b border-gray-100 duration-250 sm:border-r sm:border-l dark:border-gray-800 dark:bg-gray-900 sm:rounded-lg sm:hover:-translate-y-2 sm:focus:translate-y-0 sm:hover:shadow sm:focus:shadow focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-900"
                     :href="route('pen.show', pen)"
                     :key="pen.id"
                 >
