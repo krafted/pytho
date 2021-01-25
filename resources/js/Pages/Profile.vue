@@ -107,7 +107,7 @@
         setup(props) {
             const page = usePage()
 
-            useHead({ title: computed(() => props.user ? `${props.user?.name} — Py` : 'Py') })
+            useHead({ title: computed(() => props.profile ? `${props.profile?.name} — Py` : 'Py') })
 
             return { page }
         },
