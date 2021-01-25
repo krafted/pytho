@@ -17,7 +17,7 @@
             leave-to-class="transform scale-95 opacity-0">
             <div v-show="open"
                 class="absolute z-50 mt-2 rounded-md shadow-lg"
-                :class="[widthClass, alignmentClasses]"
+                :class="[`w-${width}`, alignmentClasses]"
                 style="display: none;"
                 @click="open = false">
                 <div class="border border-gray-100 rounded-md dark:border-gray-800" :class="contentClasses">
@@ -53,11 +53,6 @@
                 else if (props.align === 'right') return 'origin-top-right right-0'
                 else return 'origin-top'
             })
-            const widthClass = computed(() => {
-                return {
-                    '48': 'w-48',
-                }[props.width.toString()]
-            })
 
             onMounted(() => document.addEventListener('keydown', closeOnEscape))
             onUnmounted(() => document.removeEventListener('keydown', closeOnEscape))
@@ -65,7 +60,6 @@
             return {
                 alignmentClasses,
                 open,
-                widthClass,
             }
         },
     }

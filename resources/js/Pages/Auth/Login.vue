@@ -13,11 +13,11 @@
                 <form-validation-errors />
 
                 <form-input
-                    label="Email"
+                    label="Username"
                     autofocus
                     required
-                    type="email"
-                    v-model="form.email"
+                    title="Username or Email"
+                    v-model="form.username"
                 />
 
                 <form-input
@@ -104,7 +104,7 @@
         setup() {
             const page = usePage()
             const form = useForm({
-                email: '',
+                username: '',
                 password: '',
                 remember: false,
             })

@@ -37,9 +37,12 @@ class CreateUserFromProvider implements CreatesUserFromProvider
      */
     public function create(string $provider, ProviderUser $providerUser)
     {
-        return DB::transaction(function () use ($provider, $providerUser) {
+        $check = User::where('username', $providerUser->getNickname())->first();
+
+        return DB::transaction(function () use ($check, $provider, $providerUser) {
             return tap(User::create([
                 'name' => $providerUser->getName(),
+                'username' => !$check ? $providerUser->getNickname() ?? User::generateUsername() : User::generateUsername(),
                 'email' => $providerUser->getEmail(),
             ]), function (User $user) use ($provider, $providerUser) {
                 $user->markEmailAsVerified();

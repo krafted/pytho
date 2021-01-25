@@ -54,6 +54,7 @@ module.exports = {
             spacing: {
                 '10.5': '2.625rem',
                 '12.5': '3.125rem',
+                '15': '3.75rem',
                 'safe-top': 'env(safe-area-inset-top)',
                 'safe-bottom': 'env(safe-area-inset-bottom)',
                 'safe-left': 'env(safe-area-inset-left)',
@@ -228,6 +229,7 @@ module.exports = {
         },
     },
     plugins: [
+        require('@tailwindcss/line-clamp'),
         require('@tailwindcss/typography'),
         plugin(function ({ addBase, theme }) {
             addBase({

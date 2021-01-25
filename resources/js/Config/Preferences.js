@@ -1,4 +1,4 @@
-export const nonEditorSettings = ['autoRun', 'layout', 'theme']
+export const nonEditorPreferences = ['autoRun', 'layout', 'theme']
 
 export default {
   autoRun: true,

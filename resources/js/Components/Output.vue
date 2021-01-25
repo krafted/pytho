@@ -1,10 +1,10 @@
 <template>
     <div
         class="flex-1 mr-safe-right"
-        :class="{ 'ml-safe-left': settings.layout === 'horizontal' }"
+        :class="{ 'ml-safe-left': preferences.layout === 'horizontal' }"
         :style="{
-            fontSize: `${settings.fontSize}px`,
-            lineHeight: `${settings.lineHeight}rem`,
+            fontSize: `${preferences.fontSize}px`,
+            lineHeight: `${preferences.lineHeight}rem`,
         }"
     >
         <textarea
@@ -18,7 +18,7 @@
             <div
                 v-show="show"
                 class="absolute inset-0 z-10 flex flex-1 overflow-hidden"
-                :class="{ 'ml-safe-left': settings.layout === 'horizontal' }"
+                :class="{ 'ml-safe-left': preferences.layout === 'horizontal' }"
             >
                 <transition
                     enter-active-class="duration-300 ease-out"
@@ -107,7 +107,7 @@
 
     export default {
         setup() {
-            const settings = inject('settings')
+            const preferences = inject('preferences')
             const isMac = inject('isMac')
             const output = inject('output')
             const show = inject('showCanvas')
@@ -141,7 +141,7 @@
                 close,
                 isMac,
                 output,
-                settings,
+                preferences,
                 show,
             }
         },

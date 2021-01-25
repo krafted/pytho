@@ -55,15 +55,16 @@
 
 <script>
     import AppLayout from '@/Layouts/AppLayout'
-    import ConnectedAccountsForm from '@/Pages/Profile/ConnectedAccountsForm'
-    import DeleteUserForm from '@/Pages/Profile/DeleteUserForm'
+    import ConnectedAccountsForm from './ConnectedAccountsForm'
+    import DeleteUserForm from './DeleteUserForm'
     import FormSectionBorder from '@/Components/Form/SectionBorder'
-    import LogoutOtherBrowserSessionsForm from '@/Pages/Profile/LogoutOtherBrowserSessionsForm'
-    import SetPasswordForm from '@/Pages/Profile/SetPasswordForm'
-    import TwoFactorAuthenticationForm from '@/Pages/Profile/TwoFactorAuthenticationForm'
-    import UpdatePasswordForm from '@/Pages/Profile/UpdatePasswordForm'
-    import UpdateProfileInformationForm from '@/Pages/Profile/UpdateProfileInformationForm'
+    import LogoutOtherBrowserSessionsForm from './LogoutOtherBrowserSessionsForm'
+    import SetPasswordForm from './SetPasswordForm'
+    import TwoFactorAuthenticationForm from './TwoFactorAuthenticationForm'
+    import UpdatePasswordForm from './UpdatePasswordForm'
+    import UpdateProfileInformationForm from './UpdateProfileInformationForm'
     import { usePage } from '@inertiajs/inertia-vue3'
+    import { useHead } from '@vueuse/head'
 
     export default {
         props: ['sessions'],
@@ -80,6 +81,8 @@
         },
         setup() {
             const page = usePage()
+
+            useHead({ title: 'Account Settings — Py' })
 
             return { page }
         },

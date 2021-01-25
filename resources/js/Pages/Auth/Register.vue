@@ -17,6 +17,13 @@
                 />
 
                 <form-input
+                    label="Username"
+                    autocomplete="username"
+                    required
+                    v-model="form.username"
+                />
+
+                <form-input
                     label="Email"
                     required
                     type="email" 
@@ -106,6 +113,7 @@
             const page = usePage()
             const form = useForm({
                 name: '',
+                username: '',
                 email: '',
                 password: '',
                 password_confirmation: '',

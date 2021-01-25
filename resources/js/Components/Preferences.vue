@@ -4,12 +4,11 @@
         @close="show = false"
     >
         <template #icon>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
         </template>
 
         <template #title>
-            Settings
+            Preferences
         </template>
 
         <template #content>
@@ -17,7 +16,7 @@
                 <div class="grid grid-cols-2 gap-3">
                     <form-button-group
                         label="Layout"
-                        :value="settings.layout"
+                        :value="preferences.layout"
                         :options="[
                             {
                                 label: 'Vertical',
@@ -30,12 +29,12 @@
                                 value: 'horizontal',
                             }
                         ]"
-                        @update:value="updateSetting('layout', $event)"
+                        @update:value="updatePreference('layout', $event)"
                     />
 
                     <form-button-group
                         label="Theme"
-                        :value="settings.theme"
+                        :value="preferences.theme"
                         :options="[
                             {
                                 label: 'Light',
@@ -48,14 +47,14 @@
                                 value: 'dark',
                             }
                         ]"
-                        @update:value="updateSetting('theme', $event), updateTheme($event)"
+                        @update:value="updatePreference('theme', $event), updateTheme($event)"
                     />
                 </div>
 
                 <form-input
                     label="Font Size"
-                    :model-value="settings.fontSize.toString()"
-                    @update:model-value="updateSetting('fontSize', $event)"
+                    :model-value="preferences.fontSize.toString()"
+                    @update:model-value="updatePreference('fontSize', $event)"
                 >
                     <form-number-input
                         max="26"
@@ -67,8 +66,8 @@
 
                 <form-input
                     label="Indent Size"
-                    :model-value="settings.indentUnit.toString()"
-                    @update:model-value="updateSetting('indentUnit', $event)"
+                    :model-value="preferences.indentUnit.toString()"
+                    @update:model-value="updatePreference('indentUnit', $event)"
                 >
                     <form-number-input
                         max="8"
@@ -81,16 +80,16 @@
                 <form-listbox
                     v-if="!isMobile"
                     label="Keymap"
-                    :model-value="settings.keyMap"
+                    :model-value="preferences.keyMap"
                     :options="keyMapOptions"
                     position="top"
-                    @update:model-value="updateSetting('keyMap', $event)"
+                    @update:model-value="updatePreference('keyMap', $event)"
                 />
 
                 <form-input
                     label="Line Height"
-                    :model-value="settings.lineHeight.toString()"
-                    @update:model-value="updateSetting('lineHeight', $event)"
+                    :model-value="preferences.lineHeight.toString()"
+                    @update:model-value="updatePreference('lineHeight', $event)"
                 >
                     <form-number-input
                         max="2.5"
@@ -126,7 +125,6 @@
     import hotkeys from 'hotkeys-js'
 
     export default {
-        emits: ['update:setting'],
         components: {
             AppButton,
             AppModal,
@@ -136,7 +134,7 @@
             FormNumberInput,
         },
         setup() {
-            const settings = inject('settings')
+            const preferences = inject('preferences')
             const isMac = inject('isMac')
             const isMobile = inject('isMobile')
             const keyMapOptions = [
@@ -145,8 +143,8 @@
                 { value: 'sublime', label: 'Sublime Text' },
                 { value: 'vim', label: 'Vim' },
             ]
-            const show = inject('showSettings')
-            const updateSetting = inject('updateSetting')
+            const show = inject('showPreferences')
+            const updatePreference = inject('updatePreference')
 
             onMounted(() => {
                 hotkeys(isMac.value ? 'cmd+,' : 'ctrl+,', (event) => {
@@ -157,11 +155,11 @@
             onUnmounted(() => hotkeys.unbind(isMac.value ? 'cmd+,' : 'ctrl+,'))
 
             return {
-                settings,
+                preferences,
                 isMobile,
                 keyMapOptions,
                 show,
-                updateSetting,
+                updatePreference,
                 updateTheme,
             }
         }

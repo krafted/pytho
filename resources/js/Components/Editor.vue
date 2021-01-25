@@ -3,8 +3,8 @@
         ref="editorContainer"
         class="flex-1 ml-safe-left"
         :style="{
-            fontSize: `${settings.fontSize}px`,
-            lineHeight: `${settings.lineHeight}rem`,
+            fontSize: `${preferences.fontSize}px`,
+            lineHeight: `${preferences.lineHeight}rem`,
         }"
     >
     </div>
@@ -24,14 +24,14 @@
     export default {
         emits: ['saved'],
         setup(_, { emit }) {
-            const settings = inject('settings')
+            const preferences = inject('preferences')
             const form = inject('form')
             const editorContainer = ref(null)
             const editor = inject('editor')
             const dirty = inject('dirty')
             const isMac = inject('isMac')
             const isMobile = inject('isMobile')
-            const showSettings = inject('showSettings')
+            const showPreferences = inject('showPreferences')
             const run = inject('run')
 
             onMounted(() => {
@@ -40,7 +40,7 @@
                     extraKeys: {
                         'Shift-Tab': 'indentLess',
                         [isMac.value ? 'Cmd-/' : 'Ctrl-/']: 'toggleComment',
-                        [isMac.value ? 'Cmd-,' : 'Ctrl-,']: () => showSettings.value = true,
+                        [isMac.value ? 'Cmd-,' : 'Ctrl-,']: () => showPreferences.value = true,
                         [isMac.value ? 'Cmd-S' : 'Ctrl-S']: () => emit('saved'),
                         [isMac.value ? 'Cmd-Enter' : 'Ctrl-Enter']: run,
                         'Tab': editor => {
@@ -49,8 +49,8 @@
                         }
                     },
                     gutters: ["CodeMirror-linenumbers"],
-                    indentUnit: parseInt(settings.value.indentUnit),
-                    keyMap: isMobile.value ? 'default' : settings.value.keyMap,
+                    indentUnit: parseInt(preferences.value.indentUnit),
+                    keyMap: isMobile.value ? 'default' : preferences.value.keyMap,
                     lineNumbers: true,
                     lineWrapping: true,
                     mode: 'text/x-python',
@@ -63,12 +63,12 @@
                     form.value.content = e.getValue()
                     dirty.value = true
 
-                    if (settings.value.autoRun) await run()
+                    if (preferences.value.autoRun) await run()
                 }), 250)
             })
 
             return {
-                settings,
+                preferences,
                 editor,
                 editorContainer,
             }

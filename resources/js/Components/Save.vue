@@ -132,7 +132,7 @@
 
     export default {
         emits: ['created', 'saved'],
-        props: ['isOwner', 'pen', 'slug'],
+        props: ['isCreator', 'pen', 'slug'],
         components: {
             AppButton,
             AppModal,
@@ -158,7 +158,7 @@
                 { value: 'private', label: 'Private', description: 'You will be the only user that is able to view it.' },
             ]
             const save = async () => {
-                const canSave = props.isOwner && !!props.pen
+                const canSave = props.isCreator && !!props.pen
                 const method = canSave ? 'put' : 'post'
                 const url = canSave ? route('pen.update', props.pen) : route('pen.store')
                 
@@ -178,7 +178,7 @@
 
             onMounted(() => {
                 hotkeys(isMac.value ? 'cmd+s' : 'ctrl+s', async (event) => {
-                    const canSave = props.isOwner && props.pen
+                    const canSave = props.isCreator && props.pen
 
                     if (canSave) save()
                     else show.value = true

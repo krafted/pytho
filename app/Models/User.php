@@ -13,6 +13,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use JoelButcher\Socialstream\HasConnectedAccounts;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
@@ -37,7 +38,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'username', 'email', 'password',
     ];
 
     /**
@@ -117,5 +118,20 @@ class User extends Authenticatable implements MustVerifyEmail
     public function pens()
     {
         return $this->hasMany(Pen::class);
+    }
+
+    /**
+     * Generates a random, unique username
+     */
+    public static function generateUsername()
+    {
+        $username = Str::random(20);
+        $check = User::where('username', $username)->first();
+
+        if ($check) {
+            return static::generateUsername();
+        }
+
+        return $username;
     }
 }

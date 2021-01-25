@@ -26,10 +26,10 @@ class PenController extends Controller
             $this->authorize('view', $pen);
         }
 
-        $isOwner = $pen && $pen->owner->id === optional($request->user())->id;
+        $isCreator = $pen && $pen->creator->id === optional($request->user())->id;
 
         return inertia('Pen', [
-            'isOwner' => $isOwner,
+            'isCreator' => $isCreator,
             'pen' => optional($pen)
                 ->only('title', 'description', 'content', 'slug', 'visibility'),
             'slug' => Slug::generate(),

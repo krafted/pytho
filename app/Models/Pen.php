@@ -19,9 +19,31 @@ class Pen extends Model
     ];
 
     /**
+     * Scope a query to only include private pens.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePrivate($query)
+    {
+        return $query->where('visibility', 'private');
+    }
+
+    /**
+     * Scope a query to only include public pens.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePublic($query)
+    {
+        return $query->where('visibility', 'public');
+    }
+
+    /**
      * Get the user that owns the Pen.
      */
-    public function owner()
+    public function creator()
     {
         return $this->belongsTo(User::class, 'user_id');
     }

@@ -40,13 +40,13 @@
             <h-switch
                 as="button"
                 class="flex items-center justify-center p-2.5 -mt-px -mr-2 text-gray-500 border border-transparent rounded-md dark:text-gray-700 group hover:w-auto hover:bg-gray-200 dark:hover:bg-black focus:bg-gray-200 dark:focus:bg-black focus:border-gray-300 dark:focus:border-gray-800 hover:border-gray-300 dark:hover:border-gray-800 hover:text-gray-900 dark:hover:text-gray-400 focus:text-gray-900 dark:focus:text-gray-400 focus:outline-none focus:w-auto"
-                :model-value="settings.autoRun"
+                :model-value="preferences.autoRun"
                 v-slot="{ checked }"
                 @update:model-value="updateAutoRun"
             >
                 <svg
                     class="w-5 h-5 transition-all duration-200 ease-in-out"
-                    :class="settings.autoRun ? 'text-primary-500' : 'text-gray-500 dark:text-gray-700'"
+                    :class="preferences.autoRun ? 'text-primary-500' : 'text-gray-500 dark:text-gray-700'"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     stroke="currentColor"
@@ -70,21 +70,19 @@
             HSwitch,
         },
         setup() {
-            const settings = inject('settings')
-            const updateSetting = inject('updateSetting')
+            const preferences = inject('preferences')
+            const updatePreference = inject('updatePreference')
             const editor = inject('editor')
             const activeTab = inject('activeTab')
             const error = inject('error')
             const isMd = inject('isMd')
             const run = inject('run')
-            const updateAutoRun = (event) => {
-                updateSetting('autoRun', event)
-            }
+            const updateAutoRun = event => updatePreference('autoRun', event)
 
             watchEffect(() => isMd.value && (activeTab.value = 'editor'))
 
             return {
-                settings,
+                preferences,
                 activeTab,
                 error,
                 isMd,

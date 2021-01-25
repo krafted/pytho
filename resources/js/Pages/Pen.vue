@@ -49,7 +49,7 @@
 
             <app-save
                 ref="saveRef"
-                :is-owner="isOwner"
+                :is-creator="isCreator"
                 :pen="pen"
                 :slug="slug"
                 @created="typeof navigator.clipboard !== 'undefined' ? message = 'Copied' : message = 'Created'"
@@ -57,7 +57,7 @@
             />
 
             <app-details
-                v-if="!isOwner && pen"
+                v-if="!isCreator && pen"
                 :pen="pen"
             />
         </template>
@@ -67,7 +67,7 @@
 
             <splitpanes
                 class="mt-px overflow-hidden"
-                :horizontal="settings.layout === 'horizontal'"
+                :horizontal="preferences.layout === 'horizontal'"
             >
                 <pane
                     v-if="activeTab === 'editor' || isMd"
@@ -87,11 +87,11 @@
                     <div class="relative flex flex-col flex-1">
                         <header
                             class="absolute inset-x-0 top-0 items-center hidden p-4 border-gray-100 dark:border-gray-800 pr-safe-right md:flex"
-                            :class="{ 'border-b border-gray-100 dark:border-gray-800 z-30': settings.layout === 'horizontal' }"
+                            :class="{ 'border-b border-gray-100 dark:border-gray-800 z-30': preferences.layout === 'horizontal' }"
                         >
                             <h3
                                 class="mt-px font-mono text-xs font-semibold tracking-wide text-gray-500 uppercase border-b-2 border-transparent select-none dark:text-gray-700"
-                                :class="{ 'ml-safe-left': settings.layout === 'horizontal' }"
+                                :class="{ 'ml-safe-left': preferences.layout === 'horizontal' }"
                             >
                                 Output
                             </h3>
@@ -157,7 +157,7 @@
 
     export default {
         props: {
-            isOwner: {
+            isCreator: {
                 type: Boolean,
             },
             pen: {
@@ -179,10 +179,10 @@
             Splitpanes,
         },
         setup(props) {
-            const settings = inject('settings')
+            const preferences = inject('preferences')
             const page = usePage()
             const form = useForm({
-                'slug': props.isOwner ? props.pen?.slug || props.slug : props.slug,
+                'slug': props.isCreator ? props.pen?.slug || props.slug : props.slug,
                 'title': props.pen?.title || 'Untitled',
                 'content': props.pen?.content || defaultContent,
                 'description': props.pen?.description,
@@ -220,7 +220,7 @@
                 await runCode(form.value.content, { use: 'pyodide' })
             }
             const save = () => {
-                const canSave = props.isOwner && props.pen
+                const canSave = props.isCreator && props.pen
 
                 if (canSave) saveRef.value.save()
                 else saveRef.value.show = true
@@ -229,7 +229,7 @@
                 form.value.slug = props.slug
                 form.value.title = 'Untitled'
                 form.value.description = null
-                form.value.content = "# Let's write some code"
+                form.value.content = `# Let's write some code`
                 form.value.visibility = 'public'
 
                 form.value.post(route('pen.store'), {
@@ -294,7 +294,7 @@
             provide('closeCanvas', closeCanvas)
 
             return {
-                settings,
+                preferences,
                 page,
                 form,
                 activeTab,

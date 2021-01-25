@@ -36,7 +36,7 @@
 
                     <template #content>
                         <template v-if="page.props.value.jetstream.hasTeamFeatures">
-                            <div class="block px-4 py-2 font-semibold tracking-wide text-gray-400 uppercase text-2xs">
+                            <div class="block px-4 py-2 font-semibold tracking-wide text-gray-400 uppercase border-b border-gray-100 dark:border-gray-800 text-2xs">
                                 Manage Team
                             </div>
 
@@ -48,9 +48,7 @@
                                 Create New Team
                             </app-dropdown-link>
 
-                            <div class="border-t border-gray-100 dark:border-gray-800" />
-
-                            <div class="block px-4 py-2 font-semibold tracking-wide text-gray-400 uppercase text-2xs">
+                            <div class="block px-4 py-2 font-semibold tracking-wide text-gray-400 uppercase border-b border-gray-100 dark:border-gray-800 text-2xs">
                                 Switch Teams
                             </div>
 
@@ -101,13 +99,41 @@
                     </template>
 
                     <template #content>
+                        <template v-if="page.props.value.user">
+                            <app-dropdown-link :href="route('profile.show', page.props.value.user.username)">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <img
+                                            class="object-cover w-8 h-8 border-2 border-gray-100 rounded-full dark:border-gray-800"
+                                            :src="`${page.props.value.user.profile_photo_url}`"
+                                            :alt="page.props.value.user.name"
+                                        />
+
+                                        <div class="flex flex-col justify-center leading-none text-left">
+                                            <div class="text-sm font-semibold text-gray-800 dark:text-gray-300">{{ page.props.value.user.name }}</div>
+                                        </div>
+                                    </div>
+
+                                    <svg class="w-3 h-3 ml-auto text-gray-500 justify-self-end" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </app-dropdown-link>
+                            
+                            <div class="border-t border-gray-100 dark:border-gray-800" />
+
+                            <app-dropdown-link :href="route('settings.account.show')">
+                                Account Settings
+                            </app-dropdown-link>
+                        </template>
+
                         <app-dropdown-link
                             as="button"
                             type="button"
-                            @click="showSettings = true"
+                            @click="showPreferences = true"
                         >
                             <span class="inline-flex items-center justify-between w-full space-x-2">
-                                <span>Settings</span>
+                                <span>Preferences</span>
 
                                 <span
                                     v-if="!isMobile"
@@ -116,19 +142,11 @@
                                 />
                             </span>
 
-                            <app-settings />
+                            <app-preferences />
                         </app-dropdown-link>
 
                         <!-- Authentication -->
                         <template v-if="page.props.value.user">
-                            <app-dropdown-link :href="route('profile.show')">
-                                Account
-                            </app-dropdown-link>
-
-                            <app-dropdown-link :href="route('api-tokens.index')" v-if="page.props.value.jetstream.hasApiFeatures">
-                                API Tokens
-                            </app-dropdown-link>
-
                             <div class="border-t border-gray-100 dark:border-gray-800" />
 
                             <form @submit.prevent="logout">
@@ -170,7 +188,7 @@
     import AppDropdown from '@/Components/Dropdown'
     import AppDropdownLink from '@/Components/DropdownLink'
     import AppLogo from '@/Components/Logo'
-    import AppSettings from '@/Components/Settings'
+    import AppPreferences from '@/Components/Preferences'
     import { inject } from 'vue'
     import { usePage } from '@inertiajs/inertia-vue3'
     import { Inertia } from '@inertiajs/inertia'
@@ -181,14 +199,14 @@
             AppDropdown,
             AppDropdownLink,
             AppLogo,
-            AppSettings,
+            AppPreferences,
         },
         setup() {
             const page = usePage()
             const isMac = inject('isMac')
             const isMd = inject('isMd')
             const isMobile = inject('isMobile')
-            const showSettings = inject('showSettings')
+            const showPreferences = inject('showPreferences')
             const logout = () => {
                 Inertia.post(route('logout'))
             }
@@ -205,7 +223,7 @@
                 isMac,
                 isMd,
                 isMobile,
-                showSettings,
+                showPreferences,
                 logout,
                 switchToTeam,
             }

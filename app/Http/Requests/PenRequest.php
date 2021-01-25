@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Pen;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\Rule;
 
 class PenRequest extends FormRequest
@@ -31,7 +31,12 @@ class PenRequest extends FormRequest
             'description' => [],
             'slug' => [
                 'required',
-                'alpha_num',
+                'alpha_dash',
+                Rule::notIn(
+                    collect(Route::getRoutes())
+                        ->map(fn($route) => explode('/', $route->uri)[0])
+                        ->unique()
+                ),
                 $this->pen
                     ? Rule::unique('pens')->ignore($this->pen->id)
                     : 'unique:pens',

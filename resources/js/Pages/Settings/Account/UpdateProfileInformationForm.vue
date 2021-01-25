@@ -82,6 +82,16 @@
                 <form-input-error :message="form.errors.name" />
             </div>
 
+            <!-- Username -->
+            <div class="col-span-6 space-y-1 sm:col-span-4">
+                <form-input
+                    label="Username"
+                    v-model="form.username"
+                />
+
+                <form-input-error :message="form.errors.username" />
+            </div>
+
             <!-- Email -->
             <div class="col-span-6 space-y-1 sm:col-span-4">
                 <form-input
@@ -130,6 +140,7 @@
             const form = useForm({
                 _method: 'PUT',
                 name: props.user.name,
+                username: props.user.username,
                 email: props.user.email,
                 photo: null,
             })

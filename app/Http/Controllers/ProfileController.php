@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+
+class ProfileController extends Controller
+{
+    /**
+     * Show pens this user has created.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\User          $user
+     * @return \Inertia\Response
+     */
+    public function show(Request $request, User $user)
+    {
+        return inertia('Profile', [
+            'profile' => $user,
+            'pens' =>
+                $user
+                    ->pens()
+                    ->public()
+                    ->latest('updated_at')
+                    ->get()
+                    ->map(function ($pen) {
+                        return [
+                            'title' => $pen->title,
+                            'slug' => $pen->slug,
+                            'description' => $pen->description,
+                            'updated_at' => $pen->updated_at->diffForHumans(),
+                        ];
+                    }),
+        ]);
+    }
+}

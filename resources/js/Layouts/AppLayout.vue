@@ -23,7 +23,9 @@
             AppHeader,
         },
         setup(props, context) {
-            provide('showSettings', ref(false))
+            const showPreferences = ref(false)
+
+            provide('showPreferences', showPreferences)
         }
     }
 </script>
