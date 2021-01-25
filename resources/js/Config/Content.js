@@ -33,7 +33,9 @@ turtle.pendown()
 for color in ['red', 'green', 'yellow', 'blue']:
   turtle.color(color)
   turtle.forward(100)
-  turtle.left(90)`,
+  turtle.left(90)
+
+screen.exitonclick()`,
 
   String.raw`from random import randint
 
