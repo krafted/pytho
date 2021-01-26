@@ -207,7 +207,9 @@
             const isMd = inject('isMd')
             const isMobile = inject('isMobile')
             const showPreferences = inject('showPreferences')
-            const logout = () => Inertia.post(route('logout'), {}, { preserveState: false })
+            const logout = () => {
+                Inertia.post(route('logout'), {}, { preserveState: false })
+            }
             const switchToTeam = (team) => {
                 Inertia.put(route('current-team.update'), {
                     'team_id': team.id
