@@ -8,7 +8,9 @@
         </span>
 
         <div class="block text-gray-900 dark:text-white">
-            {{ value }}
+            <slot name="value" :value="value">
+                {{ value }}
+            </slot>
         </div>
     </div>
 </template>

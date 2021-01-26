@@ -32,6 +32,30 @@
         <template #content>
             <div class="grid grid-cols-1 gap-3">
                 <form-field
+                    label="Creator"
+                    :value="pen.creator?.name || 'Anonymous'"
+                >
+                    <template #value="{ value }">
+                        <inertia-link
+                            v-if="pen.creator"
+                            class="hover:underline focus:ring-2 focus:ring-primary-500"
+                            :href="route('profile.show', pen.creator.username)"
+                        >
+                            {{ value }}
+
+                            <span
+                                v-if="pen.creator.username"
+                                class="text-gray-500"
+                            >
+                                @{{ pen.creator.username }}
+                            </span>
+                        </inertia-link>
+
+                        <span v-else>{{ value }}</span>
+                    </template>
+                </form-field>
+
+                <form-field
                     label="Title"
                     :value="pen.title || 'Untitled'"
                 />

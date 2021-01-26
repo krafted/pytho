@@ -31,7 +31,8 @@ class PenController extends Controller
         return inertia('Pen', [
             'isCreator' => $isCreator,
             'pen' => optional($pen)
-                ->only('title', 'description', 'content', 'slug', 'visibility'),
+                ->load('creator:id,name,username')
+                ->only('title', 'description', 'content', 'creator', 'slug', 'visibility'),
             'slug' => Slug::generate(),
         ]);
     }
