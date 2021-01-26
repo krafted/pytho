@@ -13,16 +13,20 @@ class ProfileController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User          $user
+     * @param  \Illuminate\Support\Str   $visibility
      * @return \Inertia\Response
      */
-    public function show(Request $request, User $user)
+    public function show(Request $request, User $user, $visibility = 'public')
     {
+        abort_if(in_array($visibility, ['private', 'unlisted']) &&
+                 optional($request->user())->id !== $user->id, 403);
+
         return inertia('Profile', [
             'profile' => $user,
             'pens' =>
                 $user
                     ->pens()
-                    ->public()
+                    ->ofVisibility($visibility)
                     ->latest('updated_at')
                     ->get()
                     ->map(function ($pen) {

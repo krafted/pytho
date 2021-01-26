@@ -156,6 +156,7 @@
             const visibilityOptions = [
                 { value: 'public', label: 'Public', description: 'Anyone you send this link to will be able to view it.' },
                 { value: 'private', label: 'Private', description: 'You will be the only user that is able to view it.' },
+                { value: 'unlisted', label: 'Unlisted', description: 'Users will only be able to view it with the direct link.' },
             ]
             const save = async () => {
                 const canSave = props.isCreator && !!props.pen

@@ -42,7 +42,10 @@ class PenRequest extends FormRequest
                     : 'unique:pens',
                 'max:25'
             ],
-            'visibility' => ['required', 'in:private,public,team'],
+            'visibility' => [
+                'required',
+                Rule::in(['private', 'public', 'team', 'unlisted'])
+            ],
         ];
     }
 }

@@ -19,25 +19,15 @@ class Pen extends Model
     ];
 
     /**
-     * Scope a query to only include private pens.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopePrivate($query)
-    {
-        return $query->where('visibility', 'private');
-    }
-
-    /**
      * Scope a query to only include public pens.
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  \Illuminate\Support\Str                $visibility
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopePublic($query)
+    public function scopeOfVisibility($query, $visibility)
     {
-        return $query->where('visibility', 'public');
+        return $query->where('visibility', $visibility);
     }
 
     /**

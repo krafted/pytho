@@ -20,7 +20,7 @@ class CreatePensTable extends Migration
             $table->string('title')->nullable();
             $table->text('content');
             $table->text('description')->nullable();
-            $table->enum('visibility', ['public', 'private', 'team'])->default('public');
+            $table->enum('visibility', ['public', 'private', 'team', 'unlisted'])->default('public');
             $table->timestamps();
         });
     }

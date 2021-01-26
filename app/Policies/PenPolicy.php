@@ -19,7 +19,7 @@ class PenPolicy
      */
     public function view(?User $user, Pen $pen)
     {
-        return optional($user)->id === $pen->user_id || $pen->visibility === 'public';
+        return optional($user)->id === $pen->user_id || in_array($pen->visibility, ['public', 'unlisted']);
     }
 
     /**

@@ -100,7 +100,7 @@
 
                     <template #content>
                         <template v-if="page.props.value.user">
-                            <app-dropdown-link :href="route('profile.show', page.props.value.user.username)">
+                            <app-dropdown-link :href="route('profile.show', { user: page.props.value.user })">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center space-x-3">
                                         <img

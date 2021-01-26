@@ -14,7 +14,7 @@
                     </h1>
 
                     <p class="text-2xl font-medium leading-tight text-gray-500">
-                        <inertia-link class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500" :href="route('profile.show', profile)">@{{ profile.username }}</inertia-link>
+                        <inertia-link class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500" :href="route('profile.show', { user: profile })">@{{ profile.username }}</inertia-link>
                     </p>
                 </div>
             </div>
@@ -24,11 +24,11 @@
                     <inertia-link
                         class="flex py-4 border-b-2 focus:outline-none"
                         :class="[
-                            route().current('profile.show')
+                            route().current('profile.show', { visibility: '' })
                                 ? 'border-primary-500 text-gray-900 dark:text-gray-200'
                                 : 'border-transparent text-gray-500 dark:text-gray-700 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400'
                         ]"
-                        :href="route('profile.show', profile)"
+                        :href="route('profile.show', { user: profile })"
                     >
                         Public
                     </inertia-link>
@@ -37,13 +37,26 @@
                         v-if="profile.id === page.props.value.user?.id"
                         class="flex py-4 border-b-2 focus:outline-none"
                         :class="[
-                            route().current('profile.private.show')
+                            route().current('profile.show', { visibility: 'private' })
                                 ? 'border-primary-500 text-gray-900 dark:text-gray-200'
                                 : 'border-transparent text-gray-500 dark:text-gray-700 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400'
                         ]"
-                        :href="route('profile.private.show', profile)"
+                        :href="route('profile.show', { user: profile, visibility: 'private' })"
                     >
                         Private
+                    </inertia-link>
+
+                    <inertia-link
+                        v-if="profile.id === page.props.value.user?.id"
+                        class="flex py-4 border-b-2 focus:outline-none"
+                        :class="[
+                            route().current('profile.show', { visibility: 'unlisted' })
+                                ? 'border-primary-500 text-gray-900 dark:text-gray-200'
+                                : 'border-transparent text-gray-500 dark:text-gray-700 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400'
+                        ]"
+                        :href="route('profile.show', { user: profile, visibility: 'unlisted' })"
+                    >
+                        Unlisted
                     </inertia-link>
                 </div>
             </nav>
