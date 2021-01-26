@@ -36,7 +36,7 @@
                             :alt="user.name"
                         />
 
-                        <div class="absolute inset-0 flex items-center justify-center p-6 transition-opacity duration-200 ease-in-out bg-white bg-opacity-75 rounded-full opacity-0 dark:bg-black dark:bg-opacity-75 group-hover:opacity-100 group-focus:opacity-100 backdrop-filter-blur">
+                        <div class="absolute inset-0 flex items-center justify-center p-6 transition-opacity duration-200 ease-in-out bg-white bg-opacity-75 rounded-full opacity-0 dark:bg-gray-1000 dark:bg-opacity-75 group-hover:opacity-100 group-focus:opacity-100 backdrop-filter-blur">
                             <span class="font-semibold tracking-wide text-gray-300 uppercase text-2xs">Update Photo</span>
                         </div>
                     </button>
@@ -52,7 +52,7 @@
                             :style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'">
                         </span>
 
-                        <div class="absolute inset-0 flex items-center justify-center p-6 transition-opacity duration-200 ease-in-out bg-white bg-opacity-75 rounded-full opacity-0 dark:bg-black dark:bg-opacity-75 group-hover:opacity-100 group-focus:opacity-100 backdrop-filter-blur">
+                        <div class="absolute inset-0 flex items-center justify-center p-6 transition-opacity duration-200 ease-in-out bg-white bg-opacity-75 rounded-full opacity-0 dark:bg-gray-1000 dark:bg-opacity-75 group-hover:opacity-100 group-focus:opacity-100 backdrop-filter-blur">
                             <span class="font-semibold tracking-wide text-gray-300 uppercase text-2xs">Update Photo</span>
                         </div>
                     </button>

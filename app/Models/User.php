@@ -13,12 +13,14 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use JoelButcher\Socialstream\HasConnectedAccounts;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Activitylog\Models\Activity;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -110,6 +112,35 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
         return $this->getPhotoUrl();
+    }
+
+    /**
+     * Get the activity associated with this user.
+     */
+    public function activity()
+    {
+        $method = ['created' => 'Created', 'updated' => 'Updated'];
+        $type = ['App\Models\Pen' => 'pen'];
+
+        return Activity::inLog('pens')
+            ->causedBy($this)
+            ->latest('updated_at')
+            ->when($this->id !== optional(request()->user())->id,
+                fn ($query) => $query->whereHas('subject',
+                    fn ($query) => $query->where('visibility', 'public')
+                )
+            )
+            ->with('subject:id,title,slug,visibility')
+            ->paginate(5)
+            ->map(function ($activity) use ($method, $type) {
+                return [
+                    'id' => $activity->id,
+                    'method' => $method[$activity->description],
+                    'type' => $type[$activity->subject_type],
+                    'subject' => $activity->subject,
+                    'at' => $activity->updated_at->shortRelativeDiffForHumans(),
+                ];
+            });
     }
 
     /**

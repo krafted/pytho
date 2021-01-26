@@ -39,7 +39,7 @@
 
             <h-switch
                 as="button"
-                class="flex items-center justify-center p-2.5 -mt-px -mr-2 text-gray-500 border border-transparent rounded-md dark:text-gray-700 group hover:w-auto hover:bg-gray-200 dark:hover:bg-black focus:bg-gray-200 dark:focus:bg-black focus:border-gray-300 dark:focus:border-gray-800 hover:border-gray-300 dark:hover:border-gray-800 hover:text-gray-900 dark:hover:text-gray-400 focus:text-gray-900 dark:focus:text-gray-400 focus:outline-none focus:w-auto"
+                class="flex items-center justify-center p-2.5 -mt-px -mr-2 text-gray-500 border border-transparent rounded-md dark:text-gray-700 group hover:w-auto hover:bg-gray-200 dark:hover:bg-gray-1000 focus:bg-gray-200 dark:focus:bg-gray-1000 focus:border-gray-300 dark:focus:border-gray-800 hover:border-gray-300 dark:hover:border-gray-800 hover:text-gray-900 dark:hover:text-gray-400 focus:text-gray-900 dark:focus:text-gray-400 focus:outline-none focus:w-auto"
                 :model-value="preferences.autoRun"
                 v-slot="{ checked }"
                 @update:model-value="updateAutoRun"

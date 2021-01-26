@@ -30,7 +30,7 @@
                 >
                     <div
                         v-show="show"
-                        class="absolute inset-0 flex items-center justify-center flex-1 p-12 overflow-auto transition-opacity bg-gray-100 bg-opacity-25 dark:bg-black dark:bg-opacity-25 backdrop-filter-blur mr-safe-right focus:outline-none"
+                        class="absolute inset-0 flex items-center justify-center flex-1 p-12 overflow-auto transition-opacity bg-gray-100 bg-opacity-25 dark:bg-gray-1000 dark:bg-opacity-25 backdrop-filter-blur mr-safe-right focus:outline-none"
                     >
                         <transition
                             enter-active-class="duration-300 ease-out delay-300"

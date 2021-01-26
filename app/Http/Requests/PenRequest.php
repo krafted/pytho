@@ -34,7 +34,7 @@ class PenRequest extends FormRequest
                 'alpha_dash',
                 Rule::notIn(
                     collect(Route::getRoutes())
-                        ->map(fn($route) => explode('/', $route->uri)[0])
+                        ->map(fn ($route) => explode('/', $route->uri)[0])
                         ->unique()
                 ),
                 $this->pen

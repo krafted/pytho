@@ -24,7 +24,10 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                gray: colors.gray,
+                gray: {
+                    ...colors.gray,
+                    1000: '#101011',
+                },
                 orange: colors.orange,
                 primary: colors.yellow,
             },

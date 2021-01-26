@@ -22,7 +22,10 @@ class ProfileController extends Controller
                  optional($request->user())->id !== $user->id, 403);
 
         return inertia('Profile', [
-            'profile' => $user,
+            'activity' => $user->activity(),
+            'counts' =>
+                collect(['private', 'public', 'unlisted'])
+                    ->flatMap(fn ($visibility) => [$visibility => $user->pens()->ofVisibility($visibility)->count()]),
             'pens' =>
                 $user
                     ->pens()
@@ -37,6 +40,7 @@ class ProfileController extends Controller
                             'updated_at' => $pen->updated_at->diffForHumans(),
                         ];
                     }),
+            'profile' => $user,
         ]);
     }
 }

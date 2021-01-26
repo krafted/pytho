@@ -10,7 +10,7 @@
                 v-for="option in options"
                 :key="option.value"
                 class="inline-flex items-center justify-center flex-1 h-8 focus:outline-none"
-                :class="[option.value === value ? 'bg-white dark:bg-black text-gray-900 dark:text-white' : 'text-gray-500 hover:bg-white dark:hover:bg-black hover:text-gray-900 dark:hover:text-white focus:bg-white dark:focus:bg-black focus:text-gray-900 dark:focus:text-white']"
+                :class="[option.value === value ? 'bg-white dark:bg-gray-1000 text-gray-900 dark:text-white' : 'text-gray-500 hover:bg-white dark:hover:bg-gray-1000 hover:text-gray-900 dark:hover:text-white focus:bg-white dark:focus:bg-gray-1000 focus:text-gray-900 dark:focus:text-white']"
                 @click="handleInput(option.value)"
             >
                 <template v-if="option.icon">

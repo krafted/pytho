@@ -16,7 +16,7 @@
                     >
                         <div
                             v-show="show"
-                            class="fixed inset-0 transition-all bg-gray-100 bg-opacity-90 backdrop-filter-blur dark:bg-black dark:bg-opacity-90"
+                            class="fixed inset-0 transition-all bg-gray-100 bg-opacity-90 backdrop-filter-blur dark:bg-gray-1000 dark:bg-opacity-90"
                             aria-hidden="true"
                             @click="close"
                         />
@@ -45,7 +45,7 @@
                                 <div class="p-4 sm:p-6">
                                     <div class="flex items-start sm:space-x-6">
                                         <div v-if="hasIcon" class="hidden sm:block">
-                                            <div class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-gray-100 rounded-full dark:bg-black sm:mx-0 sm:h-10 sm:w-10">
+                                            <div class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-gray-100 rounded-full dark:bg-gray-1000 sm:mx-0 sm:h-10 sm:w-10">
                                                 <svg class="w-6 h-6 text-gray-600 dark:text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                     <slot name="icon" />
                                                 </svg>
@@ -83,7 +83,7 @@
                                 <div class="p-4 sm:p-6">
                                     <div class="flex items-start sm:space-x-6">
                                         <div v-if="hasIcon" class="hidden sm:block">
-                                            <div class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-gray-100 rounded-full dark:bg-black sm:mx-0 sm:h-10 sm:w-10">
+                                            <div class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-gray-100 rounded-full dark:bg-gray-1000 sm:mx-0 sm:h-10 sm:w-10">
                                                 <svg class="w-6 h-6 text-gray-600 dark:text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                     <slot name="icon" />
                                                 </svg>

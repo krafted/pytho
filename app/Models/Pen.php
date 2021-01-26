@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Pen extends Model
 {
     use HasFactory;
+    use LogsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -17,6 +19,11 @@ class Pen extends Model
     protected $fillable = [
         'slug', 'title', 'content', 'description', 'visibility',
     ];
+
+    protected static $logFillable = true;
+    protected static $logName = 'pens';
+    protected static $logOnlyDirty = true;
+    protected static $recordEvents = ['created', 'updated'];
 
     /**
      * Scope a query to only include public pens.

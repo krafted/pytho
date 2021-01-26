@@ -42,7 +42,7 @@
 }
 
 .cm-s-custom .CodeMirror-activeline-gutter {
-  @apply bg-gray-300 dark:bg-black opacity-25;
+  @apply bg-gray-300 dark:bg-gray-1000 opacity-25;
 }
 
 .cm-s-custom .CodeMirror-activeline-gutter .CodeMirror-guttermarker,
@@ -52,7 +52,7 @@
 }
 
 .cm-s-custom .CodeMirror-activeline-background {
-  @apply bg-gray-300 dark:bg-black opacity-25 rounded-r-md;
+  @apply bg-gray-300 dark:bg-gray-1000 opacity-25 rounded-r-md;
 }
 
 .cm-s-custom .cm-keyword {
