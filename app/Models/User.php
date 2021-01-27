@@ -138,7 +138,7 @@ class User extends Authenticatable implements MustVerifyEmail
                     'method' => $method[$activity->description],
                     'type' => $type[$activity->subject_type],
                     'subject' => $activity->subject,
-                    'at' => $activity->updated_at->shortRelativeDiffForHumans(),
+                    'at' => str_replace('ago', '', $activity->updated_at->shortRelativeToNowDiffForHumans()),
                 ];
             });
     }

@@ -104,7 +104,7 @@
 
                         <div
                             v-if="activity.length"
-                            class="pl-6 mx-4 mt-6 border-l border-gray-100 dark:border-gray-800 sm:mx-0"
+                            class="pl-6 mx-4 mt-6 border-l border-gray-100 dark:border-gray-800 sm:ml-3 sm:mr-0"
                         >
                             <div
                                 v-for="action in activity"
@@ -112,19 +112,25 @@
                                 class="flex items-center py-3"
                             >
                                 <span
-                                    class="absolute inline-block w-4 h-4 bg-gray-200 border-4 border-white rounded-full dark:bg-gray-700 dark:border-gray-900"
-                                    style="left: -32px"
-                                />
+                                    class="absolute inline-flex items-center justify-center w-8 h-8 bg-gray-200 border-4 border-white rounded-full dark:bg-gray-700 dark:border-gray-900"
+                                    style="left: -40px"
+                                >
+                                    <svg class="w-4 h-4 text-white dark:text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path v-if="action.method === 'Updated'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                        <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>
+                                </span>
 
                                 <p class="text-sm text-gray-600 dark:text-gray-400">
                                     {{ action.method }}
+
+                                    {{ action.subject.visibility }} {{ action.type }}
                                     
                                     <inertia-link
                                         class="font-semibold text-gray-700 dark:text-gray-300 focus:outline-none hover:underline focus:ring-2 focus:ring-primary-500"
                                         :href="route('pen.show', action.subject.slug)"
-                                        :title="action.subject.title"
                                     >
-                                        a {{ action.subject.visibility }} {{ action.type }}
+                                        {{ action.subject.title }}
                                     </inertia-link>
 
                                     &mdash; <time>{{ action.at }}</time>
