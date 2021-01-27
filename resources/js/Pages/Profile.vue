@@ -9,14 +9,22 @@
                         :alt="profile.name"
                     />
 
-                    <div>
-                        <h1 class="text-4xl font-semibold leading-tight text-gray-900 dark:text-gray-100">
-                            {{ profile.name }}
-                        </h1>
+                    <div class="grid items-end justify-between w-full grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
+                        <div class="md:col-span-1 lg:col-span-2">
+                            <h1 class="text-4xl font-semibold leading-tight text-gray-900 dark:text-gray-100">
+                                {{ profile.name }}
+                            </h1>
 
-                        <p class="text-2xl font-medium leading-tight text-gray-500">
-                            <inertia-link class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500" :href="route('profile.show', { user: profile })">@{{ profile.username }}</inertia-link>
-                        </p>
+                            <p class="text-2xl font-medium leading-tight text-gray-500">
+                                <inertia-link class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500" :href="route('profile.show', { user: profile })">@{{ profile.username }}</inertia-link>
+                            </p>
+                        </div>
+
+                        <div v-if="profile.id === page.props.value.user?.id" class="flex justify-end">
+                            <app-button class="top-1" :href="route('settings.account.show')">
+                                Edit Profile
+                            </app-button>
+                        </div>
                     </div>
                 </div>
 
@@ -40,7 +48,7 @@
                                         :class="[
                                             route().current('profile.show', { visibility: key })
                                                 ? 'border-primary-500 text-gray-900 dark:text-gray-200'
-                                                : 'border-transparent text-gray-500 dark:text-gray-700 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400'
+                                                : 'border-transparent text-gray-500 hover:text-gray-600 dark:hover:text-gray-400 focus:text-gray-600 dark:focus:text-gray-400'
                                         ]"
                                         :href="route('profile.show', { user: profile, visibility: key })"
                                     >
@@ -154,6 +162,7 @@
 </template>
 
 <script>
+    import AppButton from '@/Components/Button'
     import AppLayout from '@/Layouts/AppLayout'
     import FormSectionBorder from '@/Components/Form/SectionBorder'
     import { usePage } from '@inertiajs/inertia-vue3'
@@ -163,6 +172,7 @@
     export default {
         props: ['activity', 'counts', 'profile', 'pens'],
         components: {
+            AppButton,
             AppLayout,
             FormSectionBorder,
         },

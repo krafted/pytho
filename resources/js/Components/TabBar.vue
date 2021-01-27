@@ -9,7 +9,7 @@
                         class="flex py-4 border-b-2 focus:outline-none"
                         :class="{
                             'border-primary-500 text-gray-900 dark:text-gray-200': !isMd && activeTab === 'editor',
-                            'border-transparent text-gray-500 dark:text-gray-700 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400': isMd || activeTab !== 'editor',
+                            'border-transparent text-gray-500 hover:text-gray-600 dark:hover:text-gray-400 focus:text-gray-600 dark:focus:text-gray-400': isMd || activeTab !== 'editor',
                         }"
                         @click="activeTab = 'editor'"
                     >
@@ -21,7 +21,7 @@
                         class="flex py-4 border-b-2 focus:outline-none"
                         :class="{
                             'border-primary-500 text-gray-900 dark:text-gray-200': activeTab === 'output',
-                            'border-transparent text-gray-500 dark:text-gray-700 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400': activeTab !== 'output',
+                            'border-transparent text-gray-500 hover:text-gray-600 dark:hover:text-gray-400 focus:text-gray-600 dark:focus:text-gray-400': activeTab !== 'output',
                         }"
                         @click="activeTab = 'output', run()"
                     >
