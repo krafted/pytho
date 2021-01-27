@@ -1,7 +1,7 @@
 <template>
     <app-layout>
         <div class="w-full py-6 mx-auto sm:px-4 max-w-7xl">
-            <div class="mt-6">
+            <div class="mt-6 pl-safe-left pr-safe-right">
                 <div class="flex items-center px-4 space-x-6 sm:items-start sm:space-x-0 sm:space-y-6 sm:flex-col sm:px-0">
                     <img
                         class="object-cover transform border-4 border-gray-100 rounded-full w-28 h-28 dark:border-gray-800"
