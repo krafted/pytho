@@ -1,7 +1,7 @@
 <template>
     <header class="absolute z-10 w-full px-4 border-b border-gray-100 dark:border-gray-800">
         <div class="flex items-center justify-between w-full pl-safe-left pr-safe-right">
-            <h3 class="hidden py-4 -mb-px font-mono text-xs font-semibold tracking-wide text-gray-500 uppercase border-t border-b-2 border-transparent select-none dark:text-gray-700 md:block">Editor</h3>
+            <h3 class="hidden py-4 -mb-px font-mono text-xs font-semibold tracking-wide text-gray-500 uppercase border-t border-b-2 border-transparent select-none md:block">Editor</h3>
 
             <div class="flex items-center justify-between w-full -mb-px space-x-4 border-transparent md:hidden pl-safe-left">
                 <div class="flex items-center mt-px space-x-4">

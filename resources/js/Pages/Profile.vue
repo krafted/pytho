@@ -9,7 +9,7 @@
                         :alt="profile.name"
                     />
 
-                    <div class="grid items-end justify-between w-full grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
+                    <div class="flex items-end justify-between w-full sm:grid-cols-2 sm:gap-6 sm:grid md:grid-cols-3 lg:grid-cols-4">
                         <div class="md:col-span-1 lg:col-span-2">
                             <h1 class="text-4xl font-semibold leading-tight text-gray-900 dark:text-gray-100">
                                 {{ profile.name }}
@@ -21,8 +21,15 @@
                         </div>
 
                         <div v-if="profile.id === page.props.value.user?.id" class="flex justify-end">
-                            <app-button class="top-1" :href="route('settings.account.show')">
-                                Edit Profile
+                            <app-button
+                                class="-mr-2 sm:-mr-0 top-1"
+                                :href="route('settings.account.show')"
+                            >
+                                <svg class="-mx-1.5 my-0.5 inline-block w-5 h-5 sm:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+
+                                <span class="hidden sm:inline">Edit Profile</span>
                             </app-button>
                         </div>
                     </div>

@@ -10,7 +10,7 @@
             </form-action-message>
 
             <button
-                class="flex items-center justify-center p-2.5 text-gray-500 dark:text-gray-700 border border-transparent rounded-md group hover:w-auto hover:bg-gray-200 dark:hover:bg-gray-1000 focus:bg-gray-200 dark:focus:bg-gray-1000 focus:border-gray-300 dark:focus:border-gray-800 hover:border-gray-300 dark:hover:border-gray-800 hover:text-gray-900 dark:hover:text-gray-400 focus:text-gray-900 dark:focus:text-gray-400 focus:outline-none focus:w-auto"
+                class="flex items-center justify-center p-2.5 text-gray-600 dark:text-gray-400 border border-white bg-white dark:bg-gray-900 dark:border-gray-900 rounded-md group hover:w-auto hover:bg-gray-200 dark:hover:bg-gray-1000 focus:bg-gray-200 dark:focus:bg-gray-1000 focus:border-gray-300 dark:focus:border-gray-600 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-900 dark:hover:text-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-200 dark:focus:ring-offset-gray-900 focus:ring-primary-500 focus:outline-none focus:w-auto"
                 @click="create"
             >
                 <span class="sr-only">Create</span>
@@ -28,7 +28,7 @@
             </button>
 
             <button
-                class="flex items-center justify-center p-2.5 text-gray-500 dark:text-gray-700 border border-transparent rounded-md group hover:w-auto hover:bg-gray-200 dark:hover:bg-gray-1000 focus:bg-gray-200 dark:focus:bg-gray-1000 focus:border-gray-300 dark:focus:border-gray-800 hover:border-gray-300 dark:hover:border-gray-800 hover:text-gray-900 dark:hover:text-gray-400 focus:text-gray-900 dark:focus:text-gray-400 focus:outline-none focus:w-auto"
+                class="flex items-center justify-center p-2.5 text-gray-600 dark:text-gray-400 border border-white bg-white dark:bg-gray-900 dark:border-gray-900 rounded-md group hover:w-auto hover:bg-gray-200 dark:hover:bg-gray-1000 focus:bg-gray-200 dark:focus:bg-gray-1000 focus:border-gray-300 dark:focus:border-gray-600 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-900 dark:hover:text-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-200 dark:focus:ring-offset-gray-900 focus:ring-primary-500 focus:outline-none focus:w-auto"
                 :title="isMac ? '⌘ + ↩︎' : '⌃ + ↩︎'"
                 @click="run"
             >
@@ -90,7 +90,7 @@
                             :class="{ 'border-b border-gray-100 dark:border-gray-800 z-30': preferences.layout === 'horizontal' }"
                         >
                             <h3
-                                class="mt-px font-mono text-xs font-semibold tracking-wide text-gray-500 uppercase border-b-2 border-transparent select-none dark:text-gray-700"
+                                class="mt-px font-mono text-xs font-semibold tracking-wide text-gray-500 uppercase border-b-2 border-transparent select-none"
                                 :class="{ 'ml-safe-left': preferences.layout === 'horizontal' }"
                             >
                                 Output

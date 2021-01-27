@@ -18,6 +18,8 @@
                             v-show="show"
                             class="fixed inset-0 transition-all bg-gray-100 bg-opacity-90 backdrop-filter-blur dark:bg-gray-1000 dark:bg-opacity-90"
                             aria-hidden="true"
+                            ref="container"
+                            tabindex="0"
                             @click="close"
                         />
                     </transition>
@@ -117,7 +119,7 @@
 </template>
 
 <script>
-    import { computed, inject, onMounted, onUnmounted, watchEffect } from 'vue'
+    import { computed, nextTick, onMounted, onUnmounted, ref, watchEffect } from 'vue'
     import hotkeys from 'hotkeys-js'
 
     export default {
@@ -134,6 +136,7 @@
         },
         setup(props, { emit, slots }) {
             const hasIcon = computed(() => !!slots.icon)
+            const container = ref(null)
             const close = () => emit('close')
             const submit = () => emit('submitted')
 
@@ -145,11 +148,18 @@
             })
             onUnmounted(() => hotkeys.unbind('esc'))
 
-            watchEffect(() => props.show && document.activeElement.blur())
+            watchEffect(async () => {
+                if (props.show) {
+                    document.activeElement.blur()
+                    await nextTick()
+                    container.value.focus()
+                }
+            })
 
             return {
                 hasIcon,
                 close,
+                container,
                 submit,
             }
         },
