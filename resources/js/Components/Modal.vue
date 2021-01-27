@@ -16,7 +16,7 @@
                     >
                         <div
                             v-show="show"
-                            class="fixed inset-0 transition-all bg-gray-100 bg-opacity-90 backdrop-filter-blur dark:bg-gray-1000 dark:bg-opacity-90"
+                            class="fixed inset-0 transition-all bg-gray-100 bg-opacity-90 backdrop-filter-blur dark:bg-gray-1000 dark:bg-opacity-90 focus:outline-none"
                             aria-hidden="true"
                             ref="container"
                             tabindex="0"

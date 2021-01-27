@@ -12,7 +12,7 @@
             <!-- Profile Photo -->
             <div
                 v-if="page.props.value.jetstream.managesProfilePhotos"
-                class="col-span-6 p-3 bg-gray-100 rounded-md dark:bg-gray-800 sm:col-span-4"
+                class="col-span-6 p-4 bg-gray-100 rounded-md dark:bg-gray-800 sm:col-span-4"
             >
                 <!-- Profile Photo File Input -->
                 <input

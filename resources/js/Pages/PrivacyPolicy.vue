@@ -13,7 +13,7 @@
 </template>
 
 <script>
-    import AppLayout from '@/Layouts/AppLayout'
+    import AppLayout from '@/Layouts/App'
     import AppLogo from '@/Components/Logo'
     import FormSectionBorder from '@/Components/Form/SectionBorder'
 

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-    import AppLayout from '@/Layouts/AppLayout'
+    import AppLayout from '@/Layouts/App'
     import CreateTeamForm from '@/Pages/Teams/CreateTeamForm'
     import FormSectionBorder from '@/Components/Form/SectionBorder'
 

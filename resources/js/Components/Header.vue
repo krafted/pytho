@@ -125,7 +125,7 @@
                                 
                                 <div class="border-t border-gray-100 dark:border-gray-800" />
 
-                                <app-dropdown-link :href="route('settings.account.show')">
+                                <app-dropdown-link :href="route('settings.profile.show')">
                                     Account Settings
                                 </app-dropdown-link>
                             </template>

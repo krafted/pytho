@@ -8,17 +8,17 @@ use Illuminate\Support\Facades\DB;
 use Jenssegers\Agent\Agent;
 use Laravel\Jetstream\Jetstream;
 
-class AccountController
+class AdvancedSettingsController
 {
     /**
-     * Show the general account settings screen.
+     * Show the advanced settings screen.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Inertia\Response
      */
     public function show(Request $request)
     {
-        return Jetstream::inertia()->render($request, 'Settings/Account/Show', [
+        return Jetstream::inertia()->render($request, 'Settings/Advanced/Show', [
             'sessions' => $this->sessions($request)->all(),
         ]);
     }

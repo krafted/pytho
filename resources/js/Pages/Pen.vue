@@ -142,7 +142,7 @@
 <script>
     import AppDetails from '@/Components/Details'
     import AppEditor from '@/Components/Editor'
-    import AppLayout from '@/Layouts/AppLayout'
+    import AppLayout from '@/Layouts/App'
     import AppOutput from '@/Components/Output'
     import AppSave from '@/Components/Save'
     import AppTabBar from '@/Components/TabBar'

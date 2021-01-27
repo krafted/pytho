@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\PrivacyPolicyController;
-use App\Http\Controllers\Settings\AccountController;
-use App\Http\Controllers\TermsOfServiceController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Jetstream\Http\Controllers\CurrentTeamController;
 use Laravel\Jetstream\Http\Controllers\Inertia\ApiTokenController;
@@ -16,10 +13,6 @@ use Laravel\Jetstream\Jetstream;
 
 Route::group(['middleware' => config('jetstream.middleware', ['web'])], function () {
     Route::group(['middleware' => ['auth', 'verified']], function () {
-        // User & Profile...
-        Route::get('/settings/account', [AccountController::class, 'show'])
-                    ->name('settings.account.show');
-
         Route::delete('/user/other-browser-sessions', [OtherBrowserSessionsController::class, 'destroy'])
                     ->name('other-browser-sessions.destroy');
 
