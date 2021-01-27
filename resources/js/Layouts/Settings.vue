@@ -1,13 +1,15 @@
 <template>
     <app-layout>
-        <div class="w-full py-6 mx-auto mt-6 sm:px-4 max-w-7xl">
+        <div class="w-full py-6 mt-6">
             <div class="pl-safe-left pr-safe-right">
-                <h1 class="px-4 text-4xl font-semibold leading-tight text-gray-900 sm:px-0 dark:text-gray-100">
-                    Settings
-                </h1>
+                <div class="w-full mx-auto max-w-7xl sm:px-4">
+                    <h1 class="px-4 text-4xl font-semibold leading-tight text-gray-900 sm:px-0 dark:text-gray-100">
+                        Settings
+                    </h1>
+                </div>
 
-                <header class="px-4 mt-6 border-b border-gray-100 sm:px-0 dark:border-gray-800">
-                    <nav class="flex items-center -mb-px space-x-4">
+                <header class="z-10 bg-white dark:bg-gray-900 bg-opacity-75 dark:bg-opacity-75 backdrop-filter-blur sticky top-12.5 px-4 mt-6 border-b border-gray-100 sm:px-0 dark:border-gray-800">
+                    <nav class="flex items-center w-full mx-auto -mb-px space-x-4 max-w-7xl sm:px-4">
                         <inertia-link
                             v-if="page.props.value.jetstream.canUpdateProfileInformation"
                             class="flex items-center py-4 border-b-2 focus:outline-none"
@@ -60,7 +62,8 @@
                         </inertia-link>
                     </nav>
                 </header>
-                <div class="mt-6">
+
+                <div class="w-full mx-auto mt-6 sm:px-4 max-w-7xl">
                     <slot />
                 </div>
             </div>
