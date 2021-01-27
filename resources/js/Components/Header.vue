@@ -3,7 +3,7 @@
         class="fixed inset-x-0 top-0 z-30 px-4 bg-white bg-opacity-75 border-b border-gray-100 sm:px-0 pt-safe-top dark:border-gray-800 backdrop-filter-blur dark:bg-opacity-75 dark:bg-gray-900"
         :class="{ 'shadow-sm': !route().current('pen.show') }"
     >
-        <div :class="{'max-w-7xl mx-auto sm:px-4': !route().current('pen.show')}">
+        <div class="sm:px-4" :class="{'max-w-7xl mx-auto': !route().current('pen.show')}">
             <div
                 class="flex items-center justify-between w-full py-1 pl-safe-left pr-safe-right"
             >
