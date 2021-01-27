@@ -1,36 +1,38 @@
 <template>
     <app-layout>
         <div class="w-full py-6 mx-auto mt-6 sm:px-4 max-w-7xl">
-            <div class="flex items-center justify-between px-4 space-x-6 sm:px-0">
-                <div class="flex items-center space-x-6">
-                    <img
-                        class="object-cover transform border-4 border-gray-100 rounded-full w-28 h-28 dark:border-gray-800"
-                        :src="`${profile.profile_photo_url}`"
-                        :alt="profile.name"
-                    />
+            <div class="pl-safe-left pr-safe-right">
+                <div class="flex items-center justify-between px-4 space-x-6 sm:px-0">
+                    <div class="flex items-center space-x-6">
+                        <img
+                            class="object-cover transform border-4 border-gray-100 rounded-full w-28 h-28 dark:border-gray-800"
+                            :src="`${profile.profile_photo_url}`"
+                            :alt="profile.name"
+                        />
 
-                    <div>
-                        <h1 class="text-4xl font-semibold leading-tight text-gray-900 dark:text-gray-100">
-                            {{ profile.name }}
-                        </h1>
+                        <div>
+                            <h1 class="text-4xl font-semibold leading-tight text-gray-900 dark:text-gray-100">
+                                {{ profile.name }}
+                            </h1>
 
-                        <p class="text-2xl font-medium leading-tight text-gray-500">
-                            <inertia-link class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500" :href="route('profile.show', { user: profile })">@{{ profile.username }}</inertia-link>
-                        </p>
+                            <p class="text-2xl font-medium leading-tight text-gray-500">
+                                <inertia-link class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500" :href="route('profile.show', { user: profile })">@{{ profile.username }}</inertia-link>
+                            </p>
+                        </div>
                     </div>
+
+                    <app-button
+                        v-if="profile.id === page.props.value.user?.id"
+                        class="-right-2 sm:-right-3"
+                        :href="route('settings.profile.show')"
+                    >
+                        <svg class="-mx-1.5 my-0.5 inline-block w-5 h-5 sm:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                        </svg>
+
+                        <span class="hidden sm:inline">Edit Profile</span>
+                    </app-button>
                 </div>
-
-                <app-button
-                    v-if="profile.id === page.props.value.user?.id"
-                    class="-right-2 sm:-right-3"
-                    :href="route('settings.profile.show')"
-                >
-                    <svg class="-mx-1.5 my-0.5 inline-block w-5 h-5 sm:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                    </svg>
-
-                    <span class="hidden sm:inline">Edit Profile</span>
-                </app-button>
             </div>
         </div>
 
@@ -39,41 +41,43 @@
                 class="sticky z-10 bg-white bg-opacity-75 border-b border-gray-100 dark:bg-gray-900 dark:bg-opacity-75 backdrop-filter-blur dark:border-gray-800"
                 style="top: calc(3.125rem + env(safe-area-inset-top))"
             >
-                <div class="grid w-full grid-cols-1 gap-6 mx-auto pl-safe-left pr-safe-right sm:px-4 max-w-7xl md:grid-cols-3 lg:grid-cols-4">
-                    <nav class="flex items-center col-span-1 px-4 -mb-px space-x-4 md:col-span-2 lg:col-span-3 sm:px-0">
-                        <template
-                            v-for="
-                                (visibility, key) in {
-                                    '': 'Public',
-                                    unlisted: 'Unlisted',
-                                    private: 'Private'
-                                }
-                            "
-                        >
-                            <inertia-link
-                                v-if="key === '' || profile.id === page.props.value.user?.id"
-                                :key="key"
-                                class="flex items-center py-4 border-b-2 focus:outline-none"
-                                :class="[
-                                    route().current('profile.show', { visibility: key })
-                                        ? 'border-primary-500 text-gray-900 dark:text-gray-200'
-                                        : 'border-transparent text-gray-500 hover:text-gray-600 dark:hover:text-gray-400 focus:text-gray-600 dark:focus:text-gray-400'
-                                ]"
-                                :href="route('profile.show', { user: profile, visibility: key })"
+                <div class="w-full mx-auto sm:px-4 max-w-7xl">
+                    <div class="grid grid-cols-1 gap-6 pl-safe-left pr-safe-right md:grid-cols-3 lg:grid-cols-4">
+                        <nav class="flex items-center col-span-1 px-4 -mb-px space-x-4 md:col-span-2 lg:col-span-3 sm:px-0">
+                            <template
+                                v-for="
+                                    (visibility, key) in {
+                                        '': 'Public',
+                                        unlisted: 'Unlisted',
+                                        private: 'Private'
+                                    }
+                                "
                             >
-                                {{ visibility }}
+                                <inertia-link
+                                    v-if="key === '' || profile.id === page.props.value.user?.id"
+                                    :key="key"
+                                    class="flex items-center py-4 border-b-2 focus:outline-none"
+                                    :class="[
+                                        route().current('profile.show', { visibility: key })
+                                            ? 'border-primary-500 text-gray-900 dark:text-gray-200'
+                                            : 'border-transparent text-gray-500 hover:text-gray-600 dark:hover:text-gray-400 focus:text-gray-600 dark:focus:text-gray-400'
+                                    ]"
+                                    :href="route('profile.show', { user: profile, visibility: key })"
+                                >
+                                    {{ visibility }}
 
-                                <span class="inline-block px-2.5 py-0.5 ml-3 bg-gray-100 dark:bg-gray-800 rounded-full text-2xs">
-                                    {{ counts[key ? key : 'public'] }}
-                                </span>
-                            </inertia-link>
-                        </template>
-                    </nav>
+                                    <span class="inline-block px-2.5 py-0.5 ml-3 bg-gray-100 dark:bg-gray-800 rounded-full text-2xs">
+                                        {{ counts[key ? key : 'public'] }}
+                                    </span>
+                                </inertia-link>
+                            </template>
+                        </nav>
 
-                    <div class="hidden md:block">
-                        <h3 class="flex items-center py-4 -mb-px text-gray-900 border-b-2 border-transparent focus:outline-none dark:text-gray-200">
-                            Recent Activity
-                        </h3>
+                        <div class="hidden md:block">
+                            <h3 class="flex items-center py-4 -mb-px text-gray-900 border-b-2 border-transparent focus:outline-none dark:text-gray-200">
+                                Recent Activity
+                            </h3>
+                        </div>
                     </div>
                 </div>
             </header>

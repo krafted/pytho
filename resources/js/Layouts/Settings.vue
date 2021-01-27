@@ -1,18 +1,18 @@
 <template>
     <app-layout>
         <div class="w-full py-6 mt-6">
-            <div class="pl-safe-left pr-safe-right">
-                <div class="w-full mx-auto max-w-7xl sm:px-4">
-                    <h1 class="px-4 text-4xl font-semibold leading-tight text-gray-900 sm:px-0 dark:text-gray-100">
-                        Settings
-                    </h1>
-                </div>
+            <div class="w-full mx-auto max-w-7xl sm:px-4">
+                <h1 class="px-4 text-4xl font-semibold leading-tight text-gray-900 sm:px-0 dark:text-gray-100">
+                    Settings
+                </h1>
+            </div>
 
-                <header
-                    class="sticky z-10 px-4 mt-6 bg-white bg-opacity-75 border-b border-gray-100 dark:bg-gray-900 dark:bg-opacity-75 backdrop-filter-blur sm:px-0 dark:border-gray-800"
-                    style="top: calc(3.125rem + env(safe-area-inset-top))"
-                >
-                    <nav class="flex items-center w-full mx-auto -mb-px space-x-4 max-w-7xl sm:px-4">
+            <header
+                class="sticky z-10 px-4 mt-6 bg-white bg-opacity-75 border-b border-gray-100 dark:bg-gray-900 dark:bg-opacity-75 backdrop-filter-blur sm:px-0 dark:border-gray-800"
+                style="top: calc(3.125rem + env(safe-area-inset-top))"
+            >
+                <div class="pl-safe-left pr-safe-right">
+                    <nav class="flex items-center w-full px-0 mx-auto -mb-px space-x-4 max-w-7xl sm:px-4">
                         <inertia-link
                             v-if="page.props.value.jetstream.canUpdateProfileInformation"
                             class="flex items-center py-4 border-b-2 focus:outline-none"
@@ -64,9 +64,11 @@
                             Advanced
                         </inertia-link>
                     </nav>
-                </header>
+                </div>
+            </header>
 
-                <div class="w-full mx-auto mt-6 sm:px-4 max-w-7xl">
+            <div class="w-full mx-auto mt-6 sm:px-4 max-w-7xl">
+                <div class="pl-safe-left pr-safe-right">
                     <slot />
                 </div>
             </div>
