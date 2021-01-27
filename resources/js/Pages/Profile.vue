@@ -35,7 +35,10 @@
         </div>
 
         <div class="w-full">
-            <header class="sticky top-12.5 z-10 bg-white dark:bg-gray-900 bg-opacity-75 dark:bg-opacity-75 backdrop-filter-blur border-b border-gray-100 dark:border-gray-800">
+            <header
+                class="sticky z-10 bg-white bg-opacity-75 border-b border-gray-100 dark:bg-gray-900 dark:bg-opacity-75 backdrop-filter-blur dark:border-gray-800"
+                style="top: calc(3.125rem + env(safe-area-inset-top))"
+            >
                 <div class="grid w-full grid-cols-1 gap-6 mx-auto pl-safe-left pr-safe-right sm:px-4 max-w-7xl md:grid-cols-3 lg:grid-cols-4">
                     <nav class="flex items-center col-span-1 px-4 -mb-px space-x-4 md:col-span-2 lg:col-span-3 sm:px-0">
                         <template

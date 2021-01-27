@@ -8,7 +8,10 @@
                     </h1>
                 </div>
 
-                <header class="z-10 bg-white dark:bg-gray-900 bg-opacity-75 dark:bg-opacity-75 backdrop-filter-blur sticky top-12.5 px-4 mt-6 border-b border-gray-100 sm:px-0 dark:border-gray-800">
+                <header
+                    class="sticky z-10 px-4 mt-6 bg-white bg-opacity-75 border-b border-gray-100 dark:bg-gray-900 dark:bg-opacity-75 backdrop-filter-blur sm:px-0 dark:border-gray-800"
+                    style="top: calc(3.125rem + env(safe-area-inset-top))"
+                >
                     <nav class="flex items-center w-full mx-auto -mb-px space-x-4 max-w-7xl sm:px-4">
                         <inertia-link
                             v-if="page.props.value.jetstream.canUpdateProfileInformation"
