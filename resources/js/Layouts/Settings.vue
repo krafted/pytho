@@ -1,10 +1,12 @@
 <template>
     <app-layout>
         <div class="w-full py-6 mt-6">
-            <div class="w-full mx-auto max-w-7xl sm:px-4">
-                <h1 class="px-4 text-4xl font-semibold leading-tight text-gray-900 sm:px-0 dark:text-gray-100">
-                    Settings
-                </h1>
+            <div class="w-full px-0 mx-auto max-w-7xl sm:px-4">
+                <div class="pl-safe-left pr-safe-right">
+                    <h1 class="px-4 text-4xl font-semibold leading-tight text-gray-900 sm:px-0 dark:text-gray-100">
+                        Settings
+                    </h1>
+                </div>
             </div>
 
             <header
