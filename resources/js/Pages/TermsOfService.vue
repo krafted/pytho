@@ -16,6 +16,7 @@
     import AppLayout from '@/Layouts/App'
     import AppLogo from '@/Components/Logo'
     import FormSectionBorder from '@/Components/Form/SectionBorder'
+    import { useHead } from '@vueuse/head'
 
     export default {
         props: ['terms'],
@@ -23,6 +24,9 @@
             AppLayout,
             AppLogo,
             FormSectionBorder,
+        },
+        setup() {
+            useHead({ title: 'Terms of Service — Py' })
         },
     }
 </script>
