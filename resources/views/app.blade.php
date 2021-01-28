@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html
     lang="{{ str_replace('_', '-', app()->getLocale()) }}"
-    class="font-sans antialiased"
+    class="font-mono antialiased"
 >
     <head>
         <title>{{ config('app.name', 'Py') }}</title>
