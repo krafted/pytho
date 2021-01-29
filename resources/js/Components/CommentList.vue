@@ -6,26 +6,38 @@
         />
 
         <div
-            class="absolute z-20 w-56 py-3 bg-white rounded-md shadow comment-list dark:bg-gray-1000"
+            class="absolute z-20 w-56 py-1 bg-white divide-y divide-gray-100 rounded-md shadow comment-list dark:bg-gray-1000 dark:divide-gray-900"
             ref="list"
         >
             <div
                 v-for="comment in comments"
                 :key="comment.id"
-                class="px-4 py-1 text-sm text-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900"
+                class="flex items-start px-3 py-2 space-x-3 text-sm text-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900"
                 @mouseover="onMouseOver(comment)"
                 @mouseout="onMouseOut(comment)"
             >
-                {{ comment.body }}
-
-                <span class="text-gray-500">&mdash; </span>
-
-                <inertia-link
-                    class="text-gray-500 hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    :href="route('profile.show', { user: comment.user })"
-                >
-                    {{ comment.user.name }}
+                <inertia-link class="flex-shrink-0" :href="route('profile.show', { user: comment.user })">
+                    <img
+                        class="object-cover w-8 h-8 border-2 border-gray-100 rounded-full dark:border-gray-800"
+                        :src="`${comment.user.profile_photo_url}`"
+                        :alt="comment.user.name"
+                    />
                 </inertia-link>
+
+                <div class="flex-1">
+                    <div class="flex items-center justify-between">
+                        <inertia-link
+                            class="font-medium text-gray-500 hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            :href="route('profile.show', { user: comment.user })"
+                        >
+                            {{ comment.user.name }}
+                        </inertia-link>
+
+                        <time class="text-xs tracking-wide text-gray-500">{{ comment.created_at }}</time>
+                    </div>
+
+                    {{ comment.body }}
+                </div>
             </div>
         </div>
     </div>

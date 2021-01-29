@@ -80,7 +80,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected function defaultProfilePhotoUrl()
     {
-        return 'https://ui-avatars.com/api/?name='.urlencode($this->name).'&color=FFFFFF&background=000000&size=512';
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name).'&color=FFFFFF&background=000000&size=512';
     }
 
     /**
@@ -138,7 +138,7 @@ class User extends Authenticatable implements MustVerifyEmail
                     'method' => $method[$activity->description],
                     'type' => $type[$activity->subject_type],
                     'subject' => $activity->subject,
-                    'at' => str_replace('ago', '', $activity->updated_at->shortRelativeToNowDiffForHumans()),
+                    'at' => str_replace(' ago', '', $activity->updated_at->shortRelativeToNowDiffForHumans()),
                 ];
             });
     }

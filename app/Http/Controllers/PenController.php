@@ -36,8 +36,17 @@ class PenController extends Controller
                     ->only('title', 'description', 'content', 'comments', 'creator', 'slug', 'visibility')
                 : null,
             'comments' => $pen
-                ? collect($pen->comments()->with('user:id,name,username')->get())
-                    ->groupBy(fn ($item) => $item->properties['coords'][0]['line'])
+                ? collect($pen->comments()->with('user:id,name,username,profile_photo_path')->get())
+                    ->mapToGroups(function ($comment) {
+                        return [
+                            $comment->properties['coords'][0]['line'] => [
+                                'body' => $comment->body,
+                                'created_at' => str_replace(' ago', '', $comment->created_at->shortRelativeToNowDiffForHumans()),
+                                'properties' => $comment->properties,
+                                'user' => $comment->user,
+                            ],
+                        ];
+                    })
                 : null,
             'slug' => Slug::generate(),
         ]);
