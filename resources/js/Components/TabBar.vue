@@ -41,14 +41,18 @@
 
                 <h-switch
                     as="button"
-                    class="flex items-center justify-center p-2.5 -mt-px -mr-2 text-gray-500 border border-transparent rounded-md dark:text-gray-700 group hover:w-auto hover:bg-gray-200 dark:hover:bg-gray-1000 focus:bg-gray-200 dark:focus:bg-gray-1000 focus:border-gray-300 dark:focus:border-gray-800 hover:border-gray-300 dark:hover:border-gray-800 hover:text-gray-900 dark:hover:text-gray-400 focus:text-gray-900 dark:focus:text-gray-400 focus:outline-none focus:w-auto"
+                    class="-mr-2 -mt-px flex items-center justify-center p-2.5 border border-white bg-white dark:bg-gray-900 dark:border-gray-900 rounded-md group hover:w-auto hover:bg-gray-200 dark:hover:bg-gray-1000 focus:bg-gray-200 dark:focus:bg-gray-1000 focus:border-gray-300 dark:focus:border-gray-600 hover:border-gray-300 dark:hover:border-gray-600 focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-200 dark:focus:ring-offset-gray-900 focus:ring-primary-500 focus:outline-none focus:w-auto"
                     :model-value="preferences.autoRun"
                     v-slot="{ checked }"
                     @update:model-value="updateAutoRun"
                 >
                     <svg
-                        class="w-5 h-5 transition-all duration-200 ease-in-out"
-                        :class="preferences.autoRun ? 'text-primary-500' : 'text-gray-500 dark:text-gray-700'"
+                        class="w-5 h-5"
+                        :class="[
+                            checked
+                                ? 'text-primary-500'
+                                : 'text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-200'
+                        ]"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         stroke="currentColor"

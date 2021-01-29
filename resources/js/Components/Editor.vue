@@ -195,7 +195,7 @@
                     button.onclick = event => showComments(event, list)
                     button.classList= 'text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500'
                     button.innerHTML = `<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" /></svg>`
-                    editor.value.addLineWidget(parseInt(n), button, { className: 'z-10 absolute top-0 right-3 h-full flex items-center justify-center' })
+                    editor.value.addLineWidget(parseInt(n), button, { className: 'z-10 absolute top-0 right-3 -mr-px h-full flex items-center justify-center' })
                 })
             })
 
