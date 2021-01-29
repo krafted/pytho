@@ -13,7 +13,7 @@
 }
 
 .cm-s-custom .CodeMirror-code > div {
-  @apply pr-8;
+  @apply pr-11;
 }
 
 .cm-s-custom .CodeMirror-cursor {

@@ -1,5 +1,5 @@
 .CodeMirror {
-    @apply absolute inset-0 bg-transparent h-full w-full resize-none font-mono text-gray-400 leading-inherit pr-4 flex-shrink-0;
+    @apply absolute inset-0 bg-transparent h-full w-full resize-none font-mono text-gray-400 leading-inherit pr-2 flex-shrink-0;
 }
 
 .CodeMirror:focus {
