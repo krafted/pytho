@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\HasComments;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Pen extends Model
 {
+    use HasComments;
     use HasFactory;
     use LogsActivity;
 

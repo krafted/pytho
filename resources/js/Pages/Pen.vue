@@ -75,7 +75,11 @@
                     min-size="33.333"
                 >
                     <div class="flex flex-1 mt-12.5">
-                        <app-editor @saved="save" />
+                        <app-editor
+                            :comments="comments"
+                            :pen="pen"
+                            @saved="save"
+                        />
                     </div>
                 </pane>
 
@@ -157,6 +161,9 @@
 
     export default {
         props: {
+            comments: {
+                type: Object,
+            },
             isCreator: {
                 type: Boolean,
             },
@@ -281,6 +288,7 @@
                 await run()
             })
 
+            provide('pen', props.pen)
             provide('activeTab', activeTab)
             provide('form', form)
             provide('output', output)

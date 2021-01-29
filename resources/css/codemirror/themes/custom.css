@@ -12,6 +12,10 @@
   @apply text-gray-300 dark:text-gray-700;
 }
 
+.cm-s-custom .CodeMirror-code > div {
+  @apply pr-8;
+}
+
 .cm-s-custom .CodeMirror-cursor {
   @apply border-l-2 border-primary-500 rounded-sm;
 }
@@ -48,7 +52,7 @@
 .cm-s-custom .CodeMirror-activeline-gutter .CodeMirror-guttermarker,
 .cm-s-custom .CodeMirror-activeline-gutter .CodeMirror-guttermarker-subtle,
 .cm-s-custom .CodeMirror-activeline-gutter .CodeMirror-linenumber {
-  @apply text-gray-500;
+  @apply text-gray-600 dark:text-gray-400;
 }
 
 .cm-s-custom .CodeMirror-activeline-background {
