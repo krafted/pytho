@@ -24,7 +24,8 @@
 
         <template #content>
             <form-textarea
-                label="Body"
+                label="Text"
+                ref="comment"
                 v-model="commentForm.body"
             />
             <form-input-error :message="commentForm.errors.text" />
@@ -99,6 +100,7 @@
                     coords: [],
                 },
             })
+            const comment = ref(null)
             const commentList = ref(null)
             const currentComments = ref([])
             const editorContainer = ref(null)
@@ -110,9 +112,10 @@
             const showCommentList = ref(false)
             const showPreferences = inject('showPreferences')
             const run = inject('run')
-            const showComment = () => {
+            const showComment = async () => {
                 commentForm.value.properties.coords = [editor.value.getCursor(true), editor.value.getCursor(false)]
                 showCommentForm.value = true
+                setTimeout(() => comment.value.focus(), 0)
             }
             const showComments = (event, list) => {
                 currentComments.value = list
@@ -202,6 +205,7 @@
             onUnmounted(() => document.querySelectorAll('.comment-button').forEach(el => el.remove()))
 
             return {
+                comment,
                 commentForm,
                 commentList,
                 currentComments,
