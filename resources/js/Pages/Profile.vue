@@ -105,12 +105,12 @@
                                     </p>
                                 </div>
 
-                                <footer class="flex items-center p-4 mt-auto space-x-2 sm:bg-gray-100 sm:py-3 sm:px-6 sm:dark:bg-gray-800">
-                                    <svg class="w-5 h-5 text-gray-400 dark:text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <footer class="flex items-center w-full p-4 mt-auto space-x-2 sm:bg-gray-100 sm:py-3 sm:px-6 sm:dark:bg-gray-800">
+                                    <svg class="flex-shrink-0 w-5 h-5 text-gray-400 dark:text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
 
-                                    <time class="text-gray-500">{{ pen.updated_at }}</time>
+                                    <time class="flex-1 text-gray-500">{{ pen.updated_at }}</time>
                                 </footer>
                             </inertia-link>
                         </div>

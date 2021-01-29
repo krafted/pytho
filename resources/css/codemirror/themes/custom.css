@@ -25,11 +25,15 @@
   @apply bg-primary-500 bg-opacity-50 rounded-sm;
 }
 
-.cm-s-custom div.CodeMirror-selected {
+.cm-s-custom div.CodeMirror-selected,
+.cm-s-custom .cm-matchhighlight,
+.cm-s-custom .cm-markedselection {
   @apply bg-gray-500 bg-opacity-25;
 }
 
-.cm-s-custom.CodeMirror-focused div.CodeMirror-selected {
+.cm-s-custom.CodeMirror-focused div.CodeMirror-selected,
+.cm-s-custom.CodeMirror-focused .cm-matchhighlight,
+.cm-s-custom .cm-markedselection {
   @apply bg-gray-500 bg-opacity-25;
 }
 

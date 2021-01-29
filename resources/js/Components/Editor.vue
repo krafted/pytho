@@ -46,6 +46,13 @@
             </app-button>
         </template>
     </app-modal>
+
+    <app-comment-list
+        :show="showCommentList"
+        :comments="currentComments"
+        ref="commentList"
+        @close="showCommentList = false"
+    />
 </template>
 
 <script>
@@ -55,6 +62,7 @@
     import debounce from 'debounce'
     import CodeMirror from 'codemirror'
     import AppButton from '@/Components/Button'
+    import AppCommentList from '@/Components/CommentList'
     import AppModal from '@/Components/Modal'
     import AppSecondaryButton from '@/Components/SecondaryButton'
     import FormInputError from '@/Components/Form/InputError'
@@ -63,6 +71,10 @@
     import 'codemirror/mode/python/python'
     import 'codemirror/addon/selection/active-line'
     import 'codemirror/addon/selection/mark-selection'
+    import 'codemirror/addon/scroll/annotatescrollbar'
+    import 'codemirror/addon/scroll/scrollpastend'
+    import 'codemirror/addon/search/match-highlighter'
+    import 'codemirror/addon/search/matchesonscrollbar'
     import 'codemirror/keymap/emacs'
     import 'codemirror/keymap/sublime'
     import 'codemirror/keymap/vim'
@@ -72,6 +84,7 @@
         props: ['comments', 'pen'],
         components: {
             AppButton,
+            AppCommentList,
             AppModal,
             AppSecondaryButton,
             FormInputError,
@@ -86,20 +99,25 @@
                     coords: [],
                 },
             })
+            const commentList = ref(null)
+            const currentComments = ref([])
             const editorContainer = ref(null)
             const editor = inject('editor')
             const dirty = inject('dirty')
             const isMac = inject('isMac')
             const isMobile = inject('isMobile')
             const showCommentForm = ref(false)
+            const showCommentList = ref(false)
             const showPreferences = inject('showPreferences')
             const run = inject('run')
             const showComment = () => {
                 commentForm.value.properties.coords = [editor.value.getCursor(true), editor.value.getCursor(false)]
                 showCommentForm.value = true
             }
-            const showCommentList = list => {
-                console.log(list)
+            const showComments = (event, list) => {
+                currentComments.value = list
+                showCommentList.value = true
+                createPopper(event.target.closest('button'), commentList.value.list, { placement: 'left' })
             }
             const onCursorActivity = async (e) => {
                 if (!props.pen) return
@@ -145,11 +163,13 @@
                         }
                     },
                     gutters: ["CodeMirror-linenumbers"],
+                    highlightSelectionMatches: { showToken: /\w/, annotateScrollbar: true },
                     indentUnit: parseInt(preferences.value.indentUnit),
                     keyMap: isMobile.value ? 'default' : preferences.value.keyMap,
                     lineNumbers: true,
                     lineWrapping: true,
                     mode: 'text/x-python',
+                    scrollPastEnd: true,
                     styleActiveLine: true,
                     styleSelectedText: true,
                     theme: 'custom',
@@ -169,18 +189,13 @@
             onMounted(() => {
                 if (!props.pen || !props.comments) return
 
-                const lines = document.querySelectorAll('.CodeMirror-code > div')
-
                 Object.entries(props.comments).forEach(line => {
                     const [n, list] = line
                     const button = document.createElement('button')
-                    const div = document.createElement('div')
-                    div.classList = 'z-10 absolute top-0 right-2 h-full flex items-center justify-center'
-                    button.onclick = () => showCommentList(list)
-                    button.classList= 'text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-400'
+                    button.onclick = event => showComments(event, list)
+                    button.classList= 'text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500'
                     button.innerHTML = `<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" /></svg>`
-                    div.appendChild(button)
-                    lines[parseInt(n) === 0 ? parseInt(n) : parseInt(n) - 1].appendChild(div)
+                    editor.value.addLineWidget(parseInt(n), button, { className: 'z-10 absolute top-0 right-2 h-full flex items-center justify-center' })
                 })
             })
 
@@ -188,11 +203,14 @@
 
             return {
                 commentForm,
+                commentList,
+                currentComments,
                 editor,
                 editorContainer,
                 preferences,
                 saveComment,
                 showCommentForm,
+                showCommentList,
             }
         }
     }

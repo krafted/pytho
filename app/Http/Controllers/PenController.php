@@ -36,7 +36,7 @@ class PenController extends Controller
                     ->only('title', 'description', 'content', 'comments', 'creator', 'slug', 'visibility')
                 : null,
             'comments' => $pen
-                ? collect($pen->comments()->get())
+                ? collect($pen->comments()->with('user:id,name,username')->get())
                     ->groupBy(fn ($item) => $item->properties['coords'][0]['line'])
                 : null,
             'slug' => Slug::generate(),
