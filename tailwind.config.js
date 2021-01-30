@@ -37,7 +37,7 @@ module.exports = {
             },
             fontFamily: {
                 mono: ['Fira Code', ...defaultTheme.fontFamily.mono],
-                sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+                sans: ['Fira Sans', ...defaultTheme.fontFamily.sans],
             },
             fontSize: {
                 'inherit': 'inherit',
@@ -53,6 +53,9 @@ module.exports = {
             },
             minHeight: {
                 6: '1.5rem',
+            },
+            scale: {
+                '-100': '-1',
             },
             spacing: {
                 '10.5': '2.625rem',

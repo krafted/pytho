@@ -17,7 +17,7 @@
     import { provide, ref } from 'vue'
 
     export default {
-        props: ['appUrl', 'errorBags', 'errors', 'jetstream'],
+        props: ['appUrl', 'errorBags', 'errors', 'jetstream', 'socialstream', 'user'],
         components: {
             AppBanner,
             AppHeader,

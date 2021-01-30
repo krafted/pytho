@@ -28,28 +28,30 @@ class PenController extends Controller
 
         $isCreator = $pen && $pen->creator->id === optional($request->user())->id;
 
-        return inertia('Pen', [
-            'isCreator' => $isCreator,
-            'pen' => $pen
-                ? $pen
-                    ->load('creator:id,name,username')
-                    ->only('title', 'description', 'content', 'comments', 'creator', 'slug', 'visibility')
-                : null,
-            'comments' => $pen
-                ? collect($pen->comments()->with('user:id,name,username,profile_photo_path')->get())
-                    ->mapToGroups(function ($comment) {
-                        return [
-                            $comment->properties['coords'][0]['line'] => [
-                                'body' => $comment->body,
-                                'created_at' => str_replace(' ago', '', $comment->created_at->shortRelativeToNowDiffForHumans()),
-                                'properties' => $comment->properties,
-                                'user' => $comment->user,
-                            ],
-                        ];
-                    })
-                : null,
-            'slug' => Slug::generate(),
-        ]);
+        return auth()->check() || $pen || $request->query('try', false) === null
+            ? inertia('Pen', [
+                    'isCreator' => $isCreator,
+                    'pen' => $pen
+                        ? $pen
+                            ->load('creator:id,name,username')
+                            ->only('title', 'description', 'content', 'comments', 'creator', 'slug', 'visibility')
+                        : null,
+                    'comments' => $pen
+                        ? collect($pen->comments()->with('user:id,name,username,profile_photo_path')->get())
+                            ->mapToGroups(function ($comment) {
+                                return [
+                                    $comment->properties['coords'][0]['line'] => [
+                                        'body' => $comment->body,
+                                        'created_at' => str_replace(' ago', '', $comment->created_at->shortRelativeToNowDiffForHumans()),
+                                        'properties' => $comment->properties,
+                                        'user' => $comment->user,
+                                    ],
+                                ];
+                            })
+                        : null,
+                    'slug' => Slug::generate(),
+                ])
+            : inertia('Landing');
     }
 
     /**
