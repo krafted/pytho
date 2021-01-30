@@ -96,7 +96,7 @@
                         </svg>
 
                         <div class="flex-shrink-0 md:ml-24 lg:ml-32">
-                            <h1 class="text-3xl font-bold leading-snug text-gray-700 md:text-4xl lg:text-5xl dark:text-gray-300">
+                            <h1 class="text-2xl font-bold leading-snug text-gray-700 sm:text-3xl md:text-4xl lg:text-5xl dark:text-gray-300">
                                 Write, review, and share
                                 <br />
                                 your Python code
@@ -201,17 +201,17 @@
         </div>
 
         <div class="px-16 pt-6 pb-24 mt-40">
-            <div class="grid w-full max-w-5xl grid-cols-3 mx-auto">
+            <div class="grid w-full max-w-5xl grid-cols-3 gap-3 mx-auto">
                 <p class="font-medium text-gray-500">
                     &copy; <inertia-link class="hover:underline focus:ring-2 focus:outline-none focus:ring-primary-500" :href="route('pen.show')">Py</inertia-link>
                 </p>
 
                 <p class="flex items-center justify-center text-gray-500">
                     Made with&nbsp;
-                    <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
                     </svg>
-                    &nbsp;by&nbsp;<a class="hover:underline focus:ring-2 focus:outline-none focus:ring-primary-500" href="https://krafted.dev" target="_blank" rel="noopener">Krafted</a>
+                    &nbsp;by&nbsp;<a class="font-medium hover:underline focus:ring-2 focus:outline-none focus:ring-primary-500" href="https://krafted.dev" target="_blank" rel="noopener">Krafted</a>
                 </p>
 
 
