@@ -209,7 +209,7 @@
 
                     <p class="flex items-center justify-center invisible w-0 h-0 text-gray-500 opacity-0 md:visible md:opacity-100 md:w-auto md:h-auto">
                         Made with&nbsp;
-                        <svg class="flex-shrink-0 w-4 h-4 text-primary-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <svg class="flex-shrink-0 w-4 h-4 text-primary-500 animate-beat" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
                         </svg>
                         &nbsp;by&nbsp;<a class="font-medium hover:underline focus:ring-2 focus:outline-none focus:ring-primary-500" href="https://krafted.dev" target="_blank" rel="noopener">Krafted</a>
@@ -223,7 +223,7 @@
 
                 <p class="flex items-center justify-center mt-6 text-gray-500 md:hidden">
                     Made with&nbsp;
-                    <svg class="flex-shrink-0 w-4 h-4 text-primary-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <svg class="flex-shrink-0 w-4 h-4 text-primary-500 animate-beat" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
                     </svg>
                     &nbsp;by&nbsp;<a class="font-medium hover:underline focus:ring-2 focus:outline-none focus:ring-primary-500" href="https://krafted.dev" target="_blank" rel="noopener">Krafted</a>

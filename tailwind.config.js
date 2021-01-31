@@ -23,6 +23,9 @@ module.exports = {
     darkMode: 'class',
     theme: {
         extend: {
+            animation: {
+                beat: 'beat 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
             colors: {
                 gray: {
                     ...colors.gray,
@@ -47,6 +50,12 @@ module.exports = {
             height: {
                 'px': '1px',
                 '14.5': '3.625rem',
+            },
+            keyframes: {
+                beat: {
+                    '0%, 40%, 80%, 100%': { transform: 'scale(1)' },
+                    '20%, 60%': { transform: 'scale(1.15)' },
+                }
             },
             lineHeight: {
                 'inherit': 'inherit',
