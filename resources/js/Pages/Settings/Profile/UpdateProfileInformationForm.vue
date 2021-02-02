@@ -1,5 +1,5 @@
 <template>
-    <form-section @submitted="updateProfileInformation">
+    <f-section @submitted="updateProfileInformation">
         <template #title>
             Profile Information
         </template>
@@ -58,82 +58,82 @@
                     </button>
                     
                     <div class="flex flex-col ml-3 space-y-3">
-                        <app-button type="button" @click.native.prevent="selectNewPhoto">
+                        <x-button type="button" @click.native.prevent="selectNewPhoto">
                             Select A New Photo
-                        </app-button>
+                        </x-button>
 
-                        <app-button type="button" @click.native.prevent="deletePhoto" v-if="user.profile_photo_path">
+                        <x-button type="button" @click.native.prevent="deletePhoto" v-if="user.profile_photo_path">
                             Remove Photo
-                        </app-button>
+                        </x-button>
                     </div>
                 </div>
 
-                <form-input-error :message="form.errors.photo" class="mt-2" />
+                <f-input-error :message="form.errors.photo" class="mt-2" />
             </div>
 
             <!-- Name -->
             <div class="col-span-6 space-y-1 sm:col-span-4">
-                <form-input
+                <f-input
                     label="Name"
                     autocomplete="name"
                     v-model="form.name"
                 />
 
-                <form-input-error :message="form.errors.name" />
+                <f-input-error :message="form.errors.name" />
             </div>
 
             <!-- Username -->
             <div class="col-span-6 space-y-1 sm:col-span-4">
-                <form-input
+                <f-input
                     label="Username"
                     v-model="form.username"
                 />
 
-                <form-input-error :message="form.errors.username" />
+                <f-input-error :message="form.errors.username" />
             </div>
 
             <!-- Email -->
             <div class="col-span-6 space-y-1 sm:col-span-4">
-                <form-input
+                <f-input
                     label="Email"
                     type="email"
                     v-model="form.email"
                 />
 
-                <form-input-error :message="form.errors.email" />
+                <f-input-error :message="form.errors.email" />
             </div>
         </template>
 
         <template #actions>
-            <form-action-message :on="form.recentlySuccessful">
+            <f-action-message :on="form.recentlySuccessful">
                 Saved
-            </form-action-message>
+            </f-action-message>
 
-            <app-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <x-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 Save
-            </app-button>
+            </x-button>
         </template>
-    </form-section>
+    </f-section>
 </template>
 
 <script>
-    import AppButton from '@/Components/Button'
-    import FormActionMessage from '@/Components/Form/ActionMessage'
-    import FormInput from '@/Components/Form/Input'
-    import FormInputError from '@/Components/Form/InputError'
-    import FormSection from '@/Components/Form/Section'
-    import { inject, ref } from 'vue'
+    import FActionMessage from '@/Components/Form/ActionMessage'
+    import FInput from '@/Components/Form/Input'
+    import FInputError from '@/Components/Form/InputError'
+    import FSection from '@/Components/Form/Section'
+    import XButton from '@/Components/Button'
+    import { ref } from 'vue'
     import { Inertia } from '@inertiajs/inertia'
     import { useForm, usePage } from '@inertiajs/inertia-vue3'
 
     export default {
         props: ['user'],
         components: {
-            AppButton,
-            FormActionMessage,
-            FormInput,
-            FormInputError,
-            FormSection,
+            FActionMessage,
+            FInput,
+            FInputError,
+            FSection,
+            XButton,
         },
         setup(props) {
             const page = usePage()

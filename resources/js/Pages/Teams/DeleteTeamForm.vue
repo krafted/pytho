@@ -1,5 +1,5 @@
 <template>
-    <form-action-section>
+    <f-action-section>
         <template #title>
             Delete Team
         </template>
@@ -14,7 +14,7 @@
             </div>
 
             <!-- Delete Team Confirmation Modal -->
-            <app-modal
+            <x-modal
                 :show="confirmingTeamDeletion"
                 @close="confirmingTeamDeletion = false"
             >
@@ -33,40 +33,40 @@
                 </template>
 
                 <template #actions>
-                    <app-secondary-button @click.native="confirmingTeamDeletion = false">
+                    <x-secondary-button @click.native="confirmingTeamDeletion = false">
                         Close
-                    </app-secondary-button>
+                    </x-secondary-button>
 
-                    <app-danger-button @click.native="deleteTeam" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    <x-danger-button @click.native="deleteTeam" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         Delete Team
-                    </app-danger-button>
+                    </x-danger-button>
                 </template>
-            </app-modal>
+            </x-modal>
         </template>
 
         <template #actions>
-            <app-danger-button @click.native="confirmTeamDeletion">
+            <x-danger-button @click.native="confirmTeamDeletion">
                 Delete Team
-            </app-danger-button>
+            </x-danger-button>
         </template>
-    </form-action-section>
+    </f-action-section>
 </template>
 
 <script>
-    import AppDangerButton from '@/Components/DangerButton'
-    import AppModal from '@/Components/Modal'
-    import AppSecondaryButton from '@/Components/SecondaryButton'
-    import FormActionSection from '@/Components/Form/ActionSection'
+    import FActionSection from '@/Components/Form/ActionSection'
+    import XDangerButton from '@/Components/DangerButton'
+    import XModal from '@/Components/Modal'
+    import XSecondaryButton from '@/Components/SecondaryButton'
     import { ref } from 'vue'
     import { useForm } from '@inertiajs/inertia-vue3'
 
     export default {
         props: ['team'],
         components: {
-            AppDangerButton,
-            AppModal,
-            AppSecondaryButton,
-            FormActionSection,
+            FActionSection,
+            XDangerButton,
+            XModal,
+            XSecondaryButton,
         },
         setup(props) {
             const form = useForm()

@@ -1,22 +1,17 @@
 <template>
-    <a
-        v-if="href"
+    <component
+        :is="element"
+        :class="['inline-flex justify-center items-center px-4 py-2 text-sm font-semibold tracking-wide border rounded-md uppercase', classes]"
         :href="href"
-        :class="['inline-flex justify-center items-center px-4 py-2 text-sm font-semibold tracking-wide border rounded-md uppercase', classes]"
-    >
-        <slot />
-    </a>
-
-    <button
-        v-else
         :type="type"
-        :class="['inline-flex justify-center items-center px-4 py-2 text-sm font-semibold tracking-wide border rounded-md uppercase', classes]"
     >
         <slot />
-    </button>
+    </component>
 </template>
 
 <script>
+    import { computed } from 'vue'
+
     export default {
         props: {
             classes: {
@@ -30,6 +25,11 @@
                 type: String,
                 default: 'submit',
             },
+        },
+        setup(props) {
+            const element = computed(() => props.href ? 'a' : 'button')
+
+            return { element }
         }
     }
 </script>

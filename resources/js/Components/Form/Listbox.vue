@@ -1,7 +1,7 @@
 <template>
     <h-listbox
         as="div"
-        class="h-14.5 px-4 pt-2 pb-8 bg-gray-100 border border-gray-100 rounded-md dark:border-gray-800 dark:bg-gray-800 focus-within:bg-white dark:focus-within:bg-gray-900 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 focus-within:outline-none focus-within:ring-primary-500"
+        class="h-14.5 px-4 pt-2 pb-8 bg-gray-100 border border-gray-100 rounded-md dark:border-gray-800 dark:bg-gray-800 focus-within:bg-white dark:focus-within:bg-gray-900 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 focus-within:outline-none focus-within:ring-primary-500 focus-within:border-gray-300 dark:focus-within:border-gray-600"
         :model-value="modelValue"
         v-slot="{ open }"
         @update:model-value="handleInput"
@@ -42,7 +42,7 @@
                     top: 'bottom-full mb-2',
                 }[position]"
             >
-                <h-listbox-options class="overflow-y-auto bg-white border border-gray-100 rounded-md shadow-xs max-h-60 dark:bg-gray-900 focus:outline-none dark:border-gray-800">
+                <h-listbox-options class="overflow-y-auto rounded-md shadow-lg max-h-60 dark:bg-gray-900 focus:outline-none">
                     <h-listbox-option
                         v-for="option in options"
                         :key="option.value"

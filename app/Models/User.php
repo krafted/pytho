@@ -20,6 +20,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Scout\Searchable;
 use Spatie\Activitylog\Models\Activity;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -32,6 +33,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasTeams;
     use HasConnectedAccounts;
     use Notifiable;
+    use Searchable;
     use TwoFactorAuthenticatable;
 
     /**
@@ -164,5 +166,20 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
         return $username;
+    }
+
+    /**
+     * Get the indexable data array for the Pen.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        return [
+            'name' => $array['name'],
+            'username' => $array['username'],
+        ];
     }
 }

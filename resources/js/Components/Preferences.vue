@@ -1,5 +1,5 @@
 <template>
-    <app-modal
+    <x-modal
         :show="show"
         @close="show = false"
     >
@@ -14,7 +14,7 @@
         <template #content>
             <div class="grid grid-cols-1 gap-3">
                 <div class="grid grid-cols-2 gap-3">
-                    <form-button-group
+                    <f-button-group
                         label="Layout"
                         :value="preferences.layout"
                         :options="[
@@ -32,7 +32,7 @@
                         @update:value="updatePreference('layout', $event)"
                     />
 
-                    <form-button-group
+                    <f-button-group
                         label="Theme"
                         :value="preferences.theme"
                         :options="[
@@ -51,33 +51,33 @@
                     />
                 </div>
 
-                <form-input
+                <f-input
                     label="Font Size"
                     :model-value="preferences.fontSize.toString()"
                     @update:model-value="updatePreference('fontSize', $event)"
                 >
-                    <form-number-input
+                    <f-number-input
                         max="26"
                         min="10"
                         step="1"
                         increments
                     />
-                </form-input>
+                </f-input>
 
-                <form-input
+                <f-input
                     label="Indent Size"
                     :model-value="preferences.indentUnit.toString()"
                     @update:model-value="updatePreference('indentUnit', $event)"
                 >
-                    <form-number-input
+                    <f-number-input
                         max="8"
                         min="1"
                         step="1"
                         increments
                     />
-                </form-input>
+                </f-input>
 
-                <form-listbox
+                <f-listbox
                     v-if="!isMobile"
                     label="Keymap"
                     :model-value="preferences.keyMap"
@@ -86,52 +86,52 @@
                     @update:model-value="updatePreference('keyMap', $event)"
                 />
 
-                <form-input
+                <f-input
                     label="Line Height"
                     :model-value="preferences.lineHeight.toString()"
                     @update:model-value="updatePreference('lineHeight', $event)"
                 >
-                    <form-number-input
+                    <f-number-input
                         max="2.5"
                         min="0.75"
                         step="0.25"
                         type="float"
                         increments
                     />
-                </form-input>
+                </f-input>
             </div>
         </template>
 
         <template #actions>
-            <app-button
+            <x-button
                 type="button"
                 @click="show = false"
             >
                 Close
-            </app-button>
+            </x-button>
         </template>
-    </app-modal>
+    </x-modal>
 </template>
 
 <script>
     import { inject, onMounted, onUnmounted } from 'vue'
     import { updateTheme } from '@/Utils/theme'
-    import AppButton from '@/Components/Button'
-    import AppModal from '@/Components/Modal'
-    import FormButtonGroup from '@/Components/Form/ButtonGroup.vue'
-    import FormInput from '@/Components/Form/Input.vue'
-    import FormListbox from '@/Components/Form/Listbox.vue'
-    import FormNumberInput from '@/Components/Form/NumberInput.vue'
+    import FButtonGroup from '@/Components/Form/ButtonGroup.vue'
+    import FInput from '@/Components/Form/Input.vue'
+    import FListbox from '@/Components/Form/Listbox.vue'
+    import FNumberInput from '@/Components/Form/NumberInput.vue'
+    import XButton from '@/Components/Button'
+    import XModal from '@/Components/Modal'
     import hotkeys from 'hotkeys-js'
 
     export default {
         components: {
-            AppButton,
-            AppModal,
-            FormButtonGroup,
-            FormInput,
-            FormListbox,
-            FormNumberInput,
+            FButtonGroup,
+            FInput,
+            FListbox,
+            FNumberInput,
+            XButton,
+            XModal,
         },
         setup() {
             const preferences = inject('preferences')

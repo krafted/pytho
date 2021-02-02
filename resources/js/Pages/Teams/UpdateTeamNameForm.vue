@@ -1,5 +1,5 @@
 <template>
-    <form-section @submitted="updateTeamName">
+    <f-section @submitted="updateTeamName">
         <template #title>
             Team Name
         </template>
@@ -31,44 +31,44 @@
 
             <!-- Team Name -->
             <div class="col-span-6 space-y-1 sm:col-span-4">
-                <form-input
+                <f-input
                     label="Team Name"
                     :disabled="!permissions.canUpdateTeam"
                     v-model="form.name"
                 />
 
-                <form-input-error :message="form.errors.name" />
+                <f-input-error :message="form.errors.name" />
             </div>
         </template>
 
         <template #actions v-if="permissions.canUpdateTeam">
-            <form-action-message :on="form.recentlySuccessful" class="mr-3">
+            <f-action-message :on="form.recentlySuccessful" class="mr-3">
                 Saved
-            </form-action-message>
+            </f-action-message>
 
-            <app-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <x-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 Save
-            </app-button>
+            </x-button>
         </template>
-    </form-section>
+    </f-section>
 </template>
 
 <script>
-    import AppButton from '@/Components/Button'
-    import FormActionMessage from '@/Components/Form/ActionMessage'
-    import FormInput from '@/Components/Form/Input'
-    import FormInputError from '@/Components/Form/InputError'
-    import FormSection from '@/Components/Form/Section'
+    import FActionMessage from '@/Components/Form/ActionMessage'
+    import FInput from '@/Components/Form/Input'
+    import FInputError from '@/Components/Form/InputError'
+    import FSection from '@/Components/Form/Section'
+    import XButton from '@/Components/Button'
     import { useForm } from '@inertiajs/inertia-vue3'
 
     export default {
         props: ['team', 'permissions'],
         components: {
-            AppButton,
-            FormActionMessage,
-            FormInput,
-            FormInputError,
-            FormSection,
+            FActionMessage,
+            FInput,
+            FInputError,
+            FSection,
+            XButton,
         },
         setup(props) {
             const form = useForm({ name: props.team.name })

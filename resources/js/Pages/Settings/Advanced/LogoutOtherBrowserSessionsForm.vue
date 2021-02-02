@@ -1,5 +1,5 @@
 <template>
-    <form-action-section>
+    <f-action-section>
         <template #title>
             Browser Sessions
         </template>
@@ -44,7 +44,7 @@
             </div>
 
             <!-- Logout Other Devices Confirmation Modal -->
-            <app-modal
+            <x-modal
                 :show="confirmingLogout"
                 @close="closeModal"
             >
@@ -63,7 +63,7 @@
                         </div>
 
                         <div class="mt-3 space-y-1">
-                            <form-input
+                            <f-input
                                 label="Password"
                                 type="password"
                                 ref="password"
@@ -71,56 +71,56 @@
                                 @keyup.enter.native="logoutOtherBrowserSessions"
                             />
 
-                            <form-input-error :message="form.errors.password" />
+                            <f-input-error :message="form.errors.password" />
                         </div>
                     </div>
                 </template>
 
                 <template #actions>
-                    <app-secondary-button @click.native="closeModal">
+                    <x-secondary-button @click.native="closeModal">
                         Close
-                    </app-secondary-button>
+                    </x-secondary-button>
 
-                    <app-button @click.native="logoutOtherBrowserSessions" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    <x-button @click.native="logoutOtherBrowserSessions" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         Logout Other Browser Sessions
-                    </app-button>
+                    </x-button>
                 </template>
-            </app-modal>
+            </x-modal>
         </template>
 
         <template #actions>
-            <form-action-message :on="form.recentlySuccessful">
+            <f-action-message :on="form.recentlySuccessful">
                 Done
-            </form-action-message>
+            </f-action-message>
 
-            <app-button @click.native="confirmLogout">
+            <x-button @click.native="confirmLogout">
                 Logout Other Browser Sessions
-            </app-button>
+            </x-button>
         </template>
-    </form-action-section>
+    </f-action-section>
 </template>
 
 <script>
-    import AppButton from '@/Components/Button'
-    import AppModal from '@/Components/Modal'
-    import AppSecondaryButton from '@/Components/SecondaryButton'
-    import FormActionMessage from '@/Components/Form/ActionMessage'
-    import FormActionSection from '@/Components/Form/ActionSection'
-    import FormInput from '@/Components/Form/Input'
-    import FormInputError from '@/Components/Form/InputError'
-    import { inject, provide, ref } from 'vue'
+    import FActionMessage from '@/Components/Form/ActionMessage'
+    import FActionSection from '@/Components/Form/ActionSection'
+    import FInput from '@/Components/Form/Input'
+    import FInputError from '@/Components/Form/InputError'
+    import XButton from '@/Components/Button'
+    import XModal from '@/Components/Modal'
+    import XSecondaryButton from '@/Components/SecondaryButton'
+    import { ref } from 'vue'
     import { useForm } from '@inertiajs/inertia-vue3'
 
     export default {
         props: ['sessions'],
         components: {
-            AppButton,
-            AppModal,
-            AppSecondaryButton,
-            FormActionMessage,
-            FormActionSection,
-            FormInput,
-            FormInputError,
+            FActionMessage,
+            FActionSection,
+            FInput,
+            FInputError,
+            XButton,
+            XModal,
+            XSecondaryButton,
         },
         setup() {
             const form = useForm({ password: '' })

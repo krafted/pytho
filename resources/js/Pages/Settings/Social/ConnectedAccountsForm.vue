@@ -1,5 +1,5 @@
 <template>
-    <form-action-section>
+    <f-action-section>
         <template #title>
             Connected Accounts
         </template>
@@ -23,7 +23,7 @@
 
             <div class="-mx-6 -mb-6 divide-y divide-gray-100 dark:divide-gray-800">
                 <div class="p-6" v-for="(provider) in page.props.value.socialstream.providers" :key="provider">
-                    <app-connected-account v-if="hasAccountForProvider(provider)" :provider="getAccountForProvider(provider).provider" :created-at="getAccountForProvider(provider).created_at">
+                    <x-connected-account v-if="hasAccountForProvider(provider)" :provider="getAccountForProvider(provider).provider" :created-at="getAccountForProvider(provider).created_at">
                         <template #action>
                             <button
                                 v-if="page.props.value.socialstream.canRemoveAccounts || page.props.value.socialstream.hasPassword"
@@ -33,9 +33,9 @@
                                 Remove
                             </button>
                         </template>
-                    </app-connected-account>
+                    </x-connected-account>
 
-                    <app-connected-account v-else :provider="provider">
+                    <x-connected-account v-else :provider="provider">
                         <template #action>
                             <a
                                 class="text-sm font-semibold tracking-wide text-gray-500 uppercase focus:outline-none focus:ring-2 focus:ring-primary-500"
@@ -45,12 +45,12 @@
                                 Connect
                             </a>
                         </template>
-                    </app-connected-account>
+                    </x-connected-account>
                 </div>
             </div>
 
             <!-- Confirmation Modal -->
-            <app-modal
+            <x-modal
                 :show="confirmingRemove"
                 @close="confirmingRemove = false"
             >
@@ -70,35 +70,35 @@
                 </template>
 
                 <template #actions>
-                    <app-secondary-button @click.native="confirmingRemove = false">
+                    <x-secondary-button @click.native="confirmingRemove = false">
                         Close
-                    </app-secondary-button>
+                    </x-secondary-button>
 
-                    <app-danger-button @click.native="removeConnectedAccount(accountId)" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    <x-danger-button @click.native="removeConnectedAccount(accountId)" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         Remove Connected Account
-                    </app-danger-button>
+                    </x-danger-button>
                 </template>
-            </app-modal>
+            </x-modal>
         </template>
-    </form-action-section>
+    </f-action-section>
 </template>
 
 <script>
-    import AppDangerButton from '@/Components/DangerButton'
-    import AppConnectedAccount from '@/Components/ConnectedAccount'
-    import AppModal from '@/Components/Modal'
-    import AppSecondaryButton from '@/Components/SecondaryButton'
-    import FormActionSection from '@/Components/Form/ActionSection'
+    import FActionSection from '@/Components/Form/ActionSection'
+    import XDangerButton from '@/Components/DangerButton'
+    import XConnectedAccount from '@/Components/ConnectedAccount'
+    import XModal from '@/Components/Modal'
+    import XSecondaryButton from '@/Components/SecondaryButton'
     import { ref } from 'vue'
     import { useForm, usePage } from '@inertiajs/inertia-vue3'
 
     export default {
         components: {
-            AppConnectedAccount,
-            AppDangerButton,
-            AppModal,
-            AppSecondaryButton,
-            FormActionSection,
+            FActionSection,
+            XConnectedAccount,
+            XDangerButton,
+            XModal,
+            XSecondaryButton,
         },
         setup() {
             const page = usePage()

@@ -1,5 +1,5 @@
 <template>
-    <app-layout>
+    <l-app>
         <template #header>
             <h1 class="text-xl font-semibold leading-tight text-gray-800">
                 API Tokens
@@ -13,12 +13,12 @@
                                    :default-permissions="defaultPermissions" />
             </div>
         </div>
-    </app-layout>
+    </l-app>
 </template>
 
 <script>
     import ApiTokenManager from '@/Pages/API/ApiTokenManager'
-    import AppLayout from '@/Layouts/App'
+    import LApp from '@/Layouts/App'
 
     export default {
         props: [
@@ -28,7 +28,7 @@
         ],
         components: {
             ApiTokenManager,
-            AppLayout,
+            LApp,
         },
     }
 </script>

@@ -1,26 +1,26 @@
 <template>
-    <app-settings-layout>
+    <l-settings>
         <div v-if="page.props.value.jetstream.canUpdatePassword && page.props.value.socialstream.hasPassword">
             <update-password-form />
 
-            <form-section-border />
+            <f-section-border />
         </div>
 
         <div v-else>
             <set-password-form class="mt-6 sm:mt-0" />
 
-            <form-section-border />
+            <f-section-border />
         </div>
 
         <div v-if="page.props.value.jetstream.canManageTwoFactorAuthentication && page.props.value.socialstream.hasPassword">
             <two-factor-authentication-form class="mt-6 sm:mt-0" />
         </div>
-    </app-settings-layout>
+    </l-settings>
 </template>
 
 <script>
-    import AppSettingsLayout from '@/Layouts/Settings'
-    import FormSectionBorder from '@/Components/Form/SectionBorder'
+    import FSectionBorder from '@/Components/Form/SectionBorder'
+    import LSettings from '@/Layouts/Settings'
     import SetPasswordForm from './SetPasswordForm'
     import TwoFactorAuthenticationForm from './TwoFactorAuthenticationForm'
     import UpdatePasswordForm from './UpdatePasswordForm'
@@ -29,8 +29,8 @@
 
     export default {
         components: {
-            AppSettingsLayout,
-            FormSectionBorder,
+            FSectionBorder,
+            LSettings,
             SetPasswordForm,
             TwoFactorAuthenticationForm,
             UpdatePasswordForm,

@@ -4,7 +4,7 @@
             <slot />
         </span>
 
-        <app-modal
+        <x-modal
             :show="confirmingPassword"
             @close="confirmingPassword = false"
         >
@@ -23,7 +23,7 @@
                     </div>
 
                     <div class="mt-3 space-y-1">
-                        <form-input
+                        <f-input
                             label="Password"
                             type="password"
                             ref="password"
@@ -31,31 +31,31 @@
                             @keyup.enter.native="confirmPassword"
                         />
 
-                        <form-input-error :message="form.error" />
+                        <f-input-error :message="form.error" />
                     </div>
                 </div>
             </template>
 
             <template #actions>
-                <app-secondary-button @click.native="closeModal">
+                <x-secondary-button @click.native="closeModal">
                     Close
-                </app-secondary-button>
+                </x-secondary-button>
 
-                <app-button @click.native="confirmPassword" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <x-button @click.native="confirmPassword" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     {{ button }}
-                </app-button>
+                </x-button>
             </template>
-        </app-modal>
+        </x-modal>
     </span>
 </template>
 
 <script>
     import { nextTick, provide, ref } from 'vue'
-    import AppButton from '@/Components/Button'
-    import AppModal from '@/Components/Modal'
-    import AppSecondaryButton from '@/Components/SecondaryButton'
-    import FormInput from '@/Components/Form/Input'
-    import FormInputError from '@/Components/Form/InputError'
+    import FInput from '@/Components/Form/Input'
+    import FInputError from '@/Components/Form/InputError'
+    import XButton from '@/Components/Button'
+    import XModal from '@/Components/Modal'
+    import XSecondaryButton from '@/Components/SecondaryButton'
 
     export default {
         emits: ['confirmed'],
@@ -71,11 +71,11 @@
             }
         },
         components: {
-            AppButton,
-            AppModal,
-            AppSecondaryButton,
-            FormInput,
-            FormInputError,
+            FInput,
+            FInputError,
+            XButton,
+            XModal,
+            XSecondaryButton,
         },
         setup(_, { emit }) {
             const password = ref(null)

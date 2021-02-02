@@ -17,7 +17,9 @@
         "laravel/framework": "^8.12",
         "laravel/jetstream": "^2.1",
         "laravel/sanctum": "^2.6",
+        "laravel/scout": "^8.6",
         "laravel/tinker": "^2.5",
+        "meilisearch/meilisearch-laravel-scout": "^0.12.3",
         "spatie/laravel-activitylog": "^3.16",
         "tightenco/ziggy": "^1.0"
     },

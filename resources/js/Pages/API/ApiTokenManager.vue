@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Generate API Token -->
-        <form-section @submitted="createApiToken">
+        <f-section @submitted="createApiToken">
             <template #title>
                 Create API Token
             </template>
@@ -13,13 +13,13 @@
             <template #form>
                 <!-- Token Name -->
                 <div class="col-span-6 space-y-1 sm:col-span-4">
-                    <form-input
+                    <f-input
                         label="Name"
                         autofocus
                         v-model="createApiTokenForm.name"
                     />
 
-                    <form-input-error :message="createApiTokenForm.errors.name" />
+                    <f-input-error :message="createApiTokenForm.errors.name" />
                 </div>
 
                 <!-- Token Permissions -->
@@ -29,7 +29,7 @@
                     <div class="grid grid-cols-1 gap-4 mt-2 md:grid-cols-2">
                         <div v-for="permission in availablePermissions" :key="permission">
                             <label class="flex items-center">
-                                <app-checkbox :value="permission" v-model="createApiTokenForm.permissions"/>
+                                <x-checkbox :value="permission" v-model="createApiTokenForm.permissions"/>
                                 <span class="ml-2 text-sm text-gray-600">{{ permission }}</span>
                             </label>
                         </div>
@@ -38,22 +38,22 @@
             </template>
 
             <template #actions>
-                <form-action-message :on="createApiTokenForm.recentlySuccessful" class="mr-3">
+                <f-action-message :on="createApiTokenForm.recentlySuccessful" class="mr-3">
                     Created.
-                </form-action-message>
+                </f-action-message>
 
-                <app-button :class="{ 'opacity-25': createApiTokenForm.processing }" :disabled="createApiTokenForm.processing">
+                <x-button :class="{ 'opacity-25': createApiTokenForm.processing }" :disabled="createApiTokenForm.processing">
                     Create
-                </app-button>
+                </x-button>
             </template>
-        </form-section>
+        </f-section>
 
         <div v-if="tokens.length > 0">
-            <form-section-border />
+            <f-section-border />
 
             <!-- Manage API Tokens -->
             <div class="mt-10 sm:mt-0">
-                <form-action-section>
+                <f-action-section>
                     <template #title>
                         Manage API Tokens
                     </template>
@@ -89,12 +89,12 @@
                             </div>
                         </div>
                     </template>
-                </form-action-section>
+                </f-action-section>
             </div>
         </div>
 
         <!-- Token Value Modal -->
-        <app-modal
+        <x-modal
             :show="displayingToken"
             @close="displayingToken = false"
         >
@@ -113,14 +113,14 @@
             </template>
 
             <template #footer>
-                <app-secondary-button @click.native="displayingToken = false">
+                <x-secondary-button @click.native="displayingToken = false">
                     Close
-                </app-secondary-button>
+                </x-secondary-button>
             </template>
-        </app-modal>
+        </x-modal>
 
         <!-- API Token Permissions Modal -->
-        <app-modal
+        <x-modal
             :show="managingPermissionsFor"
             @close="managingPermissionsFor = null"
         >
@@ -132,7 +132,7 @@
                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div v-for="permission in availablePermissions" :key="permission">
                         <label class="flex items-center">
-                            <form-checkbox
+                            <f-checkbox
                                 :value="permission"
                                 v-model="updateApiTokenForm.permissions"
                             />
@@ -143,18 +143,18 @@
             </template>
 
             <template #actions>
-                <app-secondary-button @click.native="managingPermissionsFor = null">
+                <x-secondary-button @click.native="managingPermissionsFor = null">
                     Close
-                </app-secondary-button>
+                </x-secondary-button>
 
-                <app-button class="ml-2" @click.native="updateApiToken" :class="{ 'opacity-25': updateApiTokenForm.processing }" :disabled="updateApiTokenForm.processing">
+                <x-button class="ml-2" @click.native="updateApiToken" :class="{ 'opacity-25': updateApiTokenForm.processing }" :disabled="updateApiTokenForm.processing">
                     Save
-                </app-button>
+                </x-button>
             </template>
-        </app-modal>
+        </x-modal>
 
         <!-- Delete Token Confirmation Modal -->
-        <app-modal
+        <x-modal
             :show="apiTokenBeingDeleted"
             @close="apiTokenBeingDeleted = null"
         >
@@ -167,44 +167,44 @@
             </template>
 
             <template #actions>
-                <app-secondary-button @click.native="apiTokenBeingDeleted = null">
+                <x-secondary-button @click.native="apiTokenBeingDeleted = null">
                     Close
-                </app-secondary-button>
+                </x-secondary-button>
 
-                <app-danger-button class="ml-2" @click.native="deleteApiToken" :class="{ 'opacity-25': deleteApiTokenForm.processing }" :disabled="deleteApiTokenForm.processing">
+                <x-danger-button class="ml-2" @click.native="deleteApiToken" :class="{ 'opacity-25': deleteApiTokenForm.processing }" :disabled="deleteApiTokenForm.processing">
                     Delete
-                </app-danger-button>
+                </x-danger-button>
             </template>
-        </app-modal>
+        </x-modal>
     </div>
 </template>
 
 <script>
-    import AppButton from '@/Components/Button'
-    import AppDangerButton from '@/Components/DangerButton'
-    import AppSecondaryButton from '@/Components/SecondaryButton'
-    import AppModal from '@/Components/Modal'
-    import FormCheckbox from '@/Components/Form/Checkbox'
-    import FormActionMessage from '@/Components/Form/ActionMessage'
-    import FormInput from '@/Components/Form/Input'
-    import FormInputError from '@/Components/Form/InputError'
-    import FormSection from '@/Components/Form/Section'
-    import FormSectionBorder from '@/Components/Form/SectionBorder'
-    import { inject, ref } from 'vue'
+    import FActionMessage from '@/Components/Form/ActionMessage'
+    import FCheckbox from '@/Components/Form/Checkbox'
+    import FInput from '@/Components/Form/Input'
+    import FInputError from '@/Components/Form/InputError'
+    import FSection from '@/Components/Form/Section'
+    import FSectionBorder from '@/Components/Form/SectionBorder'
+    import XButton from '@/Components/Button'
+    import XDangerButton from '@/Components/DangerButton'
+    import XSecondaryButton from '@/Components/SecondaryButton'
+    import XModal from '@/Components/Modal'
+    import { ref } from 'vue'
     import { useForm, usePage } from '@inertiajs/inertia-vue3'
 
     export default {
         components: {
-            AppButton,
-            AppDangerButton,
-            AppSecondaryButton,
-            AppModal,
-            FormActionMessage,
-            FormCheckbox,
-            FormInput,
-            FormInputError,
-            FormSection,
-            FormSectionBorder,
+            FActionMessage,
+            FCheckbox,
+            FInput,
+            FInputError,
+            FSection,
+            FSectionBorder,
+            XButton,
+            XDangerButton,
+            XSecondaryButton,
+            XModal,
         },
         props: [
             'tokens',
