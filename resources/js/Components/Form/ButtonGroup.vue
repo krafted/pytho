@@ -11,10 +11,7 @@
                 :key="option.value"
                 class="inline-flex items-center justify-center flex-1 h-8 focus:outline-none focus:z-10 focus:ring-2 focus:ring-primary-500"
                 :class="[
-                    {
-                        'rounded-l-md': index === 0,
-                        'rounded-r-md': index === options.length - 1,
-                    },
+                    { 'rounded-l-md': index === 0, 'rounded-r-md': index === options.length - 1 },
                     option.value === value ? 'bg-white dark:bg-gray-1000 text-gray-900 dark:text-white' : 'text-gray-500 hover:bg-white dark:hover:bg-gray-1000 hover:text-gray-900 dark:hover:text-white focus:bg-white dark:focus:bg-gray-1000 focus:text-gray-900 dark:focus:text-white bg-gray-200 dark:bg-gray-900'
                 ]"
                 @click="handleInput(option.value)"
