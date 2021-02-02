@@ -34,7 +34,9 @@ class SearchController extends Controller
         return
             collect(
                 Pen::search($request->search, function (Indexes $meilisearch, $query, $options) use ($request) {
-                    $options['filters'] = 'visibility="public" AND NOT user_id=' . optional($request->user())->id;
+                    $options['filters'] = $request->user()
+                        ? 'visibility="public" AND NOT user_id=' . optional($request->user())->id
+                        : 'visibility="public"';
                     $options['attributesToHighlight'] = ['title', 'description'];
 
                     return $meilisearch->search($query, $options);
