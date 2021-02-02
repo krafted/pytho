@@ -1,5 +1,5 @@
 <template>
-    <form-action-section>
+    <f-action-section>
         <template #title>
             Two Factor Authentication
         </template>
@@ -53,60 +53,60 @@
 
         <template #actions>
             <div v-if="!twoFactorEnabled">
-                <app-confirms-password @confirmed="enableTwoFactorAuthentication">
-                    <app-button type="button" :class="{ 'opacity-25': enabling }" :disabled="enabling">
+                <x-confirms-password @confirmed="enableTwoFactorAuthentication">
+                    <x-button type="button" :class="{ 'opacity-25': enabling }" :disabled="enabling">
                         Enable
-                    </app-button>
-                </app-confirms-password>
+                    </x-button>
+                </x-confirms-password>
             </div>
 
             <div v-else>
-                <app-confirms-password @confirmed="regenerateRecoveryCodes">
-                    <app-button
+                <x-confirms-password @confirmed="regenerateRecoveryCodes">
+                    <x-button
                         v-if="recoveryCodes.length > 0"
                         class="mr-3"
                     >
                         Regenerate Recovery Codes
-                    </app-button>
-                </app-confirms-password>
+                    </x-button>
+                </x-confirms-password>
 
-                <app-confirms-password @confirmed="showRecoveryCodes">
-                    <app-button
+                <x-confirms-password @confirmed="showRecoveryCodes">
+                    <x-button
                         v-if="recoveryCodes.length === 0"
                         class="mr-3"
                     >
                         Show Recovery Codes
-                    </app-button>
-                </app-confirms-password>
+                    </x-button>
+                </x-confirms-password>
 
-                <app-confirms-password @confirmed="disableTwoFactorAuthentication">
-                    <app-danger-button
+                <x-confirms-password @confirmed="disableTwoFactorAuthentication">
+                    <x-danger-button
                         :class="{ 'opacity-25': disabling }"
                         :disabled="disabling"
                     >
                         Disable
-                    </app-danger-button>
-                </app-confirms-password>
+                    </x-danger-button>
+                </x-confirms-password>
             </div>
         </template>
-    </form-action-section>
+    </f-action-section>
 </template>
 
 <script>
-    import AppButton from '@/Components/Button'
-    import AppConfirmsPassword from '@/Components/ConfirmsPassword'
-    import AppDangerButton from '@/Components/DangerButton'
-    import FormActionSection from '@/Components/Form/ActionSection'
+    import FActionSection from '@/Components/Form/ActionSection'
+    import XButton from '@/Components/Button'
+    import XConfirmsPassword from '@/Components/ConfirmsPassword'
+    import XDangerButton from '@/Components/DangerButton'
     import { Inertia } from '@inertiajs/inertia'
     import { usePage } from '@inertiajs/inertia-vue3'
-    import { computed, inject, ref } from 'vue'
+    import { computed, ref } from 'vue'
 
     export default {
         components: {
-            AppButton,
-            AppConfirmsPassword,
-            AppDangerButton,
-            FormActionSection,
+            FActionSection,
+            XButton,
+            XConfirmsPassword,
+            XDangerButton,
         },
         setup() {
             const page = usePage()

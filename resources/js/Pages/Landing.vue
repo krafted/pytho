@@ -3,7 +3,7 @@
         <header class="px-16 pt-safe-top">
             <div class="flex items-center justify-between w-full max-w-5xl py-16 mx-auto pl-safe-left pr-safe-right">
                 <div class="flex items-center space-x-12">
-                    <app-logo class="-ml-2 text-3xl -top-0.5 w-14 h-14" />
+                    <x-logo class="-ml-2 text-3xl -top-0.5 w-14 h-14" />
 
                     <button
                         v-if="route().has('learn')"
@@ -231,22 +231,20 @@
             </div>
         </div>
 
-        <app-preferences />
+        <x-preferences />
     </div>
 </template>
 
 <script>
-    import AppButton from '@/Components/Button'
-    import AppLogo from '@/Components/Logo'
-    import AppPreferences from '@/Components/Preferences'
+    import XLogo from '@/Components/Logo'
+    import XPreferences from '@/Components/Preferences'
     import { provide, ref } from 'vue'
 
     export default {
         props: ['appUrl', 'errorBags', 'errors', 'jetstream', 'socialstream', 'user'],
         components: {
-            AppButton,
-            AppLogo,
-            AppPreferences,
+            XLogo,
+            XPreferences,
         },
         setup() {
             const showPreferences = ref(false)

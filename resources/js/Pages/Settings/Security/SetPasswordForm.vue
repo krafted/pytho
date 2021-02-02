@@ -1,5 +1,5 @@
 <template>
-    <form-section @submitted="setPassword">
+    <f-section @submitted="setPassword">
         <template #title>
             Set Password
         </template>
@@ -10,7 +10,7 @@
 
         <template #form>
             <div class="col-span-6 space-y-1 sm:col-span-4">
-                <form-input
+                <f-input
                     label="New Password"
                     autocomplete="new-password"
                     ref="password"
@@ -18,49 +18,49 @@
                     v-model="form.password"
                 />
 
-                <form-input-error :message="form.errors.password" />
+                <f-input-error :message="form.errors.password" />
             </div>
 
             <div class="col-span-6 space-y-1 sm:col-span-4">
-                <form-input
+                <f-input
                     label="Confirm Password"
                     autocomplete="new-password"
                     type="password"
                     v-model="form.password_confirmation"
                 />
 
-                <form-input-error :message="form.errors.password_confirmation" />
+                <f-input-error :message="form.errors.password_confirmation" />
             </div>
         </template>
 
         <template #actions>
-            <form-action-message :on="form.recentlySuccessful" class="mr-3">
+            <f-action-message :on="form.recentlySuccessful" class="mr-3">
                 Saved
-            </form-action-message>
+            </f-action-message>
 
-            <app-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <x-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 Save
-            </app-button>
+            </x-button>
         </template>
-    </form-section>
+    </f-section>
 </template>
 
 <script>
-    import AppButton from '@/Components/Button'
-    import FormActionMessage from '@/Components/Form/ActionMessage'
-    import FormInput from '@/Components/Form/Input'
-    import FormInputError from '@/Components/Form/InputError'
-    import FormSection from '@/Components/Form/Section'
+    import FActionMessage from '@/Components/Form/ActionMessage'
+    import FInput from '@/Components/Form/Input'
+    import FInputError from '@/Components/Form/InputError'
+    import FSection from '@/Components/Form/Section'
+    import XButton from '@/Components/Button'
     import { ref } from 'vue'
     import { useForm } from '@inertiajs/inertia-vue3'
 
     export default {
         components: {
-            AppButton,
-            FormActionMessage,
-            FormInput,
-            FormInputError,
-            FormSection,
+            FActionMessage,
+            FInput,
+            FInputError,
+            FSection,
+            XButton,
         },
         setup() {
             const form = useForm({

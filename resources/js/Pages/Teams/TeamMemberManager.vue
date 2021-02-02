@@ -1,10 +1,10 @@
 <template>
     <div>
         <div v-if="userPermissions.canAddTeamMembers">
-            <form-section-border />
+            <f-section-border />
 
             <!-- Add Team Member -->
-            <form-section @submitted="addTeamMember">
+            <f-section @submitted="addTeamMember">
                 <template #title>
                     Add Team Member
                 </template>
@@ -22,17 +22,17 @@
 
                     <!-- Member Email -->
                     <div class="col-span-6 space-y-1 sm:col-span-4">
-                        <form-input
+                        <f-input
                             label="Email"
                             v-model="addTeamMemberForm.email"
                         />
 
-                        <form-input-error :message="addTeamMemberForm.errors.email" />
+                        <f-input-error :message="addTeamMemberForm.errors.email" />
                     </div>
 
                     <!-- Role -->
                     <div class="col-span-6 space-y-1 sm:col-span-4" v-if="availableRoles.length > 0">
-                        <form-listbox
+                        <f-listbox
                             label="Role"
                             :options="availableRoles.map(role => ({
                                 label: role.name,
@@ -57,29 +57,29 @@
                                     </div>
                                 </div>
                             </template>
-                        </form-listbox>
+                        </f-listbox>
 
-                        <form-input-error :message="addTeamMemberForm.errors.role" />
+                        <f-input-error :message="addTeamMemberForm.errors.role" />
                     </div>
                 </template>
 
                 <template #actions>
-                    <form-action-message :on="addTeamMemberForm.recentlySuccessful" class="mr-3">
+                    <f-action-message :on="addTeamMemberForm.recentlySuccessful" class="mr-3">
                         Added
-                    </form-action-message>
+                    </f-action-message>
 
-                    <app-button :class="{ 'opacity-25': addTeamMemberForm.processing }" :disabled="addTeamMemberForm.processing">
+                    <x-button :class="{ 'opacity-25': addTeamMemberForm.processing }" :disabled="addTeamMemberForm.processing">
                         Add
-                    </app-button>
+                    </x-button>
                 </template>
-            </form-section>
+            </f-section>
         </div>
 
         <div v-if="team.team_invitations.length > 0 && userPermissions.canAddTeamMembers">
-            <form-section-border />
+            <f-section-border />
 
             <!-- Team Member Invitations -->
-            <form-action-section class="mt-6 sm:mt-0">
+            <f-action-section class="mt-6 sm:mt-0">
                 <template #title>
                     Pending Team Invitations
                 </template>
@@ -107,14 +107,14 @@
                         </div>
                     </div>
                 </template>
-            </form-action-section>
+            </f-action-section>
         </div>
 
         <div v-if="team.users.length > 0">
-            <form-section-border />
+            <f-section-border />
 
             <!-- Manage Team Members -->
-            <form-action-section class="mt-6 sm:mt-0">
+            <f-action-section class="mt-6 sm:mt-0">
                 <template #title>
                     Team Members
                 </template>
@@ -178,11 +178,11 @@
                         </div>
                     </div>
                 </template>
-            </form-action-section>
+            </f-action-section>
         </div>
 
         <!-- Role Management Modal -->
-        <app-modal
+        <x-modal
             :show="currentlyManagingRole"
             @close="currentlyManagingRole = false"
         >
@@ -200,7 +200,7 @@
                         Update the role in this team for <span class="font-semibold">{{ managingRoleFor.name }}</span>
                     </div>
 
-                    <form-listbox
+                    <f-listbox
                         class="mt-1"
                         label="Role"
                         :options="availableRoles.map(role => ({
@@ -225,25 +225,25 @@
                                 </div>
                             </div>
                         </template>
-                    </form-listbox>
+                    </f-listbox>
 
-                    <form-input-error :message="updateRoleForm.errors.role" />
+                    <f-input-error :message="updateRoleForm.errors.role" />
                 </div>
             </template>
 
             <template #actions>
-                <app-secondary-button @click.native="currentlyManagingRole = false">
+                <x-secondary-button @click.native="currentlyManagingRole = false">
                     Close
-                </app-secondary-button>
+                </x-secondary-button>
 
-                <app-button @click.native="updateRole" :class="{ 'opacity-25': updateRoleForm.processing }" :disabled="updateRoleForm.processing">
+                <x-button @click.native="updateRole" :class="{ 'opacity-25': updateRoleForm.processing }" :disabled="updateRoleForm.processing">
                     Save
-                </app-button>
+                </x-button>
             </template>
-        </app-modal>
+        </x-modal>
 
         <!-- Leave Team Confirmation Modal -->
-        <app-modal
+        <x-modal
             :show="confirmingLeavingTeam"
             @close="confirmingLeavingTeam = false"
         >
@@ -262,18 +262,18 @@
             </template>
 
             <template #actions>
-                <app-secondary-button @click.native="confirmingLeavingTeam = false">
+                <x-secondary-button @click.native="confirmingLeavingTeam = false">
                     Close
-                </app-secondary-button>
+                </x-secondary-button>
 
-                <app-danger-button @click.native="leaveTeam" :class="{ 'opacity-25': leaveTeamForm.processing }" :disabled="leaveTeamForm.processing">
+                <x-danger-button @click.native="leaveTeam" :class="{ 'opacity-25': leaveTeamForm.processing }" :disabled="leaveTeamForm.processing">
                     Leave
-                </app-danger-button>
+                </x-danger-button>
             </template>
-        </app-modal>
+        </x-modal>
 
         <!-- Remove Team Member Confirmation Modal -->
-        <app-modal
+        <x-modal
             :show="teamMemberBeingRemoved"
             @close="teamMemberBeingRemoved = null"
         >
@@ -292,30 +292,30 @@
             </template>
 
             <template #actions>
-                <app-secondary-button @click.native="teamMemberBeingRemoved = null">
+                <x-secondary-button @click.native="teamMemberBeingRemoved = null">
                     Close
-                </app-secondary-button>
+                </x-secondary-button>
 
-                <app-danger-button @click.native="removeTeamMember" :class="{ 'opacity-25': removeTeamMemberForm.processing }" :disabled="removeTeamMemberForm.processing">
+                <x-danger-button @click.native="removeTeamMember" :class="{ 'opacity-25': removeTeamMemberForm.processing }" :disabled="removeTeamMemberForm.processing">
                     Remove
-                </app-danger-button>
+                </x-danger-button>
             </template>
-        </app-modal>
+        </x-modal>
     </div>
 </template>
 
 <script>
-    import AppButton from '@/Components/Button'
-    import AppDangerButton from '@/Components/DangerButton'
-    import AppModal from '@/Components/Modal'
-    import AppSecondaryButton from '@/Components/SecondaryButton'
-    import FormActionMessage from '@/Components/Form/ActionMessage'
-    import FormActionSection from '@/Components/Form/ActionSection'
-    import FormInput from '@/Components/Form/Input'
-    import FormInputError from '@/Components/Form/InputError'
-    import FormListbox from '@/Components/Form/Listbox'
-    import FormSection from '@/Components/Form/Section'
-    import FormSectionBorder from '@/Components/Form/SectionBorder'
+    import FActionMessage from '@/Components/Form/ActionMessage'
+    import FActionSection from '@/Components/Form/ActionSection'
+    import FInput from '@/Components/Form/Input'
+    import FInputError from '@/Components/Form/InputError'
+    import FListbox from '@/Components/Form/Listbox'
+    import FSection from '@/Components/Form/Section'
+    import FSectionBorder from '@/Components/Form/SectionBorder'
+    import XButton from '@/Components/Button'
+    import XDangerButton from '@/Components/DangerButton'
+    import XModal from '@/Components/Modal'
+    import XSecondaryButton from '@/Components/SecondaryButton'
     import { Inertia } from '@inertiajs/inertia'
     import { useForm, usePage } from '@inertiajs/inertia-vue3'
     import { ref } from 'vue'
@@ -323,17 +323,17 @@
     export default {
         props: ['team', 'availableRoles', 'userPermissions'],
         components: {
-            AppButton,
-            AppDangerButton,
-            AppModal,
-            AppSecondaryButton,
-            FormActionMessage,
-            FormActionSection,
-            FormInput,
-            FormInputError,
-            FormListbox,
-            FormSection,
-            FormSectionBorder,
+            FActionMessage,
+            FActionSection,
+            FInput,
+            FInputError,
+            FListbox,
+            FSection,
+            FSectionBorder,
+            XButton,
+            XDangerButton,
+            XModal,
+            XSecondaryButton,
         },
         setup(props) {
             const page = usePage()

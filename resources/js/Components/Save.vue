@@ -30,7 +30,7 @@
         </transition>
     </button>
 
-    <app-modal
+    <x-modal
         :show="show"
         type="form"
         @close="show = false"
@@ -47,33 +47,33 @@
         <template #content>
             <div class="grid grid-cols-1 gap-3">
                 <div class="space-y-1">
-                    <form-url-input
+                    <f-url-input
                         ref="url"
                         label="URL"
                         :prepend="page.props.value.appUrl"
                         v-model="form.slug"
                     />
-                    <form-input-error :message="form.errors.slug" />
+                    <f-input-error :message="form.errors.slug" />
                 </div>
 
                 <div class="space-y-1">
-                    <form-input
+                    <f-input
                         label="Title"
                         v-model="form.title"
                     />
-                    <form-input-error :message="form.errors.title" />
+                    <f-input-error :message="form.errors.title" />
                 </div>
 
                 <div class="space-y-1">
-                    <form-textarea
+                    <f-textarea
                         label="Description"
                         v-model="form.description"
                     />
-                    <form-input-error :message="form.errors.description" />
+                    <f-input-error :message="form.errors.description" />
                 </div>
 
                 <div class="space-y-1">
-                    <form-listbox
+                    <f-listbox
                         label="Visibility"
                         :options="visibilityOptions"
                         position="top"
@@ -92,56 +92,55 @@
                                 </div>
                             </div>
                         </template>
-                    </form-listbox>
-                    <form-input-error :message="form.errors.visibility" />
+                    </f-listbox>
+                    <f-input-error :message="form.errors.visibility" />
                 </div>
             </div>
         </template>
 
         <template #actions>
-            <app-secondary-button
+            <x-secondary-button
                 type="button"
                 @click="show = false"
             >
                 Close
-            </app-secondary-button>
+            </x-secondary-button>
 
-            <app-button
+            <x-button
                 :class="{ 'opacity-25': form.processing }"
                 :disabled="form.processing"
             >
                 Save
-            </app-button>
+            </x-button>
         </template>
-    </app-modal>
+    </x-modal>
 </template>
 
 <script>
-    import AppButton from '@/Components/Button'
-    import AppModal from '@/Components/Modal'
-    import AppSecondaryButton from '@/Components/SecondaryButton'
-    import FormInput from '@/Components/Form/Input'
-    import FormInputError from '@/Components/Form/InputError'
-    import FormListbox from '@/Components/Form/Listbox'
-    import FormTextarea from '@/Components/Form/Textarea'
-    import FormUrlInput from '@/Components/Form/UrlInput'
+    import FInput from '@/Components/Form/Input'
+    import FInputError from '@/Components/Form/InputError'
+    import FListbox from '@/Components/Form/Listbox'
+    import FTextarea from '@/Components/Form/Textarea'
+    import FUrlInput from '@/Components/Form/UrlInput'
+    import XButton from '@/Components/Button'
+    import XModal from '@/Components/Modal'
+    import XSecondaryButton from '@/Components/SecondaryButton'
     import { inject, nextTick, onMounted, onUnmounted, ref, watchEffect } from 'vue'
     import hotkeys from 'hotkeys-js'
-    import { Inertia } from '@inertiajs/inertia'
     import { usePage } from '@inertiajs/inertia-vue3'
 
     export default {
         emits: ['created', 'saved'],
         props: ['isCreator', 'pen', 'slug'],
         components: {
-            AppButton,
-            AppModal,
-            AppSecondaryButton,
-            FormInput,
-            FormInputError,
-            FormListbox,
-            FormTextarea,
-            FormUrlInput,
+            FInput,
+            FInputError,
+            FListbox,
+            FTextarea,
+            FUrlInput,
+            XButton,
+            XModal,
+            XSecondaryButton,
         },
         setup(props, { emit }) {
             const page = usePage()

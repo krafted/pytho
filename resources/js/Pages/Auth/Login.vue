@@ -1,7 +1,7 @@
 <template>
-    <app-authentication-card>
+    <l-auth>
         <template #logo>
-            <app-logo class="w-10.5 h-10.5 text-lg sm:w-12 sm:h-12 sm:text-2xl" />
+            <x-logo class="w-10.5 h-10.5 text-lg sm:w-12 sm:h-12 sm:text-2xl" />
         </template>
 
         <form @submit.prevent="submit">
@@ -10,9 +10,9 @@
                     {{ status }}
                 </div>
 
-                <form-validation-errors />
+                <f-validation-errors />
 
-                <form-input
+                <f-input
                     label="Username"
                     autofocus
                     required
@@ -20,7 +20,7 @@
                     v-model="form.username"
                 />
 
-                <form-input
+                <f-input
                     label="Password"
                     autocomplete="current-password"
                     required
@@ -30,7 +30,7 @@
 
                 <div class="flex items-center justify-between">
                     <label class="flex items-center cursor-pointer">
-                        <form-checkbox
+                        <f-checkbox
                             class="w-6 h-6"
                             name="remember"
                             v-model="form.remember"
@@ -41,15 +41,15 @@
             </div>
 
             <div class="p-4 bg-gray-100 sm:rounded-b-lg sm:px-6 sm:py-3 dark:bg-gray-800">
-                <app-button
+                <x-button
                     class="w-full"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     Login
-                </app-button>
+                </x-button>
 
-                <app-providers v-if="page.props.value.socialstream.show" method="Login" />
+                <x-providers v-if="page.props.value.socialstream.show" method="Login" />
             </div>
         </form>
 
@@ -74,17 +74,17 @@
                 </inertia-link>
             </div>
         </template>
-    </app-authentication-card>
+    </l-auth>
 </template>
 
 <script>
-    import AppAuthenticationCard from '@/Components/AuthenticationCard'
-    import AppButton from '@/Components/Button'
-    import AppLogo from '@/Components/Logo'
-    import AppProviders from '@/Components/Providers'
-    import FormCheckbox from '@/Components/Form/Checkbox'
-    import FormInput from '@/Components/Form/Input'
-    import FormValidationErrors from '@/Components/Form/ValidationErrors'
+    import FCheckbox from '@/Components/Form/Checkbox'
+    import FInput from '@/Components/Form/Input'
+    import FValidationErrors from '@/Components/Form/ValidationErrors'
+    import LAuth from '@/Layouts/Auth'
+    import XButton from '@/Components/Button'
+    import XLogo from '@/Components/Logo'
+    import XProviders from '@/Components/Providers'
     import { useForm, usePage } from '@inertiajs/inertia-vue3'
 
     export default {
@@ -93,13 +93,13 @@
             status: String
         },
         components: {
-            AppAuthenticationCard,
-            AppButton,
-            AppLogo,
-            AppProviders,
-            FormCheckbox,
-            FormInput,
-            FormValidationErrors,
+            FCheckbox,
+            FInput,
+            FValidationErrors,
+            LAuth,
+            XButton,
+            XLogo,
+            XProviders,
         },
         setup() {
             const page = usePage()

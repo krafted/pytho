@@ -7,29 +7,29 @@
         </div>
 
         <div class="flex items-center justify-center">
-            <app-button
+            <x-button
                 v-if="page.props.value.socialstream.providers.includes('github')"
                 class="w-full space-x-3"
                 :href="route('oauth.redirect', 'github')"
             >
                 <icon-github class="w-4 h-4" />
                 <span>{{ method || 'Connect' }} with Github</span>
-            </app-button>
+            </x-button>
 
-            <app-button
+            <x-button
                 v-if="page.props.value.socialstream.providers.includes('gitlab')"
                 class="w-full space-x-3"
                 :href="route('oauth.redirect', 'gitlab')"
             >
                 <icon-github class="w-4 h-4" />
                 <span>{{ method || 'Connect' }} with GitLab</span>
-            </app-button>
+            </x-button>
         </div>
     </div>
 </template>
 
 <script>
-    import AppButton from '@/Components/Button'
+    import XButton from '@/Components/Button'
     import IconGithub from '@/Icons/Github'
     import IconGitLab from '@/Icons/GitLab'
     import { usePage } from '@inertiajs/inertia-vue3'
@@ -37,7 +37,7 @@
     export default {
         props: ['method'],
         components: {
-            AppButton,
+            XButton,
             IconGithub,
             IconGitLab,
         },

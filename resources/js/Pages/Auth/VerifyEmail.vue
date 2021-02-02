@@ -1,7 +1,7 @@
 <template>
-    <app-authentication-card>
+    <l-auth>
         <template #logo>
-            <app-logo class="w-10.5 h-10.5 text-lg sm:w-12 sm:h-12 sm:text-2xl" />
+            <x-logo class="w-10.5 h-10.5 text-lg sm:w-12 sm:h-12 sm:text-2xl" />
         </template>
 
         <form @submit.prevent="submit">
@@ -16,13 +16,13 @@
             </div>
 
             <div class="flex p-4 space-x-3 bg-gray-100 sm:rounded-b-lg sm:px-6 sm:py-3 dark:bg-gray-800">
-                <app-button
+                <x-button
                     class="w-full"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     Resend Verification Email
-                </app-button>
+                </x-button>
             </div>
         </form>
 
@@ -38,22 +38,22 @@
                 </inertia-link>
             </div>
         </template>
-    </app-authentication-card>
+    </l-auth>
 </template>
 
 <script>
-    import AppAuthenticationCard from '@/Components/AuthenticationCard'
-    import AppButton from '@/Components/Button'
-    import AppLogo from '@/Components/Logo'
-    import { computed, inject } from 'vue'
+    import LAuth from '@/Layouts/Auth'
+    import XButton from '@/Components/Button'
+    import XLogo from '@/Components/Logo'
+    import { computed } from 'vue'
     import { useForm } from '@inertiajs/inertia-vue3'
 
     export default {
         props: { status: String },
         components: {
-            AppAuthenticationCard,
-            AppButton,
-            AppLogo,
+            LAuth,
+            XButton,
+            XLogo,
         },
         setup(props) {
             const form = useForm()
@@ -63,6 +63,7 @@
             return {
                 form,
                 submit,
+                verificationLinkSent,
             }
         },
     }

@@ -1,26 +1,26 @@
 <template>
     <div class="flex flex-col h-screen pt-12.5 mt-safe-top">
-        <app-header>
+        <x-header>
             <template #header-left-actions><slot name="header-left-actions" /></template>
             <template #header-right-actions><slot name="header-right-actions" /></template>
-        </app-header>
+        </x-header>
 
         <slot />
 
-        <app-banner />
+        <x-banner />
     </div>
 </template>
 
 <script>
-    import AppBanner from '@/Components/Banner'
-    import AppHeader from '@/Components/Header'
+    import XBanner from '@/Components/Banner'
+    import XHeader from '@/Components/Header'
     import { provide, ref } from 'vue'
 
     export default {
         props: ['appUrl', 'errorBags', 'errors', 'jetstream', 'socialstream', 'user'],
         components: {
-            AppBanner,
-            AppHeader,
+            XBanner,
+            XHeader,
         },
         setup(props, context) {
             const showPreferences = ref(false)

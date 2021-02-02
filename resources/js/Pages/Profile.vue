@@ -1,5 +1,5 @@
 <template>
-    <app-layout>
+    <l-app>
         <div class="w-full py-6 mx-auto mt-6 sm:px-4 max-w-7xl">
             <div class="pl-safe-left pr-safe-right">
                 <div class="flex items-center justify-between px-4 space-x-6 sm:px-0">
@@ -21,7 +21,7 @@
                         </div>
                     </div>
 
-                    <app-button
+                    <x-button
                         v-if="profile.id === page.props.value.user?.id"
                         class="-right-2 sm:-right-3"
                         :href="route('settings.profile.show')"
@@ -31,7 +31,7 @@
                         </svg>
 
                         <span class="hidden sm:inline">Edit Profile</span>
-                    </app-button>
+                    </x-button>
                 </div>
             </div>
         </div>
@@ -230,12 +230,12 @@
                 </div>
             </aside>
         </div>
-    </app-layout>
+    </l-app>
 </template>
 
 <script>
-    import AppButton from '@/Components/Button'
-    import AppLayout from '@/Layouts/App'
+    import LApp from '@/Layouts/App'
+    import XButton from '@/Components/Button'
     import FormSectionBorder from '@/Components/Form/SectionBorder'
     import { usePage } from '@inertiajs/inertia-vue3'
     import { useHead } from '@vueuse/head'
@@ -244,8 +244,8 @@
     export default {
         props: ['activity', 'counts', 'profile', 'pens'],
         components: {
-            AppButton,
-            AppLayout,
+            LApp,
+            XButton,
             FormSectionBorder,
         },
         setup(props) {

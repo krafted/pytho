@@ -5,6 +5,7 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\PenController;
 use App\Http\Controllers\PrivacyPolicyController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Settings\AdvancedSettingsController;
 use App\Http\Controllers\Settings\ProfileSettingsController;
 use App\Http\Controllers\Settings\SecuritySettingsController;
@@ -20,6 +21,9 @@ Route::get('/privacy', [PrivacyPolicyController::class, 'show'])->name('privacy.
 Route::get('/@{user:username}/{visibility?}', [ProfileController::class, 'show'])
     ->where('visibility', '(public|private|unlisted)?')
     ->name('profile.show');
+
+// Search
+Route::get('/search', [SearchController::class, 'index'])->name('search.index');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     // Settings

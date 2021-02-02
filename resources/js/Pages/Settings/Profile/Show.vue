@@ -1,20 +1,20 @@
 <template>
-    <app-settings-layout>
+    <l-settings>
         <div v-if="page.props.value.jetstream.canUpdateProfileInformation">
             <update-profile-information-form :user="page.props.value.user" />
         </div>
-    </app-settings-layout>
+    </l-settings>
 </template>
 
 <script>
-    import AppSettingsLayout from '@/Layouts/Settings'
+    import LSettings from '@/Layouts/Settings'
     import UpdateProfileInformationForm from './UpdateProfileInformationForm'
     import { usePage } from '@inertiajs/inertia-vue3'
     import { useHead } from '@vueuse/head'
 
     export default {
         components: {
-            AppSettingsLayout,
+            LSettings,
             UpdateProfileInformationForm,
         },
         setup() {

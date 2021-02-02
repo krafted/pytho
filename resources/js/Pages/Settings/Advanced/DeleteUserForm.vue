@@ -1,5 +1,5 @@
 <template>
-    <form-action-section>
+    <f-action-section>
         <template #title>
             Delete Account
         </template>
@@ -14,7 +14,7 @@
             </div>
 
             <!-- Delete Account Confirmation Modal -->
-            <app-modal
+            <x-modal
                 :show="confirmingUserDeletion"
                 @close="closeModal"
             >
@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="mt-3 space-y-1">
-                        <form-input
+                        <f-input
                             label="Password"
                             type="password"
                             ref="password"
@@ -40,48 +40,48 @@
                             @keyup.enter.native="deleteUser"
                         />
 
-                        <form-input-error :message="form.errors.password" />
+                        <f-input-error :message="form.errors.password" />
                     </div>
                 </template>
 
                 <template #actions>
-                    <app-secondary-button @click.native="closeModal">
+                    <x-secondary-button @click.native="closeModal">
                         Close
-                    </app-secondary-button>
+                    </x-secondary-button>
 
-                    <app-danger-button @click.native="deleteUser" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    <x-danger-button @click.native="deleteUser" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         Delete Account
-                    </app-danger-button>
+                    </x-danger-button>
                 </template>
-            </app-modal>
+            </x-modal>
         </template>
 
         <template #actions>
-            <app-danger-button @click.native="confirmUserDeletion">
+            <x-danger-button @click.native="confirmUserDeletion">
                 Delete Account
-            </app-danger-button>
+            </x-danger-button>
         </template>
-    </form-action-section>
+    </f-action-section>
 </template>
 
 <script>
-    import AppDangerButton from '@/Components/DangerButton'
-    import AppSecondaryButton from '@/Components/SecondaryButton'
-    import AppModal from '@/Components/Modal'
-    import FormActionSection from '@/Components/Form/ActionSection'
-    import FormInput from '@/Components/Form/Input'
-    import FormInputError from '@/Components/Form/InputError'
-    import { inject, provide, ref } from 'vue'
+    import FActionSection from '@/Components/Form/ActionSection'
+    import FInput from '@/Components/Form/Input'
+    import FInputError from '@/Components/Form/InputError'
+    import XDangerButton from '@/Components/DangerButton'
+    import XSecondaryButton from '@/Components/SecondaryButton'
+    import XModal from '@/Components/Modal'
+    import { ref } from 'vue'
     import { useForm } from '@inertiajs/inertia-vue3'
 
     export default {
         components: {
-            AppDangerButton,
-            AppSecondaryButton,
-            AppModal,
-            FormActionSection,
-            FormInput,
-            FormInputError,
+            FActionSection,
+            FInput,
+            FInputError,
+            XDangerButton,
+            XSecondaryButton,
+            XModal,
         },
         setup() {
             const form = useForm({ password: '' })

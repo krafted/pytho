@@ -1,14 +1,14 @@
 <template>
-    <app-authentication-card>
+    <l-auth>
         <template #logo>
-            <app-logo class="w-10.5 h-10.5 text-lg sm:w-12 sm:h-12 sm:text-2xl" />
+            <x-logo class="w-10.5 h-10.5 text-lg sm:w-12 sm:h-12 sm:text-2xl" />
         </template>
 
         <form @submit.prevent="submit">
             <div class="grid grid-cols-1 gap-3 p-4 sm:p-6">
-                <form-validation-errors />
+                <f-validation-errors />
 
-                <form-input
+                <f-input
                     label="Email"
                     readonly
                     required
@@ -16,7 +16,7 @@
                     v-model="form.email"
                 />
 
-                <form-input
+                <f-input
                     label="Password"
                     autocomplete="new-password"
                     autofocus
@@ -25,7 +25,7 @@
                     v-model="form.password"
                 />
 
-                <form-input
+                <f-input
                     label="Confirm Password"
                     autocomplete="new-password"
                     required
@@ -35,24 +35,23 @@
             </div>
 
             <div class="flex items-center justify-end p-4 space-x-3 bg-gray-100 sm:rounded-b-lg sm:px-6 sm:py-3 dark:bg-gray-800">
-                <app-button
+                <x-button
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     Reset Password
-                </app-button>
+                </x-button>
             </div>
         </form>
-    </app-authentication-card>
+    </l-auth>
 </template>
 
 <script>
-    import AppAuthenticationCard from '@/Components/AuthenticationCard'
-    import AppButton from '@/Components/Button'
-    import AppLogo from '@/Components/Logo'
-    import FormInput from '@/Components/Form/Input'
-    import FormValidationErrors from '@/Components/Form/ValidationErrors'
-    import { inject } from 'vue'
+    import FInput from '@/Components/Form/Input'
+    import FValidationErrors from '@/Components/Form/ValidationErrors'
+    import LAuth from '@/Layouts/Auth'
+    import XButton from '@/Components/Button'
+    import XLogo from '@/Components/Logo'
     import { useForm } from '@inertiajs/inertia-vue3'
 
     export default {
@@ -61,11 +60,11 @@
             token: String,
         },
         components: {
-            AppAuthenticationCard,
-            AppButton,
-            AppLogo,
-            FormInput,
-            FormValidationErrors,
+            FInput,
+            FValidationErrors,
+            LAuth,
+            XButton,
+            XLogo,
         },
         setup(props) {
             const form = useForm({

@@ -1,7 +1,7 @@
 <template>
-    <app-authentication-card>
+    <l-auth>
         <template #logo>
-            <app-logo class="w-10.5 h-10.5 text-lg sm:w-12 sm:h-12 sm:text-2xl" />
+            <x-logo class="w-10.5 h-10.5 text-lg sm:w-12 sm:h-12 sm:text-2xl" />
         </template>
 
         <form @submit.prevent="submit">
@@ -18,9 +18,9 @@
 
                 <div class="border-t border-gray-100 dark:border-gray-800" />
 
-                <form-validation-errors />
+                <f-validation-errors />
 
-                <form-input
+                <f-input
                     v-if="!recovery"
                     label="Code"
                     autocomplete="one-time-code"
@@ -31,7 +31,7 @@
                     v-model="form.code"
                 />
 
-                <form-input
+                <f-input
                     v-else
                     label="Recovery Code"
                     autocomplete="one-time-code"
@@ -43,7 +43,7 @@
             </div>
 
             <div class="flex items-center justify-end p-4 space-x-3 bg-gray-100 sm:rounded-b-lg sm:px-6 sm:py-3 dark:bg-gray-800">
-                <app-secondary-button
+                <x-secondary-button
                     type="button"
                     @click.prevent="toggleRecovery"
                 >
@@ -54,37 +54,37 @@
                     <template v-else>
                         Use authentication code
                     </template>
-                </app-secondary-button>
+                </x-secondary-button>
 
-                <app-button
+                <x-button
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     Login
-                </app-button>
+                </x-button>
             </div>
         </form>
-    </app-authentication-card>
+    </l-auth>
 </template>
 
 <script>
-    import AppAuthenticationCard from '@/Components/AuthenticationCard'
-    import AppButton from '@/Components/Button'
-    import AppSecondaryButton from '@/Components/SecondaryButton'
-    import AppLogo from '@/Components/Logo'
-    import FormInput from '@/Components/Form/Input'
-    import FormValidationErrors from '@/Components/Form/ValidationErrors'
-    import { inject, nextTick, onMounted, ref } from 'vue'
+    import FInput from '@/Components/Form/Input'
+    import FValidationErrors from '@/Components/Form/ValidationErrors'
+    import LAuth from '@/Layouts/Auth'
+    import XButton from '@/Components/Button'
+    import XSecondaryButton from '@/Components/SecondaryButton'
+    import XLogo from '@/Components/Logo'
+    import { nextTick, ref } from 'vue'
     import { useForm } from '@inertiajs/inertia-vue3'
 
     export default {
         components: {
-            AppAuthenticationCard,
-            AppButton,
-            AppSecondaryButton,
-            AppLogo,
-            FormInput,
-            FormValidationErrors,
+            FInput,
+            FValidationErrors,
+            LAuth,
+            XButton,
+            XSecondaryButton,
+            XLogo,
         },
         setup() {
             const form = useForm({ code: '', recovery_code: '' })

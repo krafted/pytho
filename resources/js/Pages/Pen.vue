@@ -1,13 +1,13 @@
 <template>
-    <app-layout>
+    <l-app>
         <template #header-right-actions>
-            <form-action-message
+            <f-action-message
                 :on="form.recentlySuccessful"
                 class="mr-2 font-semibold"
                 type="success"
             >
                 {{ message }}
-            </form-action-message>
+            </f-action-message>
 
             <button
                 class="flex items-center justify-center p-2.5 text-gray-600 dark:text-gray-400 border border-white bg-white dark:bg-gray-900 dark:border-gray-900 rounded-md group hover:w-auto hover:bg-gray-200 dark:hover:bg-gray-1000 focus:bg-gray-200 dark:focus:bg-gray-1000 focus:border-gray-300 dark:focus:border-gray-600 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-900 dark:hover:text-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-200 dark:focus:ring-offset-gray-900 focus:ring-primary-500 focus:outline-none focus:w-auto"
@@ -47,7 +47,7 @@
                 </svg>
             </button>
 
-            <app-save
+            <x-save
                 ref="saveRef"
                 :is-creator="isCreator"
                 :pen="pen"
@@ -56,14 +56,14 @@
                 @saved="message = 'Saved'"
             />
 
-            <app-details
+            <x-details
                 v-if="!isCreator && pen"
                 :pen="pen"
             />
         </template>
 
         <div class="flex flex-col flex-1">
-            <app-tab-bar  />
+            <x-tab-bar  />
 
             <splitpanes
                 class="mt-px overflow-hidden"
@@ -75,7 +75,7 @@
                     min-size="33.333"
                 >
                     <div class="flex flex-1 mt-12.5">
-                        <app-editor
+                        <x-editor
                             :comments="comments"
                             :pen="pen"
                             @saved="save"
@@ -102,7 +102,7 @@
                         </header>
 
                         <div class="flex flex-1 mt-12.5">
-                            <app-output />
+                            <x-output />
                         </div>
                     </div>
                 </pane>
@@ -140,17 +140,17 @@
                 </svg>
             </p>
         </transition>
-    </app-layout>
+    </l-app>
 </template>
 
 <script>
-    import AppDetails from '@/Components/Details'
-    import AppEditor from '@/Components/Editor'
-    import AppLayout from '@/Layouts/App'
-    import AppOutput from '@/Components/Output'
-    import AppSave from '@/Components/Save'
-    import AppTabBar from '@/Components/TabBar'
-    import FormActionMessage from '@/Components/Form/ActionMessage'
+    import FActionMessage from '@/Components/Form/ActionMessage'
+    import LApp from '@/Layouts/App'
+    import XDetails from '@/Components/Details'
+    import XEditor from '@/Components/Editor'
+    import XOutput from '@/Components/Output'
+    import XSave from '@/Components/Save'
+    import XTabBar from '@/Components/TabBar'
     import useMedia from '@/Hooks/useMedia'
     import defaultContent from '@/Config/Content'
     import { loadEngine, runCode, setOptions } from '@/Utils/interpreter'
@@ -175,13 +175,13 @@
             },
         },
         components: {
-            AppDetails,
-            AppEditor,
-            AppLayout,
-            AppOutput,
-            AppSave,
-            AppTabBar,
-            FormActionMessage,
+            FActionMessage,
+            LApp,
+            XDetails,
+            XEditor,
+            XOutput,
+            XSave,
+            XTabBar,
             Pane,
             Splitpanes,
         },

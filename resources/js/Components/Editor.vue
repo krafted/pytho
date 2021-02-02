@@ -8,7 +8,7 @@
         }"
     />
 
-    <app-modal
+    <x-modal
         :show="showCommentForm"
         type="form"
         @close="showCommentForm = false"
@@ -23,32 +23,32 @@
         </template>
 
         <template #content>
-            <form-textarea
+            <f-textarea
                 label="Text"
                 ref="comment"
                 v-model="commentForm.body"
             />
-            <form-input-error :message="commentForm.errors.text" />
+            <f-input-error :message="commentForm.errors.text" />
         </template>
 
         <template #actions>
-            <app-secondary-button
+            <x-secondary-button
                 type="button"
                 @click="showCommentForm = false"
             >
                 Close
-            </app-secondary-button>
+            </x-secondary-button>
 
-            <app-button
+            <x-button
                 :class="{ 'opacity-25': commentForm.processing }"
                 :disabled="commentForm.processing"
             >
                 Comment
-            </app-button>
+            </x-button>
         </template>
-    </app-modal>
+    </x-modal>
 
-    <app-comment-list
+    <x-comment-list
         :show="showCommentList"
         :comments="currentComments"
         ref="commentList"
@@ -62,14 +62,15 @@
     import { createPopper } from '@popperjs/core'
     import debounce from 'debounce'
     import CodeMirror from 'codemirror'
-    import AppButton from '@/Components/Button'
-    import AppCommentList from '@/Components/CommentList'
-    import AppModal from '@/Components/Modal'
-    import AppSecondaryButton from '@/Components/SecondaryButton'
-    import FormInputError from '@/Components/Form/InputError'
-    import FormTextarea from '@/Components/Form/Textarea'
+    import FInputError from '@/Components/Form/InputError'
+    import FTextarea from '@/Components/Form/Textarea'
+    import XButton from '@/Components/Button'
+    import XCommentList from '@/Components/CommentList'
+    import XModal from '@/Components/Modal'
+    import XSecondaryButton from '@/Components/SecondaryButton'
 
     import 'codemirror/mode/python/python'
+    import 'codemirror/addon/comment/comment'
     import 'codemirror/addon/selection/active-line'
     import 'codemirror/addon/selection/mark-selection'
     import 'codemirror/addon/scroll/annotatescrollbar'
@@ -84,12 +85,12 @@
         emits: ['saved'],
         props: ['comments', 'pen'],
         components: {
-            AppButton,
-            AppCommentList,
-            AppModal,
-            AppSecondaryButton,
-            FormInputError,
-            FormTextarea,
+            FInputError,
+            FTextarea,
+            XButton,
+            XCommentList,
+            XModal,
+            XSecondaryButton,
         },
         setup(props, { emit }) {
             const preferences = inject('preferences')

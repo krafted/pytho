@@ -1,7 +1,7 @@
 <template>
-    <app-authentication-card>
+    <l-auth>
         <template #logo>
-            <app-logo class="10.5 h-10.5 text-lg sm:w-12 sm:h-12 sm:text-2xl" />
+            <x-logo class="10.5 h-10.5 text-lg sm:w-12 sm:h-12 sm:text-2xl" />
         </template>
 
         <form @submit.prevent="submit">
@@ -10,9 +10,9 @@
                     This is a secure area of the application. Please confirm your password before continuing.
                 </div>
 
-                <form-validation-errors />
+                <f-validation-errors />
 
-                <form-input
+                <f-input
                     label="Password"
                     autocomplete="current-password"
                     autofocus
@@ -23,33 +23,32 @@
             </div>
 
             <div class="flex flex-col p-4 space-y-1 bg-gray-100 sm:rounded-b-lg sm:space-x-3 sm:px-6 sm:py-3 dark:bg-gray-800 sm:flex-row-reverse">
-                <app-button
+                <x-button
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     Confirm
-                </app-button>
+                </x-button>
             </div>
         </form>
-    </app-authentication-card>
+    </l-auth>
 </template>
 
 <script>
-    import AppAuthenticationCard from '@/Components/AuthenticationCard'
-    import AppButton from '@/Components/Button'
-    import AppLogo from '@/Components/Logo'
-    import FormInput from '@/Components/Form/Input'
-    import FormValidationErrors from '@/Components/Form/ValidationErrors'
-    import { inject } from 'vue'
+    import FInput from '@/Components/Form/Input'
+    import FValidationErrors from '@/Components/Form/ValidationErrors'
+    import LAuth from '@/Layouts/Auth'
+    import XButton from '@/Components/Button'
+    import XLogo from '@/Components/Logo'
     import { useForm } from '@inertiajs/inertia-vue3'
 
     export default {
         components: {
-            AppAuthenticationCard,
-            AppButton,
-            AppLogo,
-            FormInput,
-            FormValidationErrors,
+            FInput,
+            FValidationErrors,
+            LAuth,
+            XButton,
+            XLogo,
         },
         setup() {
             const form = useForm({ password: '' })

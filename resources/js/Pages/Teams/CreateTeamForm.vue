@@ -1,5 +1,5 @@
 <template>
-    <form-section @submitted="createTeam">
+    <f-section @submitted="createTeam">
         <template #title>
             Team Details
         </template>
@@ -29,37 +29,37 @@
             </div>
 
             <div class="col-span-6 space-y-1 sm:col-span-4">
-                <form-input
+                <f-input
                     label="Team Name"
                     autofocus
                     v-model="form.name"
                 />
 
-                <form-input-error :message="form.errors.name" />
+                <f-input-error :message="form.errors.name" />
             </div>
         </template>
 
         <template #actions>
-            <app-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <x-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 Create
-            </app-button>
+            </x-button>
         </template>
-    </form-section>
+    </f-section>
 </template>
 
 <script>
-    import AppButton from '@/Components/Button'
-    import FormInput from '@/Components/Form/Input'
-    import FormInputError from '@/Components/Form/InputError'
-    import FormSection from '@/Components/Form/Section'
+    import FInput from '@/Components/Form/Input'
+    import FInputError from '@/Components/Form/InputError'
+    import FSection from '@/Components/Form/Section'
+    import XButton from '@/Components/Button'
     import { useForm, usePage } from '@inertiajs/inertia-vue3'
 
     export default {
         components: {
-            AppButton,
-            FormInput,
-            FormInputError,
-            FormSection,
+            FInput,
+            FInputError,
+            FSection,
+            XButton,
         },
         setup() {
             const page = usePage()

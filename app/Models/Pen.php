@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\HasComments;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Pen extends Model
@@ -12,6 +13,7 @@ class Pen extends Model
     use HasComments;
     use HasFactory;
     use LogsActivity;
+    use Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -53,5 +55,20 @@ class Pen extends Model
     public function path()
     {
         return route('pen.show', $this->slug);
+    }
+
+    /**
+     * Get the indexable data array for the Pen.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        return [
+            'title' => $array['title'],
+            'description' => $array['description'],
+        ];
     }
 }

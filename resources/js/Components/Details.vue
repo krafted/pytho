@@ -17,7 +17,7 @@
         </span>
     </button>
 
-    <app-modal
+    <x-modal
         :show="show"
         @close="show = false"
     >
@@ -31,7 +31,7 @@
 
         <template #content>
             <div class="grid grid-cols-1 gap-3">
-                <form-field
+                <f-field
                     label="Creator"
                     :value="pen.creator?.name || 'Anonymous'"
                 >
@@ -53,14 +53,14 @@
 
                         <span v-else>{{ value }}</span>
                     </template>
-                </form-field>
+                </f-field>
 
-                <form-field
+                <f-field
                     label="Title"
                     :value="pen.title || 'Untitled'"
                 />
 
-                <form-field
+                <f-field
                     label="Description"
                     :value="pen.description || 'No description'"
                 />
@@ -68,30 +68,30 @@
         </template>
 
         <template #actions>
-            <app-secondary-button
+            <x-secondary-button
                 type="button"
                 @click="show = false"
             >
                 Close
-            </app-secondary-button>
+            </x-secondary-button>
         </template>
-    </app-modal>
+    </x-modal>
 </template>
 
 <script>
-    import AppButton from '@/Components/Button'
-    import AppModal from '@/Components/Modal'
-    import AppSecondaryButton from '@/Components/SecondaryButton'
-    import FormField from '@/Components/Form/Field'
+    import FField from '@/Components/Form/Field'
+    import XButton from '@/Components/Button'
+    import XModal from '@/Components/Modal'
+    import XSecondaryButton from '@/Components/SecondaryButton'
     import { inject, ref } from 'vue'
 
     export default {
         props: ['pen'],
         components: {
-            AppButton,
-            AppModal,
-            AppSecondaryButton,
-            FormField,
+            FField,
+            XButton,
+            XModal,
+            XSecondaryButton,
         },
         setup(props) {
             const isMobile = inject('isMobile')

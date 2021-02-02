@@ -1,5 +1,5 @@
 <template>
-    <app-layout>
+    <l-app>
         <div class="w-full py-6 mt-6">
             <div class="w-full px-0 mx-auto max-w-7xl sm:px-4">
                 <div class="pl-safe-left pr-safe-right">
@@ -75,15 +75,15 @@
                 </div>
             </div>
         </div>
-    </app-layout>
+    </l-app>
 </template>
 
 <script>
-    import AppLayout from '@/Layouts/App'
+    import LApp from '@/Layouts/App'
     import { usePage } from '@inertiajs/inertia-vue3'
 
     export default {
-        components: { AppLayout },
+        components: { LApp },
         setup() {
             const page = usePage()
 
