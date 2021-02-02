@@ -20,7 +20,7 @@
                 v-if="!isMobile"
                 class="inline-block text-gray-700 dark:text-gray-400 absolute right-2.5 py-0.5 px-1.5 border border-gray-200 dark:border-gray-700 rounded text-2xs"
             >
-                /
+                {{ isMac ? '⌘K' : '⌃K' }}
             </span>
         </div>
 
@@ -96,9 +96,7 @@
     import hotkeys from 'hotkeys-js'
 
     export default {
-        emits: ['close', 'show'],
-        props: ['show'],
-        setup(props, { emit }) {
+        setup() {
             const isMac = inject('isMac')
             const isMobile = inject('isMobile')
             const isMd = inject('isMd')
@@ -106,12 +104,13 @@
             const input = ref(null)
             const query = ref('')
             const results = ref({})
+            const show = inject('showSearch')
             const showResults = ref(false)
             const close = event => {
                 if (event.target.closest('#searchButton')) return
                 if (!event.target === container.value || !event.target.closest('#searchContainer')) {
                     showResults.value = false
-                    emit('close')
+                    show.value = false
                 }
             }
             const search = debounce(async () => {
@@ -127,15 +126,15 @@
             }, 250)
 
             watchEffect(async () => {
-                if (props.show) {
+                if (show.value) {
                     await nextTick()
                     input.value && input.value.focus()
                 }
             })
 
             onMounted(() => {
-                hotkeys('/', async (event) => {
-                    emit('show')
+                hotkeys(isMac.value ? 'cmd+k' : 'ctrl+k', async (event) => {
+                    show.value = true
                     await nextTick()
                     input.value.focus()
                     event.preventDefault()
@@ -149,7 +148,7 @@
                 document.addEventListener('click', close)
             })
             onUnmounted(() => {
-                hotkeys.unbind('/')
+                hotkeys.unbind(isMac.value ? 'cmd+k' : 'ctrl+k')
                 hotkeys.unbind('esc')
                 document.removeEventListener('click', close)
             })
@@ -163,6 +162,7 @@
                 query,
                 results,
                 search,
+                show,
                 showResults,
             }
         },

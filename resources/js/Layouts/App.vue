@@ -22,10 +22,12 @@
             XBanner,
             XHeader,
         },
-        setup(props, context) {
+        setup() {
             const showPreferences = ref(false)
+            const showSearch = ref(false)
 
             provide('showPreferences', showPreferences)
+            provide('showSearch', showSearch)
         }
     }
 </script>

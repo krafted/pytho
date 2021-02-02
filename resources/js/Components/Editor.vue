@@ -112,6 +112,7 @@
             const showCommentForm = ref(false)
             const showCommentList = ref(false)
             const showPreferences = inject('showPreferences')
+            const showSearch = inject('showSearch')
             const run = inject('run')
             const showComment = async () => {
                 commentForm.value.properties.coords = [editor.value.getCursor(true), editor.value.getCursor(false)]
@@ -159,6 +160,7 @@
                         'Shift-Tab': 'indentLess',
                         [isMac.value ? 'Cmd-/' : 'Ctrl-/']: 'toggleComment',
                         [isMac.value ? 'Cmd-,' : 'Ctrl-,']: () => showPreferences.value = true,
+                        [isMac.value ? 'Cmd-K' : 'Ctrl-K']: () => showSearch.value = true,
                         [isMac.value ? 'Cmd-S' : 'Ctrl-S']: () => emit('saved'),
                         [isMac.value ? 'Cmd-Enter' : 'Ctrl-Enter']: run,
                         'Tab': editor => {

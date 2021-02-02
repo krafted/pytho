@@ -8,11 +8,7 @@
                     <slot name="header-left-actions" />
                 </div>
 
-                <x-search
-                    :show="showSearch"
-                    @close="showSearch = false"
-                    @show="showSearch = true"
-                />
+                <x-search />
 
                 <div class="flex items-center justify-end -mr-2 space-x-2">
                     <slot name="header-right-actions" />
@@ -159,7 +155,7 @@
                                     <span
                                         v-if="!isMobile"
                                         class="px-1.5 border border-gray-200 dark:border-gray-800 rounded text-2xs"
-                                        v-text="isMac ? '⌘ + ,' : '⌃ + ,'"
+                                        v-text="isMac ? '⌘,' : '⌃,'"
                                     />
                                 </span>
 
@@ -230,7 +226,7 @@
             const isMd = inject('isMd')
             const isMobile = inject('isMobile')
             const showPreferences = inject('showPreferences')
-            const showSearch = ref(false)
+            const showSearch = inject('showSearch')
             const logout = () => {
                 Inertia.post(route('logout'), {}, { preserveState: false })
             }

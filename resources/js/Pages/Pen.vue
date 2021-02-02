@@ -29,7 +29,7 @@
 
             <button
                 class="flex items-center justify-center p-2.5 text-gray-600 dark:text-gray-400 border border-white bg-white dark:bg-gray-900 dark:border-gray-900 rounded-md group hover:w-auto hover:bg-gray-200 dark:hover:bg-gray-1000 focus:bg-gray-200 dark:focus:bg-gray-1000 focus:border-gray-300 dark:focus:border-gray-600 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-900 dark:hover:text-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-200 dark:focus:ring-offset-gray-900 focus:ring-primary-500 focus:outline-none focus:w-auto"
-                :title="isMac ? '⌘ + ↩︎' : '⌃ + ↩︎'"
+                :title="isMac ? '⌘↩︎' : '⌃↩︎'"
                 @click="run"
             >
                 <span class="sr-only">Run</span>
