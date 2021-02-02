@@ -217,8 +217,9 @@
                     await loadEngine('skulpt')
                     showCanvas.value = true
                     await nextTick()
-                    output.value = 'Re-run to view the output'
                     await runCode(form.value.content, { use: 'skulpt', canvas: 'canvas' })
+                    if (error.value) showCanvas.value = false
+                    else output.value = 'Re-run to view the output'
 
                     return
                 }
