@@ -167,39 +167,4 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return $username;
     }
-
-    /**
-     * Get the indexable data array for the Pen.
-     *
-     * @return array
-     */
-    public function toSearchableArray()
-    {
-        $array = $this->toArray();
-
-        return [
-            'name' => $array['name'],
-            'username' => $array['username'],
-        ];
-    }
-
-    /**
-     * Get the value used to index the model.
-     *
-     * @return mixed
-     */
-    public function getScoutKey()
-    {
-        return $this->username;
-    }
-
-    /**
-     * Get the key name used to index the model.
-     *
-     * @return mixed
-     */
-    public function getScoutKeyName()
-    {
-        return 'username';
-    }
 }
