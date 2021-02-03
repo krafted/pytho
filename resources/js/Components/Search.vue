@@ -3,14 +3,15 @@
         v-show="show || isMd"
         id="searchContainer"
         ref="container"
-        class="absolute z-10 w-full md:relative md:z-0"
+        class="absolute z-10 flex items-center w-full md:relative"
     >
-        <div class="flex items-center">
+        <div class="flex items-center w-full">
             <input
                 v-model="query"
                 ref="input"
-                class="placeholder-gray-500 pl-4 pr-14 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-100 dark:border-gray-800 h-10.5 focus:bg-white dark:focus:bg-gray-900 w-full py-2.5 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 focus:ring-offset-white dark:focus:ring-offset-gray-900 focus:border-gray-300 dark:focus:border-gray-600"
-                placeholder="Search"
+                class="placeholder-gray-500 pl-4 pr-14 text-gray-900 dark:text-white border h-10.5 focus:bg-white dark:focus:bg-gray-900 w-full py-2.5 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 focus:ring-offset-white dark:focus:ring-offset-gray-900 focus:border-gray-300 dark:focus:border-gray-600"
+                :class="additionalClasses ?? 'bg-gray-100 dark:bg-gray-800 border-gray-100 dark:border-gray-800'"
+                :placeholder="placeholder ?? 'Search'"
                 type="text"
                 @input="search"
                 @focus="showResults = true"
@@ -34,7 +35,7 @@
         >
             <div
                 v-if="showResults && (results.allPens?.length || results.ownedPens?.length || results.users?.length)"
-                class="absolute w-full mt-2 overflow-auto text-sm origin-top bg-white rounded-md shadow-lg search__results dark:bg-gray-900 max-h-64"
+                class="absolute w-full mt-2 overflow-auto text-sm origin-top bg-white rounded-md shadow-lg top-full search__results dark:bg-gray-900 max-h-64"
             >
                 <div v-if="results.ownedPens?.length">
                     <div class="block px-4 py-2 font-semibold tracking-wide text-gray-400 uppercase border-b border-gray-100 dark:border-gray-800 text-2xs">
@@ -54,7 +55,7 @@
                 </div>
                 <div v-if="results.allPens?.length">
                     <div class="block px-4 py-2 font-semibold tracking-wide text-gray-400 uppercase border-b border-gray-100 dark:border-gray-800 text-2xs">
-                        All
+                        Pens
                     </div>
                     <div>
                         <inertia-link
@@ -96,6 +97,7 @@
     import hotkeys from 'hotkeys-js'
 
     export default {
+        props: ['additionalClasses', 'placeholder'],
         setup() {
             const isMac = inject('isMac')
             const isMobile = inject('isMobile')
@@ -122,7 +124,7 @@
 
                 axios
                     .get(`${route('search.index')}?search=${query.value}`)
-                    .then(({ data }) => (console.log(data), results.value = data, showResults.value = true))
+                    .then(({ data }) => (results.value = data, showResults.value = true))
             }, 250)
 
             watchEffect(async () => {

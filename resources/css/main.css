@@ -87,8 +87,12 @@
         @apply absolute right-0 md:-left-6 text-gray-200 dark:text-gray-700 hover:no-underline hover:text-gray-300 dark:hover:text-gray-600;
     }
 
-    .search__results em {
+    .search__results h5 em {
         @apply bg-primary-500 not-italic text-primary-900;
+    }
+
+    .search__results p em {
+        @apply border-b-2 border-primary-500 not-italic;
     }
 }
 

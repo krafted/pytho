@@ -1,7 +1,7 @@
 <template>
     <div class="bg-gray-100 dark:bg-gray-900">
         <header class="px-16 pt-safe-top">
-            <div class="flex items-center justify-between w-full max-w-5xl py-16 mx-auto pl-safe-left pr-safe-right">
+            <div class="flex items-center justify-between w-full max-w-5xl py-16 mx-auto md:grid md:grid-cols-3 md:gap-3 pl-safe-left pr-safe-right">
                 <div class="flex items-center space-x-12">
                     <x-logo class="-ml-2 text-3xl -top-0.5 w-14 h-14" />
 
@@ -17,7 +17,20 @@
                     </button>
                 </div>
 
-                <div class="space-x-6">
+                <x-search
+                    additional-classes="bg-white dark:bg-gray-800 border-white dark:border-gray-800 shadow"
+                    placeholder="Search for anything"
+                />
+
+                <div class="flex items-center justify-end space-x-6">
+                    <button
+                        id="searchButton"
+                        class="inline-flex font-semibold text-gray-700 md:hidden hover:underline dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                        @click="showSearch = true"
+                    >
+                        Search
+                    </button>
+
                     <inertia-link
                         class="inline-flex font-semibold text-gray-700 hover:underline dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
                         :href="route('login')"
@@ -238,6 +251,7 @@
 <script>
     import XLogo from '@/Components/Logo'
     import XPreferences from '@/Components/Preferences'
+    import XSearch from '@/Components/Search'
     import { provide, ref } from 'vue'
 
     export default {
@@ -245,11 +259,16 @@
         components: {
             XLogo,
             XPreferences,
+            XSearch,
         },
         setup() {
             const showPreferences = ref(false)
+            const showSearch = ref(false)
 
             provide('showPreferences', showPreferences)
+            provide('showSearch', showSearch)
+
+            return { showSearch }
         },
     }
 </script>
