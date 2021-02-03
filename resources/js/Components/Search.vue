@@ -5,7 +5,7 @@
         ref="container"
         class="absolute z-10 w-full md:relative md:z-0"
     >
-        <div class="flex items-center hidden"> <!-- Remove hidden -->
+        <div class="flex items-center">
             <input
                 v-model="query"
                 ref="input"
