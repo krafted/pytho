@@ -67,8 +67,29 @@ class Pen extends Model
         $array = $this->toArray();
 
         return [
+            'slug' => $array['slug'],
             'title' => $array['title'],
             'description' => $array['description'],
         ];
+    }
+
+    /**
+     * Get the value used to index the model.
+     *
+     * @return mixed
+     */
+    public function getScoutKey()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Get the key name used to index the model.
+     *
+     * @return mixed
+     */
+    public function getScoutKeyName()
+    {
+        return 'slug';
     }
 }

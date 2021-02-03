@@ -182,4 +182,24 @@ class User extends Authenticatable implements MustVerifyEmail
             'username' => $array['username'],
         ];
     }
+
+    /**
+     * Get the value used to index the model.
+     *
+     * @return mixed
+     */
+    public function getScoutKey()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Get the key name used to index the model.
+     *
+     * @return mixed
+     */
+    public function getScoutKeyName()
+    {
+        return 'username';
+    }
 }
