@@ -4,14 +4,31 @@
     class="font-sans antialiased"
 >
     <head>
-        <title>{{ config('app.name', 'Py') }}</title>
+        <title>{{ config('app.name') }}</title>
 
-        <meta charset="utf-8">
+        <!-- Compatability -->
+        <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
+
+        <!-- SEO -->
+        <meta name="title" content="{{ config('app.name') }}" />
+        <meta name="title" content="{{ config('app.description') }}" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="{{ config('app.name') }}" />
+        <meta property="og:title" content="{{ config('app.name') }}" />
+        <meta property="og:description" content="{{ config('app.description') }}" />
+        <meta property="og:image" content="/images/social-square.jpg" />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:site" content="@kraftedhq" />
+        <meta property="twitter:title" content="{{ config('app.name') }}" />
+        <meta property="twitter:description" content="{{ config('app.description') }}" />
+        <meta property="twitter:image" content="/images/social-square.jpg" />
+
+        <!-- PWA -->
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="viewport" content="initial-scale=1, viewport-fit=cover, user-scalable=no" />
-        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <link rel="manifest" href="/pwa/site.webmanifest" />
         <link rel="icon" type="image/png" sizes="196x196" href="/favicon.png" />
