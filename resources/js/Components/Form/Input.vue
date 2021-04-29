@@ -25,7 +25,7 @@
             <input
                 :autocomplete="autocomplete"
                 :autofocus="autofocus"
-                class="block mt-2 text-gray-900 bg-transparent dark:text-white focus:outline-none focus:ring-0"
+                class="block w-full mt-2 text-gray-900 bg-transparent dark:text-white focus:outline-none focus:ring-0"
                 :disabled="disabled"
                 :readonly="readonly"
                 ref="input"

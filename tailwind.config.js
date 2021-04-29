@@ -20,7 +20,9 @@ module.exports = {
             },
         },
     },
+
     darkMode: 'class',
+
     theme: {
         extend: {
             animation: {
@@ -228,6 +230,7 @@ module.exports = {
             },
         },
     },
+
     variants: {
         extend: {
             backgroundColor: ['focus-within'],
@@ -243,6 +246,7 @@ module.exports = {
             width: ['hover', 'focus'],
         },
     },
+
     plugins: [
         require('@tailwindcss/line-clamp'),
         require('@tailwindcss/typography'),

@@ -40,7 +40,7 @@ class PenRequest extends FormRequest
                 $this->pen
                     ? Rule::unique('pens')->ignore($this->pen->id)
                     : 'unique:pens',
-                'max:25'
+                'max:30',
             ],
             'visibility' => [
                 'required',

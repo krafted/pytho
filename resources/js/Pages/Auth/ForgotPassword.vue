@@ -20,7 +20,7 @@
 
                 <f-input
                     label="Email"
-                    autofocus 
+                    autofocus
                     required
                     type="email"
                     v-model="form.email"
