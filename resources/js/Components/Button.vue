@@ -1,7 +1,7 @@
 <template>
     <component
         :is="element"
-        :class="['inline-flex justify-center items-center px-4 py-2 text-sm font-semibold tracking-wide border rounded-md uppercase', classes]"
+        :class="['inline-flex justify-center appearance-none items-center px-4 py-2 text-sm font-semibold tracking-wide border rounded-md uppercase', classes]"
         :href="href"
         :type="type"
     >
