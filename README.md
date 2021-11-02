@@ -1,1 +1,1 @@
-# Py - a real-time Python environment in the browser
+# Pytho - a real-time Python environment in the browser

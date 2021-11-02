@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Fira+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
-@import '../../node_modules/codemirror/lib/codemirror.css';
-@import './codemirror/base.css';
-@import './codemirror/themes/custom.css';
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Fira+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
+@import "../../node_modules/codemirror/lib/codemirror.css";
+@import "./codemirror/base.css";
+@import "./codemirror/themes/custom.css";
 
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 @layer components {
     * {
@@ -23,7 +23,7 @@
     input,
     textarea,
     [contenteditable] {
-        caret-color: theme('colors.primary.500');
+        caret-color: theme("colors.primary.500");
     }
 
     canvas {
@@ -36,7 +36,7 @@
         margin: 0;
     }
 
-    input[type=number] {
+    input[type="number"] {
         -moz-appearance: textfield;
     }
 
@@ -67,23 +67,23 @@
 
     .splitpanes__splitter:before {
         @apply absolute top-0 left-0;
-        content: '';
+        content: "";
     }
 
     .splitpanes--vertical > .splitpanes__splitter:before {
-        @apply cursor-col-resize -left-4 -right-4 h-full
+        @apply cursor-col-resize -left-4 -right-4 h-full;
     }
 
     .splitpanes--horizontal > .splitpanes__splitter:before {
-        @apply cursor-row-resize -top-4 -bottom-4 w-full
+        @apply cursor-row-resize -top-4 -bottom-4 w-full;
     }
 
-    h1 .py-heading-permalink,
-    h2 .py-heading-permalink,
-    h3 .py-heading-permalink,
-    h4 .py-heading-permalink,
-    h5 .py-heading-permalink,
-    h6 .py-heading-permalink {
+    h1 .pytho-heading-permalink,
+    h2 .pytho-heading-permalink,
+    h3 .pytho-heading-permalink,
+    h4 .pytho-heading-permalink,
+    h5 .pytho-heading-permalink,
+    h6 .pytho-heading-permalink {
         @apply absolute right-0 md:-left-6 text-gray-200 dark:text-gray-700 hover:no-underline hover:text-gray-300 dark:hover:text-gray-600;
     }
 

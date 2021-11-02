@@ -7,22 +7,22 @@
 </template>
 
 <script>
-    import ConnectedAccountsForm from './ConnectedAccountsForm'
-    import LSettings from '@/Layouts/Settings'
-    import { usePage } from '@inertiajs/inertia-vue3'
-    import { useHead } from '@vueuse/head'
+import ConnectedAccountsForm from "./ConnectedAccountsForm";
+import LSettings from "@/Layouts/Settings";
+import { usePage } from "@inertiajs/inertia-vue3";
+import { useHead } from "@vueuse/head";
 
-    export default {
-        components: {
-            ConnectedAccountsForm,
-            LSettings,
-        },
-        setup() {
-            const page = usePage()
+export default {
+    components: {
+        ConnectedAccountsForm,
+        LSettings,
+    },
+    setup() {
+        const page = usePage();
 
-            useHead({ title: 'Social Settings — Py' })
+        useHead({ title: "Social Settings — Pytho" });
 
-            return { page }
-        },
-    }
+        return { page };
+    },
+};
 </script>

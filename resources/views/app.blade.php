@@ -18,12 +18,12 @@
         <meta property="og:site_name" content="{{ config('app.name') }}" />
         <meta property="og:title" content="{{ config('app.name') }}" />
         <meta property="og:description" content="{{ config('app.description') }}" />
-        <meta property="og:image" content="https://py.krafted.dev/images/social-card.jpg" />
+        <meta property="og:image" content="https://pytho.app/images/social-card.jpg" />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:site" content="@kraftedhq" />
         <meta property="twitter:title" content="{{ config('app.name') }}" />
         <meta property="twitter:description" content="{{ config('app.description') }}" />
-        <meta property="twitter:image" content="https://py.krafted.dev/images/social-card.jpg" />
+        <meta property="twitter:image" content="https://pytho.app/images/social-card.jpg" />
 
         <!-- PWA -->
         <meta name="apple-mobile-web-app-capable" content="yes" />

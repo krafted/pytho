@@ -1,7 +1,7 @@
 <template>
     <l-settings>
         <div v-if="page.props.value.socialstream.hasPassword">
-            <logout-other-browser-sessions-form  :sessions="sessions" />
+            <logout-other-browser-sessions-form :sessions="sessions" />
         </div>
 
         <div v-if="page.props.value.socialstream.hasPassword">
@@ -13,27 +13,27 @@
 </template>
 
 <script>
-    import DeleteUserForm from './DeleteUserForm'
-    import FSectionBorder from '@/Components/Form/SectionBorder'
-    import LSettings from '@/Layouts/Settings'
-    import LogoutOtherBrowserSessionsForm from './LogoutOtherBrowserSessionsForm'
-    import { usePage } from '@inertiajs/inertia-vue3'
-    import { useHead } from '@vueuse/head'
+import DeleteUserForm from "./DeleteUserForm";
+import FSectionBorder from "@/Components/Form/SectionBorder";
+import LSettings from "@/Layouts/Settings";
+import LogoutOtherBrowserSessionsForm from "./LogoutOtherBrowserSessionsForm";
+import { usePage } from "@inertiajs/inertia-vue3";
+import { useHead } from "@vueuse/head";
 
-    export default {
-        props: ['sessions'],
-        components: {
-            DeleteUserForm,
-            FSectionBorder,
-            LSettings,
-            LogoutOtherBrowserSessionsForm,
-        },
-        setup() {
-            const page = usePage()
+export default {
+    props: ["sessions"],
+    components: {
+        DeleteUserForm,
+        FSectionBorder,
+        LSettings,
+        LogoutOtherBrowserSessionsForm,
+    },
+    setup() {
+        const page = usePage();
 
-            useHead({ title: 'Advanced Settings — Py' })
+        useHead({ title: "Advanced Settings — Pytho" });
 
-            return { page }
-        },
-    }
+        return { page };
+    },
+};
 </script>

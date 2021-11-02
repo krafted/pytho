@@ -1,7 +1,5 @@
-import dedent from "dedent"
-
 const options = [
-  String.raw`from random import randint
+    String.raw`from random import randint
 
 # Produces a list of random numbers and their squares.
 # Random numbers start at min and end at max.
@@ -16,8 +14,8 @@ def get_random_squares(min, max):
     print(row_format.format(num, '=>', square))
 
 get_random_squares(min=1, max=10)`,
-  
-  String.raw`from turtle import Screen, Turtle
+
+    String.raw`from turtle import Screen, Turtle
 
 # Set up screen
 screen = Screen()
@@ -37,7 +35,7 @@ for color in ['red', 'green', 'yellow', 'blue']:
 
 screen.exitonclick()`,
 
-  String.raw`from random import randint
+    String.raw`from random import randint
 
 # If the number is divisible by 3, print fizz
 # If it is divisible by 5, print buzz
@@ -49,10 +47,10 @@ for i in range(10, randint(10, 50)):
       print("buzz", end="")
   print()
   `,
-]
+];
 
 export default String.raw`"""
-Welcome to Py!
+Welcome to Pytho!
 ---
 In this environment, you can create and share
 your Python code with the world.
@@ -62,4 +60,4 @@ right in and write your own code!
 """
 
 ${options[Math.floor(Math.random() * options.length)]}
-`
+`;

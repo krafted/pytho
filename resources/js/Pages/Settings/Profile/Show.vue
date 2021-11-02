@@ -7,22 +7,22 @@
 </template>
 
 <script>
-    import LSettings from '@/Layouts/Settings'
-    import UpdateProfileInformationForm from './UpdateProfileInformationForm'
-    import { usePage } from '@inertiajs/inertia-vue3'
-    import { useHead } from '@vueuse/head'
+import LSettings from "@/Layouts/Settings";
+import UpdateProfileInformationForm from "./UpdateProfileInformationForm";
+import { usePage } from "@inertiajs/inertia-vue3";
+import { useHead } from "@vueuse/head";
 
-    export default {
-        components: {
-            LSettings,
-            UpdateProfileInformationForm,
-        },
-        setup() {
-            const page = usePage()
+export default {
+    components: {
+        LSettings,
+        UpdateProfileInformationForm,
+    },
+    setup() {
+        const page = usePage();
 
-            useHead({ title: 'Profile Settings — Py' })
+        useHead({ title: "Profile Settings — Pytho" });
 
-            return { page }
-        },
-    }
+        return { page };
+    },
+};
 </script>

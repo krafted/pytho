@@ -25,7 +25,7 @@ class PrivacyPolicyController extends Controller
 
         $config = [
             'heading_permalink' => [
-                'html_class' => 'py-heading-permalink',
+                'html_class' => 'pytho-heading-permalink',
                 'id_prefix' => '',
                 'insert' => 'before',
                 'title' => '',
