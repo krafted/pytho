@@ -155,6 +155,7 @@
                     <div class="flex flex-1 mt-12.5">
                         <x-editor
                             :comments="comments"
+                            :is-creator="isCreator"
                             :pen="pen"
                             @saved="save"
                         />

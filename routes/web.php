@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\LandingController;
 use App\Http\Controllers\PenController;
 use App\Http\Controllers\PrivacyPolicyController;
 use App\Http\Controllers\ProfileController;
@@ -39,7 +38,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Comment
     Route::post('/{pen:slug}/comments', [CommentController::class, 'store'])->name('pen.comments.store');
-    Route::post('/{pen:slug}/comments/{comment}', [CommentController::class, 'destroy'])->name('pen.comments.destroy');
+    Route::delete('/{pen:slug}/comments/{comment}', [CommentController::class, 'destroy'])->name('pen.comments.destroy');
 });
 
 // Pen

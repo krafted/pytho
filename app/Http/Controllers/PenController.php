@@ -34,13 +34,14 @@ class PenController extends Controller
                     'pen' => $pen
                         ? $pen
                             ->load('creator:id,name,username')
-                            ->only('title', 'description', 'content', 'comments', 'creator', 'slug', 'visibility')
+                            ->only('id', 'title', 'description', 'content', 'comments', 'creator', 'slug', 'visibility')
                         : null,
                     'comments' => $pen
                         ? collect($pen->comments()->with('user:id,name,username,profile_photo_path')->get())
                             ->mapToGroups(function ($comment) {
                                 return [
                                     $comment->properties['coords'][0]['line'] => [
+                                        'id' => $comment->id,
                                         'body' => $comment->body,
                                         'created_at' => str_replace(' ago', '', $comment->created_at->shortRelativeToNowDiffForHumans()),
                                         'properties' => $comment->properties,
@@ -90,12 +91,12 @@ class PenController extends Controller
     /**
      * Attempt to delete a Pen.
      *
-     * @param  \App\Http\Requests\PenRequest  $request
-     * @param  \App\Models\Pen                $pen
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Pen           $pen
      *
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroy(PenRequest $request, Pen $pen)
+    public function destroy(Request $request, Pen $pen)
     {
         $this->authorize('destroy', $pen);
 
