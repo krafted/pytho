@@ -35,9 +35,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Pen Actions
     Route::post('/', [PenController::class, 'store'])->name('pen.store');
     Route::put('/{pen:slug}', [PenController::class, 'update'])->name('pen.update');
+    Route::delete('/{pen:slug}', [PenController::class, 'destroy'])->name('pen.destroy');
 
     // Comment
     Route::post('/{pen:slug}/comments', [CommentController::class, 'store'])->name('pen.comments.store');
+    Route::post('/{pen:slug}/comments/{comment}', [CommentController::class, 'destroy'])->name('pen.comments.destroy');
 });
 
 // Pen

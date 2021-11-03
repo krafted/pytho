@@ -351,7 +351,7 @@
                                 >
                                     <span>Preferences</span>
 
-                                    <span
+                                    <kbd
                                         v-if="!isMobile"
                                         class="
                                             px-1.5
@@ -360,8 +360,10 @@
                                             rounded
                                             text-2xs
                                         "
-                                        v-text="isMac ? '⌘,' : '⌃,'"
-                                    />
+                                    >
+                                        <kbd>{{ isMac ? "⌘" : "⌃" }}</kbd>
+                                        <kbd>,</kbd>
+                                    </kbd>
                                 </span>
 
                                 <x-preferences />
