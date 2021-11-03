@@ -33,4 +33,16 @@ class PenPolicy
     {
         return optional($user)->id === $pen->user_id;
     }
+
+    /**
+     * Determine if the given pen can be destroyed by the user.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Pen   $pen
+     * @return bool
+     */
+    public function destroy(User $user, Pen $pen)
+    {
+        return optional($user)->id === $pen->user_id;
+    }
 }

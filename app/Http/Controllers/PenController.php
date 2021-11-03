@@ -59,7 +59,7 @@ class PenController extends Controller
      *
      * @param  \App\Http\Requests\PenRequest  $request
      * @return \App\Models\Pen
-     * 
+     *
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(PenRequest $request)
@@ -75,7 +75,7 @@ class PenController extends Controller
      * @param  \App\Http\Requests\PenRequest  $request
      * @param  \App\Models\Pen                $pen
      * @return \App\Models\Pen
-     * 
+     *
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(PenRequest $request, Pen $pen)
@@ -85,5 +85,22 @@ class PenController extends Controller
         $pen->update($request->validated());
 
         return redirect($pen->path());
+    }
+
+    /**
+     * Attempt to delete a Pen.
+     *
+     * @param  \App\Http\Requests\PenRequest  $request
+     * @param  \App\Models\Pen                $pen
+     *
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function destroy(PenRequest $request, Pen $pen)
+    {
+        $this->authorize('destroy', $pen);
+
+        $pen->delete();
+
+        return redirect()->route('pen.show');
     }
 }
