@@ -6,6 +6,7 @@ use App\Traits\HasComments;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Pen extends Model
@@ -28,6 +29,15 @@ class Pen extends Model
     protected static $logName = 'pens';
     protected static $logOnlyDirty = true;
     protected static $recordEvents = ['created', 'updated'];
+
+    protected static function booted()
+    {
+        static::deleting(fn(Pen $pen) =>
+            Activity::where('subject_type', get_called_class())
+                ->where('subject_id', $pen->id)
+                ->delete()
+        );
+    }
 
     /**
      * Scope a query to only include public pens.
