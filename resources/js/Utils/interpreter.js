@@ -224,7 +224,7 @@ window.pythonRunner.loadEngine = async function (
             window.pythonRunner.options.onLoading(engine);
 
             const scriptWasLoaded = await loadScript(
-                "https://pytho.app/js/pyodide-build-0.15.0/pyodide.js"
+                "https://pytho.app/pyodide-build-0.15.0/pyodide.js"
             );
 
             if (!scriptWasLoaded) return false;
